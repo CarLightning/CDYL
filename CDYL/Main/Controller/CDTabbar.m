@@ -23,7 +23,7 @@
     if (self = [super initWithFrame:frame]) {
         // 添加加好按钮
         UIButton *plusBtn = [[UIButton alloc] init];
-        [plusBtn setImage:[[UIImage imageNamed:@"tab_publish_nor"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [plusBtn setImage:[[UIImage imageNamed:@"tab_publish_nor"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         // 设置监听事件
         [plusBtn addTarget:self action:@selector(plusClick) forControlEvents:UIControlEventTouchUpInside];
         self.plusBtn = plusBtn;
@@ -46,11 +46,11 @@
     // 计算宽度
     CGFloat childW = self.py_width / (PYControllCount + 1);
     self.plusBtn.py_width = childW;
-    self.plusBtn.py_height = 49;
+    self.plusBtn.py_height = childW;
     
     // 添加plusBtn的位置
-    self.plusBtn.py_x = ([UIScreen mainScreen].bounds.size.width - childW) * 0.5;
-    self.plusBtn.py_y = 0;
+    self.plusBtn.center = CGPointMake(self.center.x, 0);
+   
     
     // 引出下标
     NSInteger index = 0;
