@@ -1,0 +1,37 @@
+//
+//  PrefixHeader.pch
+//  CDYL
+//
+//  Created by admin on 2018/4/3.
+//  Copyright © 2018年 admin. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+#import "Const.h"
+#import <Masonry.h>
+#import "NSFileManager+CDFilePath.h"
+#import "CDUserInfor.h"
+#import "CDXML.h"
+#import "CDWebRequest.h"
+#import "MBProgressHUD.h"
+
+#define LHColor(a,b,c)  [UIColor colorWithRed:a/255.0 green:b/255.0 blue:c/255.0 alpha:1]
+#define DEAppWidth ([UIScreen mainScreen].bounds.size.width)
+#define LHAccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"UserInforFile"] stringByAppendingPathComponent:@"infor.data"]
+#define is_iphoneX  (DEAppHeight == 812 ? YES:NO)
+#define is_iphone6  (DEAppHeight == 667 ? YES:NO)
+#define is_iphone6P (DEAppHeight == 736 ? YES:NO)
+
+#define DEAppHeight ([UIScreen mainScreen].bounds.size.height)
+#define IS_IPHONE_X (DEAppHeight==812? YES:NO)
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+//LBXScan 如果需要使用LBXScanViewController控制器代码，那么下载了那些模块，请定义对应的宏
+#define LBXScan_Define_Native  //包含native库
+#define LBXScan_Define_ZXing   //包含ZXing库
+#define LBXScan_Define_ZBar   //包含ZBar库
+#define LBXScan_Define_UI     //包含界面库
+
+#endif /* PrefixHeader_pch */

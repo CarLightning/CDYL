@@ -1,0 +1,91 @@
+PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - AMap3DMap (5.4.0):
+    - AMapFoundation (~> 1.3)
+  - AMapFoundation (1.4.2)
+  - AMapLocation (2.4.0):
+    - AMapFoundation (~> 1.4)
+  - AMapNavi (5.3.0):
+    - AMap3DMap (>= 5.3.0)
+    - AMapFoundation (~> 1.4)
+  - FMDB (2.7.2):
+    - FMDB/standard (= 2.7.2)
+  - FMDB/standard (2.7.2)
+  - JSONModel (1.7.0)
+  - LBXScan/LBXNative (2.2):
+    - LBXScan/Types (~> 2.2)
+  - LBXScan/LBXZBar (2.2):
+    - LBXScan/Types (~> 2.2)
+    - ZBarSDK (~> 1.3.1)
+  - LBXScan/LBXZXing (2.2):
+    - LBXScan/Types (~> 2.2)
+  - LBXScan/Types (2.2)
+  - LBXScan/UI (2.2):
+    - LBXScan/Types (~> 2.2)
+  - Masonry (1.1.0)
+  - MBProgressHUD (1.0.0)
+  - SDWebImage (4.3.3):
+    - SDWebImage/Core (= 4.3.3)
+  - SDWebImage/Core (4.3.3)
+  - ZBarSDK (1.3.1)
+
+DEPENDENCIES:
+  - AFNetworking (~> 3.0)
+  - AMapLocation
+  - AMapNavi
+  - FMDB
+  - JSONModel
+  - LBXScan/LBXNative
+  - LBXScan/LBXZBar
+  - LBXScan/LBXZXing
+  - LBXScan/UI
+  - Masonry
+  - MBProgressHUD
+  - SDWebImage (~> 4.0)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - AFNetworking
+    - AMap3DMap
+    - AMapFoundation
+    - AMapLocation
+    - AMapNavi
+    - FMDB
+    - JSONModel
+    - LBXScan
+    - Masonry
+    - MBProgressHUD
+    - SDWebImage
+    - ZBarSDK
+
+SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AMap3DMap: 3eb906ac6b9d488413ab26c24f67eca4b4ad4641
+  AMapFoundation: 6c0471c9a6a0ad17dad46e3d800ad56ca170f82a
+  AMapLocation: 47b62b5381a66e4d0c2931b70ffde72682427896
+  AMapNavi: 3f553beb42afdc4c18b2ca8137f9363038d8783d
+  FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
+  JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
+  LBXScan: 31b69c9657404133324e6b68ef814802ef9cacc0
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  ZBarSDK: 4c1b5daeb7d6cc67dc9355e690af0230a661f6ec
+
+PODFILE CHECKSUM: 8ca8bfad52df9166df55be3cb7c08c33d519f6d0
+
+COCOAPODS: 1.5.0
