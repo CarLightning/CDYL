@@ -22,7 +22,7 @@
 @end
 
 @implementation CDTabbarCtl
-
+ 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -31,8 +31,8 @@
     // 首页
     [self addChildViewController:[[CDMapViewController alloc] init] image:@"tab_home_nor" seletedImage:@"tab_home_press" title:@"地图"];
     [self addChildViewController:[[CDoderViewController alloc] init] image:@"tab_classify_nor"  seletedImage:@"tab_classify_press"  title:@"订单"];
-    [self addChildViewController:[[CDchargeViewController alloc] init] image:@"tab_community_nor"  seletedImage:@"tab_community_press"  title:@"我要充电"];
-    [self addChildViewController:[[CDcommonViewController alloc] init] image:@"tab_me_nor"  seletedImage:@"tab_me_press"  title:@"设置"];
+    [self addChildViewController:[[CDchargeViewController alloc] init] image:@"tab_community_nor"  seletedImage:@"tab_community_press"  title:@"预约"];
+    [self addChildViewController:[[CDcommonViewController alloc] init] image:@"tab_me_nor"  seletedImage:@"tab_me_press"  title:@"我的"];
 
     
     CDTabbar *tabBar = [CDTabbar tabBar];
@@ -67,8 +67,8 @@
     
     //镜头拉远拉近功能
     vc.isVideoZoom = YES;
-     CDNav *navi = [[CDNav alloc]initWithRootViewController:vc];
-   [self.selectedViewController presentViewController:navi animated:YES completion:nil];
+//     CDNav *navi = [[CDNav alloc]initWithRootViewController:vc];
+   [self.selectedViewController presentViewController:vc animated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

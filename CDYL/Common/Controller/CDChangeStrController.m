@@ -30,7 +30,10 @@
     if (is_iphoneX) {
         black = 88+15;
     }
-    UITextField *tf=[[UITextField alloc]initWithFrame:CGRectMake(15, black, DEAppWidth-30, 30)];
+    UIView *iv = [[UIView alloc]initWithFrame:CGRectMake(0, black, DEAppWidth, 40)];
+    iv.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:iv];
+    UITextField *tf=[[UITextField alloc]initWithFrame:CGRectMake(15, 0, DEAppWidth-30, 40)];
     tf.delegate = self;
     tf.backgroundColor = [UIColor whiteColor];
     tf.text = self.oldStr;
@@ -39,7 +42,7 @@
     tf.returnKeyType = UIReturnKeyDone;
     [self keyBoardModel:tf];
     [tf becomeFirstResponder];
-    [self.view addSubview:tf];
+    [iv addSubview:tf];
     self.textField = tf;
   
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(clickTheRightItem)];

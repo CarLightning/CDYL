@@ -24,7 +24,7 @@
 }
 -(UILabel *)whatLb{
     if (_whatLb == nil) {
-        _whatLb = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, 100, 20)];
+        _whatLb = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, 100, 20)];
         _whatLb.font = [UIFont systemFontOfSize:16];
         _whatLb.textAlignment = NSTextAlignmentLeft;
     }
@@ -32,9 +32,9 @@
 }
 -(UILabel *)nameLb{
     if (_nameLb == nil) {
-        _nameLb = [[UILabel alloc]initWithFrame:CGRectMake(DEAppWidth -200, 10, 170, 20)];
+        _nameLb = [[UILabel alloc]initWithFrame:CGRectMake(DEAppWidth -200, 15, 170, 20)];
 //        _nameLb.backgroundColor = [UIColor redColor];
-        _nameLb.font = [UIFont systemFontOfSize:12];
+        _nameLb.font = [UIFont systemFontOfSize:14];
         _nameLb.textColor = [UIColor lightGrayColor];
         _nameLb.textAlignment = NSTextAlignmentRight;
     }

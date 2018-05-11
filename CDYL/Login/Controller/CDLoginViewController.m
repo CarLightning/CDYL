@@ -10,11 +10,12 @@
 #import "CDLoginView.h"
 #import "CDWebRequest.h"
 #import "CDCodeViewController.h"
-
+#import "CDReViewController.h"
 @interface CDLoginViewController ()
 @property (nonatomic, strong) CDLoginView *loginView;
 @property (nonatomic, strong) UIView *HUDView;
 @property (nonatomic, strong) UIButton *LoginButton;
+@property (nonatomic, strong) UIButton *reviewBtn; //重设密码
 @property (nonatomic, strong) UIView *LoginAnimView;
 //登录转圈的那条白线所在的layer
 @property (nonatomic,strong) CAShapeLayer *shapeLayer;
@@ -45,6 +46,16 @@
     [self.view addSubview:lgView];
     self.loginView = lgView;
     [self setBtnblack:black title:@"登录" tag:100];
+   
+    UIButton *reviewBtn=[[UIButton alloc]initWithFrame:CGRectMake(15, black+200, DEAppWidth-30, 40)];
+    
+    [reviewBtn setTitle:@"重设密码" forState:UIControlStateNormal];
+    reviewBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [reviewBtn addTarget:self action:@selector(clickThereviewBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [reviewBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [self.view addSubview:reviewBtn];
+    self.reviewBtn = reviewBtn;
+    
     
 }
 -(void)registerCth {
@@ -73,6 +84,7 @@
     btn.layer.borderWidth = 0.5;
     self.LoginButton = btn;
 }
+#pragma mark - Btn点击方法
 -(void)clickTheBtn:(UIButton *)btn{
     [self.view endEditing:YES];
      if (btn.tag == 100) { //登录
@@ -81,6 +93,10 @@
         [self registerBtnClick];
         
     }
+}
+-(void)clickThereviewBtn:(UIButton *)btn{
+    CDReViewController *review = [[CDReViewController alloc]init];
+    [self.navigationController pushViewController:review animated:YES];
 }
 #pragma mark - 登录方法
 -(BOOL)is_okPhone:(NSString *)phoneNum Pword:(NSString *)pwordNum{

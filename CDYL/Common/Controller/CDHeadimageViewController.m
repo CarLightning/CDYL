@@ -27,9 +27,10 @@
     self.title = @"个人头像";
     UIImageView *igview = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEAppWidth, DEAppWidth)];
     igview.center = self.view.center;
-    igview.backgroundColor = [[UIColor orangeColor]colorWithAlphaComponent:0.5];
-    igview.layer.cornerRadius = 5;
+    igview.contentMode = UIViewContentModeScaleAspectFill;
+    igview.clipsToBounds = YES;
     [self.view addSubview:igview];
+    
     self.igview = igview;
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(clickTheitem)];
@@ -92,7 +93,5 @@
     [[CDUserInfor shareUserInfor] updateInforWithAll:NO];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
--(void)dealloc{
-    NSLog(@"shifang3");
-}
+
 @end

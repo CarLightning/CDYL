@@ -114,7 +114,7 @@ static  NSString *const SmallCELL = @"CDSMALLTWOCELL";
     if (indexPath.section == 0) {
         return 76.0f;
     }else{
-        return 40.0f;
+        return 50.0f;
     }
 }
 
@@ -126,20 +126,21 @@ static  NSString *const SmallCELL = @"CDSMALLTWOCELL";
     
     if (indexPath.section == 0) {
        baseCth= [[CDHeadimageViewController alloc]init];
+        self.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:baseCth animated:YES];
     }else if (!(indexPath.row==1)){
         CDSmallTwoCell *cell = [tableView cellForRowAtIndexPath:indexPath];
        
          baseCth= [[CDChangeStrController alloc]init];
         baseCth.typeDic = cell.dic;
         baseCth.cthType = indexPath.row+100;
+        self.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:baseCth animated:YES];
     }
-    self.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:baseCth animated:YES];
+   
  
 }
--(void)dealloc{
-    NSLog(@"shifang2");
-}
+
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     self.array = nil;

@@ -22,9 +22,6 @@
     id nsreturn =sth[@"ns:return"];
     id text=nsreturn[@"text"];
     NSDictionary *diction=[self dictionaryWithJsonString:text];
-    
-    
-    
     return diction;
 }
 //解析JSon text

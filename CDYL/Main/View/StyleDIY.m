@@ -22,7 +22,7 @@
     LBXScanViewStyle *style = [[LBXScanViewStyle alloc]init];
     
     //矩形区域中心上移，默认中心点为屏幕中心点
-    style.centerUpOffset = 44;
+    style.centerUpOffset = 0;
     
     //扫码框周围4个角的类型,设置为外挂式
     style.photoframeAngleStyle = LBXScanViewPhotoframeAngleStyle_Outer;

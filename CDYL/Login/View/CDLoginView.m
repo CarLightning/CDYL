@@ -96,7 +96,7 @@
     }];
     [self.uplb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).offset(15);
-        make.height.mas_equalTo(0.2);
+        make.height.mas_equalTo(0.5);
         make.right.mas_equalTo(self).offset(-15);
         make.top.mas_equalTo(44);
     }];
@@ -113,7 +113,7 @@
     }];
     [self.downlb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).offset(15);
-        make.height.mas_equalTo(0.2);
+        make.height.mas_equalTo(0.5);
         make.right.mas_equalTo(self).offset(-15);
         make.top.mas_equalTo(88);
     }];

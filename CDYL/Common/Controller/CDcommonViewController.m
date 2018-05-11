@@ -115,6 +115,7 @@ static NSString *const smallcellID = @"smallCommentcell";
                 CDViewController *cview = [[CDViewController alloc]init];
                 CDNav *navi = [[CDNav alloc]initWithRootViewController:cview];
                 [self presentViewController:navi animated:YES completion:nil];
+                return;
             }
                 break;
             case 2: // 收藏

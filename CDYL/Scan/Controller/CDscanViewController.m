@@ -31,27 +31,21 @@
     //设置扫码后需要扫码图像
     self.isNeedScanImage = YES;
     
-    [self setBarButtonItem];
+   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
--(void)setBarButtonItem{
-    UIButton *btn=[[UIButton alloc]init];
-    [btn setFrame : CGRectMake ( 0 , 0 , 20 , 30 )];
-    [btn addTarget:self action:@selector(clickTheBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [btn setImage:[UIImage imageNamed:@"back.png"]  forState:UIControlStateNormal];
-    [btn setImageEdgeInsets:UIEdgeInsetsMake(7, 0, 7, 56)];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
-    self.navigationItem.leftBarButtonItem = item;
-}
-- (void)clickTheBtn:(UIButton *)item{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+
+
+
+
 
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+     [self drawUpItems];
     [self drawBottomItems];
+   
     [self drawTitle];
     [self.view bringSubviewToFront:_topTitle];
     
@@ -65,25 +59,40 @@
     {
         self.topTitle = [[UILabel alloc]init];
         _topTitle.bounds = CGRectMake(0, 0, 145, 60);
-        _topTitle.center = CGPointMake(CGRectGetWidth(self.view.frame)/2, 50);
-        
-        //3.5inch iphone
-        if ([UIScreen mainScreen].bounds.size.height <= 568 )
-        {
-            _topTitle.center = CGPointMake(CGRectGetWidth(self.view.frame)/2, 38);
-            _topTitle.font = [UIFont systemFontOfSize:14];
-        }
-        
-        
+        _topTitle.center = CGPointMake(CGRectGetWidth(self.view.frame)/2, CGRectGetMaxY(self.upItemsView.frame)+70);
         _topTitle.textAlignment = NSTextAlignmentCenter;
         _topTitle.numberOfLines = 0;
         _topTitle.text = @"将取景框对准二维码即可自动扫描";
+       
         _topTitle.textColor = [UIColor whiteColor];
         [self.view addSubview:_topTitle];
     }
     
 }
+- (void)drawUpItems{
+    if (_upItemsView) {        
+        return;
+    }
+    CGFloat height = 0;
+    CGFloat block = 0;
+    if (is_iphoneX) {
+        height = 88;
+        block = 44;
+    }else{
+        block = 20;
+        height = 64;
+    }
+    self.upItemsView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEAppWidth, height)];
+    self.upItemsView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+    [self.view addSubview:self.upItemsView];
+    
 
+    self.backItem = [[UIButton alloc]init];
+     self.backItem.frame = CGRectMake(5, block+7, 30, 30);
+    [ self.backItem setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [ self.backItem addTarget:self action:@selector(clicktheBackBtn) forControlEvents:UIControlEventTouchUpInside];
+    [self.upItemsView addSubview:self.backItem];
+}
 - (void)drawBottomItems
 {
     if (_bottomItemsView) {
@@ -93,24 +102,24 @@
     CGFloat block = 0;
     CGFloat hight = 0;
     if (is_iphoneX) {
-        block = 164+34;
+        block = 134;
         hight = 134;
     }else{
-        block = 164;
+        block = 100;
         hight = 100;
     }
-    self.bottomItemsView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.frame)-block, CGRectGetWidth(self.view.frame), hight)];
-    _bottomItemsView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+    self.bottomItemsView = [[UIView alloc]initWithFrame:CGRectMake(0, DEAppHeight-hight, DEAppWidth, hight)];
+    self.bottomItemsView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
     
-    [self.view addSubview:_bottomItemsView];
+    [self.view addSubview:self.bottomItemsView];
     
     CGSize size = CGSizeMake(65, 87);
     self.btnFlash = [[UIButton alloc]init];
-    _btnFlash.frame = CGRectMake((DEAppWidth - size.width)/2, 6, size.width, size.height);
+    self.btnFlash .frame = CGRectMake((DEAppWidth - size.width)/2, 6, size.width, size.height);
     
-    [_btnFlash setImage:[UIImage imageNamed:@"CodeScan.bundle/qrcode_scan_btn_flash_nor"] forState:UIControlStateNormal];
-    [_btnFlash addTarget:self action:@selector(openOrCloseFlash) forControlEvents:UIControlEventTouchUpInside];
-    [_bottomItemsView addSubview:_btnFlash];
+    [self.btnFlash  setImage:[UIImage imageNamed:@"CodeScan.bundle/qrcode_scan_btn_flash_nor"] forState:UIControlStateNormal];
+    [self.btnFlash  addTarget:self action:@selector(openOrCloseFlash) forControlEvents:UIControlEventTouchUpInside];
+    [self.bottomItemsView addSubview:self.btnFlash];
     
 }
 
@@ -179,6 +188,9 @@
     //
     //    vc.strCodeType = strResult.strBarCodeType;
     //
+    
+    NSString *resultStr = strResult.strScanned;
+    NSLog(@"扫描结果：%@",resultStr);
     //    [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -200,6 +212,11 @@
 }
 
 
-
-
+-(void)clicktheBackBtn{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
 @end

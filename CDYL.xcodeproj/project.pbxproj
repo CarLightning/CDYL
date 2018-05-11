@@ -39,9 +39,11 @@
 		848B6B13207A123500ED46E3 /* LocationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B6B11207A123500ED46E3 /* LocationAnnotationView.m */; };
 		849048EA20943ECF00F4FC87 /* CDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849048E920943ECF00F4FC87 /* CDLoginViewController.m */; };
 		849048F0209442AF00F4FC87 /* CDLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849048EE209442AF00F4FC87 /* CDLoginView.m */; };
+		84A1226320A43E59003AB2F1 /* CDLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A1226220A43E59003AB2F1 /* CDLocationViewController.m */; };
 		84A6BB492080850800131835 /* CDBigCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6BB482080850800131835 /* CDBigCell.m */; };
 		84A6BB4C2080853C00131835 /* CDSmallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6BB4B2080853C00131835 /* CDSmallCell.m */; };
 		84A6BB4F20808D7200131835 /* CDUserInfor.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6BB4E20808D7200131835 /* CDUserInfor.m */; };
+		84ACCB4120A29DEE0004D514 /* CDReViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ACCB4020A29DEE0004D514 /* CDReViewController.m */; };
 		84ADAF7B20870AE300555B27 /* CDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ADAF7A20870AE300555B27 /* CDAppDelegate.m */; };
 		84ADAF7D20870C5B00555B27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ADAF7C20870C5B00555B27 /* main.m */; };
 		84B51A4F208EC4FA00333A2A /* CDHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51A4E208EC4FA00333A2A /* CDHeaderController.m */; };
@@ -49,6 +51,7 @@
 		84B51A55208EC70F00333A2A /* CDSmallTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51A54208EC70F00333A2A /* CDSmallTwoCell.m */; };
 		84B51A58208F198100333A2A /* CDHeadimageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51A57208F198100333A2A /* CDHeadimageViewController.m */; };
 		84B51A5B2090696F00333A2A /* NSFileManager+CDFilePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51A5A2090696F00333A2A /* NSFileManager+CDFilePath.m */; };
+		84D3652D20A52A1300E9063E /* CDShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D3652C20A52A1300E9063E /* CDShowCell.m */; };
 		84E429E42074B7A6001AE931 /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E429E32074B7A6001AE931 /* Const.m */; };
 		84E429E72074CAA0001AE931 /* CDWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E429E62074CAA0001AE931 /* CDWebRequest.m */; };
 		84E429EA2074CB6C001AE931 /* CDAFNetLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E429E92074CB6C001AE931 /* CDAFNetLine.m */; };
@@ -119,12 +122,16 @@
 		849048E920943ECF00F4FC87 /* CDLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDLoginViewController.m; sourceTree = "<group>"; };
 		849048EE209442AF00F4FC87 /* CDLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDLoginView.m; sourceTree = "<group>"; };
 		849048EF209442AF00F4FC87 /* CDLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDLoginView.h; sourceTree = "<group>"; };
+		84A1226120A43E59003AB2F1 /* CDLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDLocationViewController.h; sourceTree = "<group>"; };
+		84A1226220A43E59003AB2F1 /* CDLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDLocationViewController.m; sourceTree = "<group>"; };
 		84A6BB472080850800131835 /* CDBigCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDBigCell.h; sourceTree = "<group>"; };
 		84A6BB482080850800131835 /* CDBigCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDBigCell.m; sourceTree = "<group>"; };
 		84A6BB4A2080853C00131835 /* CDSmallCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDSmallCell.h; sourceTree = "<group>"; };
 		84A6BB4B2080853C00131835 /* CDSmallCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDSmallCell.m; sourceTree = "<group>"; };
 		84A6BB4D20808D7200131835 /* CDUserInfor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDUserInfor.h; sourceTree = "<group>"; };
 		84A6BB4E20808D7200131835 /* CDUserInfor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDUserInfor.m; sourceTree = "<group>"; };
+		84ACCB3F20A29DEE0004D514 /* CDReViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDReViewController.h; sourceTree = "<group>"; };
+		84ACCB4020A29DEE0004D514 /* CDReViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDReViewController.m; sourceTree = "<group>"; };
 		84ADAF7920870AE300555B27 /* CDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDAppDelegate.h; sourceTree = "<group>"; };
 		84ADAF7A20870AE300555B27 /* CDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDAppDelegate.m; sourceTree = "<group>"; };
 		84ADAF7C20870C5B00555B27 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -138,6 +145,8 @@
 		84B51A57208F198100333A2A /* CDHeadimageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDHeadimageViewController.m; sourceTree = "<group>"; };
 		84B51A592090696F00333A2A /* NSFileManager+CDFilePath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+CDFilePath.h"; sourceTree = "<group>"; };
 		84B51A5A2090696F00333A2A /* NSFileManager+CDFilePath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+CDFilePath.m"; sourceTree = "<group>"; };
+		84D3652B20A52A1300E9063E /* CDShowCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDShowCell.h; sourceTree = "<group>"; };
+		84D3652C20A52A1300E9063E /* CDShowCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDShowCell.m; sourceTree = "<group>"; };
 		84E429E22074B7A6001AE931 /* Const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
 		84E429E32074B7A6001AE931 /* Const.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Const.m; sourceTree = "<group>"; };
 		84E429E52074CAA0001AE931 /* CDWebRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDWebRequest.h; sourceTree = "<group>"; };
@@ -358,6 +367,8 @@
 			children = (
 				8431472B1EE1160200E41BBD /* CDMapViewController.h */,
 				8431472C1EE1160200E41BBD /* CDMapViewController.m */,
+				84A1226120A43E59003AB2F1 /* CDLocationViewController.h */,
+				84A1226220A43E59003AB2F1 /* CDLocationViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -380,6 +391,8 @@
 				84228507207B04030078139F /* AliMapViewCustomAnnotationView.m */,
 				8422850A207B356C0078139F /* AliMapViewCustomCalloutView.h */,
 				8422850B207B356C0078139F /* AliMapViewCustomCalloutView.m */,
+				84D3652B20A52A1300E9063E /* CDShowCell.h */,
+				84D3652C20A52A1300E9063E /* CDShowCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -550,6 +563,8 @@
 				84228511207C8FC90078139F /* CDViewController.m */,
 				849048E820943ECF00F4FC87 /* CDLoginViewController.h */,
 				849048E920943ECF00F4FC87 /* CDLoginViewController.m */,
+				84ACCB3F20A29DEE0004D514 /* CDReViewController.h */,
+				84ACCB4020A29DEE0004D514 /* CDReViewController.m */,
 				84302B1A20996AB600D29C8B /* CDCodeViewController.h */,
 				84302B1B20996AB600D29C8B /* CDCodeViewController.m */,
 			);
@@ -713,6 +728,7 @@
 				8422851D207DF08C0078139F /* UIWindow+LBXHierarchy.m in Sources */,
 				849048F0209442AF00F4FC87 /* CDLoginView.m in Sources */,
 				84B51A5B2090696F00333A2A /* NSFileManager+CDFilePath.m in Sources */,
+				84D3652D20A52A1300E9063E /* CDShowCell.m in Sources */,
 				8431472A1EE1123500E41BBD /* CDTabbarCtl.m in Sources */,
 				84B51A58208F198100333A2A /* CDHeadimageViewController.m in Sources */,
 				84228526207DF9C10078139F /* StyleDIY.m in Sources */,
@@ -736,11 +752,13 @@
 				843147401EE1178700E41BBD /* CDTabbar.m in Sources */,
 				84E429EA2074CB6C001AE931 /* CDAFNetLine.m in Sources */,
 				84B51A55208EC70F00333A2A /* CDSmallTwoCell.m in Sources */,
+				84ACCB4120A29DEE0004D514 /* CDReViewController.m in Sources */,
 				848B6B102079F15D00ED46E3 /* CDPoliList.m in Sources */,
 				8422850F207B40430078139F /* CDPointAnnotation.m in Sources */,
 				84302B1C20996AB600D29C8B /* CDCodeViewController.m in Sources */,
 				84B51A52208EC6EB00333A2A /* CDBigTwoCell.m in Sources */,
 				84228509207B04030078139F /* AliMapViewCustomAnnotationView.m in Sources */,
+				84A1226320A43E59003AB2F1 /* CDLocationViewController.m in Sources */,
 				84ADAF7B20870AE300555B27 /* CDAppDelegate.m in Sources */,
 				84FC4E48209174640060ED91 /* CDChangeStrController.m in Sources */,
 				84E429E42074B7A6001AE931 /* Const.m in Sources */,

@@ -21,9 +21,9 @@
    
 }
 -(void)setSubViews{
-    UIImageView *imageview = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEAppWidth, DEAppHeight)];
-    imageview.image = [UIImage imageNamed:@"sd"];
-    [self.view addSubview:imageview];
+//    UIImageView *imageview = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEAppWidth, DEAppHeight)];
+//    imageview.image = [UIImage imageNamed:@"sd"];
+//    [self.view addSubview:imageview];
     
     UIButton *loginbtn=[[UIButton alloc]initWithFrame:CGRectMake(50, self.view.center.y-35, DEAppWidth-100, 30)];
     loginbtn.backgroundColor = [UIColor whiteColor];
@@ -49,6 +49,10 @@
     regBtn.layer.borderColor = [UIColor redColor].CGColor;
     regBtn.layer.borderWidth = 0.5;
     
+    UILongPressGestureRecognizer *longpress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
+   
+    longpress.minimumPressDuration = 2;
+    [self.view addGestureRecognizer:longpress];
 }
 - (void)clickTheLoginBtn{
     CDLoginViewController *login = [[CDLoginViewController alloc]init];
@@ -62,6 +66,10 @@
     
     [self.navigationController pushViewController:login animated:YES];
 }
-
+-(void)longPress:(UILongPressGestureRecognizer *)longPress{
+    
+        [self dismissViewControllerAnimated:YES completion:nil];
+   
+}
 
 @end

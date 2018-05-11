@@ -16,7 +16,7 @@
 #import "AliMapViewCustomAnnotationView.h"
 #import "CDPointAnnotation.h"
 #import "AliMapViewCustomCalloutView.h"
-#import <Masonry.h>
+#import "CDLocationViewController.h"
 
 #define paoHight (is_iphoneX ? CDPaoHight+34: CDPaoHight)
 @interface CDMapViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,CallViewDelegate>{
@@ -93,17 +93,7 @@
     UIButton *btn = [[UIButton alloc]init];
     CGRect frame = CGRectMake(0, 0, 40, 40);
     btn.frame = frame;
-    [btn setTitle:@"\U0000e69d" forState:UIControlStateNormal];
-    CGFloat size = 22;
-    CGFloat maxSize =frame.size.height<frame.size.width ? frame.size.height :frame.size.width;
-    if (size <= maxSize) {
-        btn.titleLabel.font = [UIFont fontWithName:@"iconfont" size:size];
-    }else{
-        btn.titleLabel.font = [UIFont fontWithName:@"iconfont" size:maxSize];
-    }
-    btn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [btn setImage:[UIImage imageNamed:@"rightItem"] forState:UIControlStateNormal];
     btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [btn addTarget:self action:@selector(_clickTheItem:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
@@ -165,7 +155,11 @@
 }
 #pragma mark - 点击事件
 - (void)_clickTheItem:(UIButton *)btn {
-    
+    CDLocationViewController *loca = [[CDLocationViewController alloc]init];
+    loca.nowCoordinate = self.nowCoordinate;
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:loca animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
 }
 -(void)clickTheBtn{
     is_request = YES;

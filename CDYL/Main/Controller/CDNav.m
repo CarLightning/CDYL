@@ -17,15 +17,15 @@
 -(instancetype)initWithRootViewController:(UIViewController *)rootViewController{
     self = [super initWithRootViewController:rootViewController];
     if (self) {
-//        UINavigationBar *navbar = [[UINavigationBar alloc]init];
-//        navbar.tintColor=[UIColor greenColor];
+        UINavigationBar *navbar = [[UINavigationBar alloc]init];
+        navbar.tintColor=[UIColor blackColor];
 //        navbar.barTintColor=[UIColor grayColor];
-//        NSDictionary *attri = @{
-//                                NSForegroundColorAttributeName :[UIColor whiteColor],
-//                                NSFontAttributeName : [UIFont systemFontOfSize:20]
-//                                };
-//        navbar.titleTextAttributes = attri;
-//        [self setValue:navbar forKey:@"navigationBar"];
+        NSDictionary *attri = @{
+                                NSForegroundColorAttributeName :[UIColor blackColor],
+                                NSFontAttributeName : [UIFont systemFontOfSize:20]
+                                };
+        navbar.titleTextAttributes = attri;
+        [self setValue:navbar forKey:@"navigationBar"];
     }
     return self;
 }

@@ -63,7 +63,7 @@
     
     
     UILabel *phoneLb=[[UILabel alloc]init];
-    phoneLb.font=[UIFont systemFontOfSize:16];
+    phoneLb.font=[UIFont systemFontOfSize:14];
     phoneLb.text = @"账号：13136111092";
     phoneLb.textAlignment=NSTextAlignmentLeft;
     [self addSubview:phoneLb];

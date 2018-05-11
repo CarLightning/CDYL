@@ -28,7 +28,9 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+   
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerDisappear) userInfo:nil repeats:YES];
+   
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -110,27 +112,56 @@
 -(void)clickTheBtn:(UIButton *)btn{
     [self.view endEditing:YES];
     if (self.codeTf.text.length>0) {
-        __weak typeof(self) weakself = self;
-        [CDWebRequest requestregUserWithTel:self.userNum Code:self.codeTf.text Pass:[CDXML md5:self.PwordNum] AndBack:^(NSDictionary *backDic) {
-            NSString *is_ok = [NSString stringWithFormat:@"%@",backDic[@"success"]];
-            NSString *msg = [NSString stringWithFormat:@"%@",backDic[@"message"]];
-            if ([is_ok isEqualToString:@"1"]) {
-                
-                [weakself registerSuccessd];
-                
-            }else{
-                [weakself showMessage:msg];
-            }
-            
-        } failure:^(NSError *err) {
-             [weakself showMessage:@"网络连接失败"];
-        }];
-        
+        if(self.cthType == 30){
+            [self toReviewPassword];
+        }else{
+            [self toRegister];
+        }
+     
     }else{
         [self showMessage:@"不能为空"];
     }
     
+}
+-(void)toRegister{
     
+    __weak typeof(self) weakself = self;
+    [CDWebRequest requestregUserWithTel:self.userNum Code:self.codeTf.text Pass:[CDXML md5:self.PwordNum] AndBack:^(NSDictionary *backDic) {
+        NSString *is_ok = [NSString stringWithFormat:@"%@",backDic[@"success"]];
+        NSString *msg = [NSString stringWithFormat:@"%@",backDic[@"message"]];
+        if ([is_ok isEqualToString:@"1"]) {
+            
+            [weakself registerSuccessd];
+            
+        }else{
+            [weakself showMessage:msg];
+        }
+        
+    } failure:^(NSError *err) {
+        [weakself showMessage:@"网络连接失败"];
+    }];
+    
+}
+
+-(void)toReviewPassword{
+    
+    __weak typeof(self) weakself = self;
+    [CDWebRequest requestResetPassWithTel:self.userNum Code:self.codeTf.text Pass:[CDXML md5:self.PwordNum] AndBack:^(NSDictionary *backDic) {
+        
+    
+        NSString *is_ok = [NSString stringWithFormat:@"%@",backDic[@"success"]];
+        NSString *msg = [NSString stringWithFormat:@"%@",backDic[@"message"]];
+        if ([is_ok isEqualToString:@"1"]) {
+            
+            [weakself passwordChangeSuccessed];
+            
+        }else{
+            [weakself showMessage:msg];
+        }
+        
+    } failure:^(NSError *err) {
+        [weakself showMessage:@"网络连接失败"];
+    }];
 }
 //计时器
 -(void)timerDisappear{
@@ -147,15 +178,15 @@
     NSString *phone = self.userNum;
     __weak typeof( self) weakself = self;
     [CDWebRequest requestsendVerCodeWithTel:phone AndBack:^(NSDictionary *backDic) {
-      
-        [weakself showMessage:@"已发送"];
+        NSString *message = backDic[@"message"];
+        [weakself showMessage:message];
         weakself.getCodeBtn.hidden = YES;
         weakself.countLb.hidden = NO;
         numberCount = 60;
         [_timer setFireDate:[NSDate distantPast]];
         
     } failure:^(NSError *err) {
-    
+    [weakself showMessage:@"网络连接失败"];
     }];
     
 }
@@ -178,9 +209,19 @@
     [CDUserInfor shareUserInfor].phoneNum = self.userNum;
     [CDUserInfor shareUserInfor].userPword = [CDXML md5:self.PwordNum];
     [[CDUserInfor shareUserInfor] updateInforWithAll:YES];
-    
-    
     [self dismissViewControllerAnimated:YES completion:nil];
     
+}
+//密码修改成功
+- (void)passwordChangeSuccessed{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"修改成功，请重新登录" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.navigationController popToViewController:[self.navigationController.childViewControllers objectAtIndex:1] animated:YES];
+    }];
+   
+    [alert addAction:action1];
+   
+    [self presentViewController:alert animated:YES completion:nil];
+
 }
 @end
