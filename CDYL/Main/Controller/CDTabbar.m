@@ -11,7 +11,7 @@
 
 #define  PYControllCount 4
 @interface CDTabbar()
-@property (nonatomic, strong) UIView *plusBtn;
+@property (nonatomic, strong) UIButton *plusBtn;
 @end
 
 @implementation CDTabbar
@@ -25,15 +25,15 @@
         UIButton *plusBtn = [[UIButton alloc] init];
         [plusBtn setImage:[[UIImage imageNamed:@"tab_publish_nor"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         // 设置监听事件
-        [plusBtn addTarget:self action:@selector(plusClick) forControlEvents:UIControlEventTouchUpInside];
-        self.plusBtn = plusBtn;
+        [plusBtn addTarget:self action:@selector(plusClick:) forControlEvents:UIControlEventTouchUpInside];
+       
         [self addSubview:plusBtn];
-        
+         self.plusBtn = plusBtn;
     }
     return self;
 }
 
-- (void)plusClick
+- (void)plusClick:(UIButton *)btn
 {
     if ([self.delegate respondsToSelector:@selector(tabBarDidPlusClick:)]) {
         [self.delegate tabBarDidPlusClick:self];
@@ -63,6 +63,7 @@
             index++;
             if (index == 2) {
                 index ++;
+                
             }
         }
     }
@@ -73,5 +74,20 @@
     return [[self alloc] init];
 }
 
+
+//处理超出区域点击无效的问题
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+    UIView *view = [super hitTest:point withEvent:event];
+    if (view == nil){
+        //转换坐标
+        CGPoint tempPoint = [self.plusBtn convertPoint:point fromView:self];
+        //判断点击的点是否在按钮区域内
+        if (CGRectContainsPoint(self.plusBtn.bounds, tempPoint) && self.hidden ==NO){
+            //返回按钮
+            return _plusBtn;
+        }
+    }
+    return view;
+}
 
 @end

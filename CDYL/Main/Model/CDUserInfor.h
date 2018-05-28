@@ -8,6 +8,7 @@
 
 #import <JSONModel/JSONModel.h>
 
+
 @interface CDUserInfor : JSONModel
 
 /***手机号***/
@@ -31,6 +32,7 @@
 @property (nonatomic, copy) NSString <Optional> * emergencyPhoneNum;
 /***默认卡***/
 @property (nonatomic, copy) NSString <Optional>  * defaultCard;
+
 
 +(instancetype)shareUserInfor;
 /*更新*/

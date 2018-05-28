@@ -17,7 +17,10 @@
 #import "CDPointAnnotation.h"
 #import "AliMapViewCustomCalloutView.h"
 #import "CDLocationViewController.h"
-
+#import <AMapNaviKit/AMapNaviKit.h>
+#import "GPSNaviViewController.h"
+#import "CDCompanyShow.h"
+#import "CDUserLocation.h"
 #define paoHight (is_iphoneX ? CDPaoHight+34: CDPaoHight)
 @interface CDMapViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,CallViewDelegate>{
     LocationAnnotationView *_locationAnnotationView;
@@ -42,6 +45,27 @@
     [self setBtn];
    
     [self location];
+    
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    if (self.navigationController.navigationBar.hidden) {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+    }
+    if (self.selectView &&self.selectView.hidden) {
+        self.selectView.hidden = NO;
+    }
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+   
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if (self.selectView && !self.selectView.hidden) {
+        self.selectView.hidden = YES;
+    }
     
 }
 #pragma mark selector
@@ -148,7 +172,7 @@
         
         [weakSelf createAnnotation:stationList];
         
-    } failure:^(NSError *err) {
+    } failure:^(NSString *err) {
         
     }];
     }
@@ -157,9 +181,11 @@
 - (void)_clickTheItem:(UIButton *)btn {
     CDLocationViewController *loca = [[CDLocationViewController alloc]init];
     loca.nowCoordinate = self.nowCoordinate;
+    loca.cthType = 0;//附近充电桩
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:loca animated:YES];
     self.hidesBottomBarWhenPushed = NO;
+   
 }
 -(void)clickTheBtn{
     is_request = YES;
@@ -177,6 +203,7 @@
     //    AMapCoordinateType type = AMapCoordinateTypeGPS;
     //    _nowCoordinate = AMapCoordinateConvert(coor, type);
     self.nowCoordinate = coor;
+    [CDUserLocation share].userCoordinate = coor;
     
      [self getSource:is_request];
 }
@@ -232,15 +259,16 @@
         // 创建泡泡视图
         AliMapViewCustomCalloutView *CustomCalloutView = [[AliMapViewCustomCalloutView alloc]initWithFrame:CGRectMake(0, DEAppHeight, DEAppWidth, paoHight)];
         CustomCalloutView.delegate = self;
-        [self.view addSubview:CustomCalloutView];
+        [[[UIApplication sharedApplication] keyWindow] addSubview : CustomCalloutView];
         
         
         
         CDPointAnnotation *annotation = (CDPointAnnotation *)view.annotation;
+        [self.mapview setCenterCoordinate:annotation.coordinate animated:YES];
        
        CustomCalloutView.stationModel = annotation.stationModel;
         
-        self.tabBarController.tabBar.hidden = YES;
+//        self.tabBarController.tabBar.hidden = YES;
         
 
         
@@ -269,7 +297,7 @@
         [UIView animateWithDuration:0.3f animations:^{
             self.selectView.alpha = 0;
             self.selectView.center = newPoint;
-            self.tabBarController.tabBar.hidden = NO;
+//            self.tabBarController.tabBar.hidden = NO;
         } completion:^(BOOL finished) {
 
             [CustomCalloutView removeFromSuperview];
@@ -324,18 +352,65 @@
     
     return annotationView;
 }
+- (void)showAlert:(NSString *)msg{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:msg message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+   
+    [alert addAction:action1];
+
+    [self presentViewController:alert animated:YES completion:nil];
+
+}
 #pragma mark - CallViewDelegate
 /** 点击蓝体字事件回调 */
 - (void)stationModel:(CDStation *)model didTouchHightLightLabel:(BOOL)touch{
     NSLog(@"点击蓝体字");
+    CDCompanyShow *subViewController = [[NSClassFromString(@"CDCompanyShow") alloc] init];
+    
+    subViewController.model = model;
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:subViewController animated:YES];
+     self.hidesBottomBarWhenPushed = NO;
 }
 /** 点击收藏的事件回调 */
 - (void)stationModel:(CDStation *)model didCollection:(BOOL)collection{
      NSLog(@"点击收藏");
+    
+    NSString *phoneNub = [CDUserInfor shareUserInfor].phoneNum;
+     NSString *PwNub = [CDUserInfor shareUserInfor].userPword;
+    NSString *facType = @"1";
+    NSString *facId = model.pid;
+    __weak typeof(self) weakself = self;
+    [CDWebRequest requestgaddCollectWithidentity:@"1" cardNo:phoneNub Pass:PwNub facId:facId facType:facType AndBack:^(NSDictionary *backDic) {
+ 
+        [weakself showAlert:@"收藏成功"];
+        
+    } failure:^(NSString *err) {
+        [weakself showAlert:err];
+        
+    }];
+    
+    
+    
+    
+    
+    
+    
 }
 /** 点击导航的事件回调 */
 - (void)stationModel:(CDStation *)model didNavigationBtn:(BOOL)naviagtion{
      NSLog(@"点击导航");
+    CLLocationCoordinate2D  location  = self.nowCoordinate;
+    AMapNaviPoint *startPoint =  [AMapNaviPoint locationWithLatitude:location.latitude longitude:location.longitude];
+    AMapNaviPoint *endPoint =  [AMapNaviPoint locationWithLatitude:model.lat longitude:model.lon];
+    GPSNaviViewController *gpsNavi = [[GPSNaviViewController alloc]init];
+    gpsNavi.startPoint = startPoint;
+    gpsNavi.endPoint = endPoint;
+    
+//    self.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:gpsNavi animated:YES];
+//    self.hidesBottomBarWhenPushed = NO;
+    [self presentViewController:gpsNavi animated:YES completion:nil];
 }
 /** 点击预约的事件回调 */
 - (void)stationModel:(CDStation *)model didAppointmentBtn:(BOOL)appointment{

@@ -45,7 +45,7 @@
         NSData *data = [[NSFileManager defaultManager]contentsAtPath:file];
         self.igview.image = [[UIImage alloc]initWithData:data];
     }else{
-        self.igview.backgroundColor =[[UIColor orangeColor]colorWithAlphaComponent:0.5];
+        self.igview.image = [UIImage imageNamed:@"headIg"];
     }
 }
 -(void)getDataSource{

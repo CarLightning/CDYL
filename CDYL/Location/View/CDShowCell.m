@@ -20,6 +20,8 @@
 @property (nonatomic, strong) UILabel *locationLb;
 /**距离**/
 @property (nonatomic, strong) UILabel *distanceLb;
+
+@property (nonatomic, strong) UIImageView *locaImageV;
 /**导航**/
 @property (nonatomic, strong) UIButton *navigaBtn;
 /**预约**/
@@ -42,6 +44,7 @@
     [self.contentView addSubview:self.nameLb];
     [self.contentView addSubview:self.havePoliLb];
     [self.contentView addSubview:self.locationLb];
+    [self.contentView addSubview:self.locaImageV];
     [self.contentView addSubview:self.distanceLb];
     [self.contentView addSubview:self.navigaBtn];
     [self.contentView addSubview:self.collecBtn];
@@ -55,6 +58,10 @@
     self.locationLb.text = model.addr;
     NSString *groudipo = [NSString stringWithFormat:@"%ld",model.polelist.count];
     self.havePoliLb.text = [NSString stringWithFormat:@"交流桩%@个，直流桩0个",groudipo];
+}
+-(void)setBtnName:(NSString *)btnName{
+    _btnName = btnName;
+    [self.collecBtn setTitle:btnName forState:UIControlStateNormal];
 }
 - (void)addSubMasonry {
     float btnWidht = (DEAppWidth-30)/2 ;
@@ -82,23 +89,30 @@
         make.right.equalTo(self).offset(-50);
         make.height.equalTo(@20);
     }];
-    [self.distanceLb mas_makeConstraints:^(MASConstraintMaker *make){
+    [self.locaImageV mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.equalTo(self.showImage.mas_right).offset(10);
+        make.top.equalTo(self.locationLb.mas_bottom).offset(5);
+        make.height.width.equalTo(@10);
+    }];
+    [self.distanceLb mas_makeConstraints:^(MASConstraintMaker *make){
+        make.left.equalTo(self.locaImageV.mas_right).offset(3);
         make.top.equalTo(self.locationLb.mas_bottom).offset(0);
         make.right.equalTo(self).offset(-50);
         make.height.equalTo(@20);
     }];
+   
+    
     [self.navigaBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.equalTo(self.showImage);
         make.top.equalTo(self.showImage.mas_bottom).offset(10);
         make.width.mas_equalTo(btnWidht);
-        make.height.equalTo(@28);
+        make.height.equalTo(@24);
     }];
     [self.collecBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.equalTo(self.navigaBtn.mas_right).offset(10);
         make.top.equalTo(self.navigaBtn);
         make.width.mas_equalTo(btnWidht);
-        make.height.equalTo(@28);
+        make.height.equalTo(@24);
     }];
     
 }
@@ -112,6 +126,13 @@
         _showImage.layer.masksToBounds=YES;
     }
     return _showImage;
+}
+- (UIImageView *)locaImageV{
+    if (_locaImageV == nil) {
+        _locaImageV = [[UIImageView alloc]init];
+        _locaImageV.image = [UIImage imageNamed:@"tab_home_press"];
+    }
+    return _locaImageV;
 }
 - (UILabel *)nameLb{
     if (_nameLb == nil) {
@@ -167,11 +188,11 @@
 - (UIButton *)navigaBtn{
     if (_navigaBtn == nil) {
         _navigaBtn = [[UIButton alloc]init];
-        _navigaBtn.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+        _navigaBtn.backgroundColor = LHColor(22, 177, 184);
         _navigaBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_navigaBtn setTitle:@"导航" forState:UIControlStateNormal];
         [_navigaBtn addTarget:self action:@selector(clickThtNaviBtn:) forControlEvents:UIControlEventTouchUpInside];
-        _navigaBtn.layer.cornerRadius =14;
+        _navigaBtn.layer.cornerRadius =4;
         _navigaBtn.layer.masksToBounds = YES;
     }
     return _navigaBtn;
@@ -179,23 +200,23 @@
 - (UIButton *)collecBtn{
     if (_collecBtn == nil) {
         _collecBtn = [[UIButton alloc]init];
-        _collecBtn.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+        _collecBtn.backgroundColor = LHColor(22, 177, 184);
         _collecBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_collecBtn setTitle:@"收藏" forState:UIControlStateNormal];
+        [_collecBtn setTitle:self.btnName forState:UIControlStateNormal];
         [_collecBtn addTarget:self action:@selector(clickThtCollecBtn:) forControlEvents:UIControlEventTouchUpInside];
-        _collecBtn.layer.cornerRadius =14;
+        _collecBtn.layer.cornerRadius =4;
         _collecBtn.layer.masksToBounds = YES;
     }
     return _collecBtn;
 }
 - (void)clickThtNaviBtn:(UIButton *)btn {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(clickTheNavigationButton)]) {
-        [self.delegate clickTheNavigationButton];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(clickTheNavigationButtonWithCDStation:)]) {
+        [self.delegate clickTheNavigationButtonWithCDStation:self.model];
     }
 }
 - (void)clickThtCollecBtn:(UIButton *)btn {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(clickTheCollectionButton)]) {
-        [self.delegate clickTheCollectionButton];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(clickTheCollectionButtonWithCDStation:)]) {
+        [self.delegate clickTheCollectionButtonWithCDStation:self.model];
     }
 }
 @end

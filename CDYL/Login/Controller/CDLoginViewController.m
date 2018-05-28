@@ -11,7 +11,9 @@
 #import "CDWebRequest.h"
 #import "CDCodeViewController.h"
 #import "CDReViewController.h"
-@interface CDLoginViewController ()
+#import "CDBarView.h"
+
+@interface CDLoginViewController ()<CDBarViewDelagate>
 @property (nonatomic, strong) CDLoginView *loginView;
 @property (nonatomic, strong) UIView *HUDView;
 @property (nonatomic, strong) UIButton *LoginButton;
@@ -19,6 +21,7 @@
 @property (nonatomic, strong) UIView *LoginAnimView;
 //登录转圈的那条白线所在的layer
 @property (nonatomic,strong) CAShapeLayer *shapeLayer;
+@property (nonatomic, strong)CDBarView *barView;
 @end
 
 @implementation CDLoginViewController
@@ -30,24 +33,32 @@
 
 - (void)setSubInfors {
     self.view.backgroundColor = [UIColor whiteColor];
+    CGFloat Height = 64;
+    if (is_iphoneX) {
+        Height = 88;
+    }
+    CDBarView *barView = [[CDBarView alloc]initWithFrame:CGRectMake(0, 0, DEAppWidth, Height)];
+    barView.delegate = self;
+    [self.view addSubview:barView];
+    self.barView = barView;
+    
     if (self.cthType == 1) {//登录界面
-        [self LoginCth];
+        [self LoginCth:barView.bounds.size.height+15 title:@"手机号登录"];
+       
     }else{
-        [self registerCth];
+        [self registerCth:barView.bounds.size.height+15 title:@"手机号注册"];
+      
     }
 }
-- (void)LoginCth {
-    self.title = @"登录";
-    CGFloat black = 79;
-    if (is_iphoneX) {
-        black = 103;
-    }
-    CDLoginView *lgView = [[CDLoginView alloc]initWithFrame:CGRectMake(0, black, DEAppWidth, 88) wight:0];
+- (void)LoginCth:(CGFloat )block title:(NSString *)string {
+   
+    self.barView.title = string;
+    CDLoginView *lgView = [[CDLoginView alloc]initWithFrame:CGRectMake(0, block, DEAppWidth, 88) wight:0];
     [self.view addSubview:lgView];
     self.loginView = lgView;
-    [self setBtnblack:black title:@"登录" tag:100];
+    [self setBtnblack:block title:@"登录" tag:100];
    
-    UIButton *reviewBtn=[[UIButton alloc]initWithFrame:CGRectMake(15, black+200, DEAppWidth-30, 40)];
+    UIButton *reviewBtn=[[UIButton alloc]initWithFrame:CGRectMake(15, block+200, DEAppWidth-30, 40)];
     
     [reviewBtn setTitle:@"重设密码" forState:UIControlStateNormal];
     reviewBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -58,30 +69,24 @@
     
     
 }
--(void)registerCth {
-    self.title = @"注册";
-    CGFloat black = 79;
-    if (is_iphoneX) {
-        black = 103;
-    }
-    CDLoginView *lgView = [[CDLoginView alloc]initWithFrame:CGRectMake(0, black, DEAppWidth, 88) wight:35];
+-(void)registerCth:(CGFloat )block title:(NSString *)string  {
+    self.barView.title = string;
+    CDLoginView *lgView = [[CDLoginView alloc]initWithFrame:CGRectMake(0, block, DEAppWidth, 88) wight:35];
     [self.view addSubview:lgView];
     self.loginView = lgView;
-    [self setBtnblack:black title:@"下一步" tag:101];
+    [self setBtnblack:block title:@"下一步" tag:101];
 }
 -(void)setBtnblack:(CGFloat)black title:(NSString *)title tag:(NSUInteger)tag{
     UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(15, black+130, DEAppWidth-30, 40)];
-    btn.backgroundColor = LHColor(251, 102, 110);
+    btn.backgroundColor = LHColor(255, 198, 80);
     [btn setTitle:title forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(clickTheBtn:) forControlEvents:UIControlEventTouchUpInside];
     btn.tag = tag;
-    [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [btn setTitleColor:LHColor(34, 34, 34) forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [self.view addSubview:btn];
     btn.layer.cornerRadius = 20;
-    btn.layer.masksToBounds = YES;
-    btn.layer.borderColor = [UIColor redColor].CGColor;
-    btn.layer.borderWidth = 0.5;
+
     self.LoginButton = btn;
 }
 #pragma mark - Btn点击方法
@@ -129,7 +134,7 @@
       
         [CDWebRequest requestsendVerCodeWithTel:phone AndBack:^(NSDictionary *backDic) {
             
-        } failure:^(NSError *err) {
+        } failure:^(NSString *err) {
             
         }];
         CDCodeViewController *codeView = [[CDCodeViewController alloc]init];
@@ -216,7 +221,7 @@
                     
                 }
                 
-            } failure:^(NSError *err) {
+            } failure:^(NSString *err) {
                 //登录失败
                 [weakself loginFail];
             }];
@@ -238,6 +243,11 @@
     [CDUserInfor shareUserInfor].userPword = pword;
     [[CDUserInfor shareUserInfor] updateInforWithAll:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
+//    写入UserDefault
+    NSUserDefaults *userdf = [NSUserDefaults standardUserDefaults];
+    [userdf setBool:YES forKey:@"isLogin"];
+    [userdf synchronize];
+    
 }
 /** 登录失败 */
 - (void)loginFail
@@ -285,5 +295,11 @@
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+#pragma mark - CDBarViewDelagate
+-(void)popUpViewController{
+    NSArray *subs = self.navigationController.childViewControllers;
+   
+    [self.navigationController popToViewController:[subs objectAtIndex:subs.count-2] animated:YES];
 }
 @end

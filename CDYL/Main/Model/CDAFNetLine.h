@@ -11,7 +11,7 @@
 @interface CDAFNetLine : NSObject
 
 typedef void(^SuccessedData)(id data);
-typedef void(^FailureMessage)(NSError * error);
+typedef void(^FailureMessage)(NSString * error);
 
 +(instancetype)shareManager;
 

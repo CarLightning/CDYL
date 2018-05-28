@@ -22,7 +22,7 @@
 //        navbar.barTintColor=[UIColor grayColor];
         NSDictionary *attri = @{
                                 NSForegroundColorAttributeName :[UIColor blackColor],
-                                NSFontAttributeName : [UIFont systemFontOfSize:20]
+                                NSFontAttributeName : [UIFont systemFontOfSize:18]
                                 };
         navbar.titleTextAttributes = attri;
         [self setValue:navbar forKey:@"navigationBar"];

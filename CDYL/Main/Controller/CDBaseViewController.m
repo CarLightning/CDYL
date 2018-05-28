@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = LHColor(235, 235, 241);
+    self.view.backgroundColor = LHColor(226, 226, 226);
    
    
 }
@@ -27,7 +27,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
 -(void)dealloc{
     NSLog(@"%@无内存泄漏",NSStringFromClass([self class]));
 }

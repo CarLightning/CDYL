@@ -8,8 +8,9 @@
 
 #import "CDCodeViewController.h"
 #import "UIView+PYExtension.h"
+#import "CDBarView.h"
 
-@interface CDCodeViewController ()
+@interface CDCodeViewController ()<CDBarViewDelagate>
 @property (nonatomic, strong) UILabel *countLb;
 @property (nonatomic, strong) UITextField *codeTf;
 @property (nonatomic, strong) UIButton *LoginButton;
@@ -24,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self setSubViews];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -38,8 +40,15 @@
     
 }
 -(void)setSubViews{
-    self.title = @"手机号验证";
-    self.view.backgroundColor = [UIColor whiteColor];
+    CGFloat Height = 64;
+    if (is_iphoneX) {
+        Height = 88;
+    }
+    CDBarView *barView = [[CDBarView alloc]initWithFrame:CGRectMake(0, 0, DEAppWidth, Height)];
+    barView.delegate = self;
+    [self.view addSubview:barView];
+    barView.title = @"手机号验证";
+    
     numberCount = 60;
     CGFloat black = 79;
     if (is_iphoneX) {
@@ -93,11 +102,10 @@
     
     
     UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(15, showView.py_centerX+40+40, DEAppWidth-30, 40)];
-    btn.backgroundColor = LHColor(251, 102, 110);
+    btn.backgroundColor =  LHColor(255, 198, 80);
     [btn setTitle:@"下一步" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(clickTheBtn:) forControlEvents:UIControlEventTouchUpInside];
-   
-    [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [btn setTitleColor: LHColor(34, 34, 34) forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [self.view addSubview:btn];
     btn.layer.cornerRadius = 20;
@@ -113,8 +121,10 @@
     [self.view endEditing:YES];
     if (self.codeTf.text.length>0) {
         if(self.cthType == 30){
+            //修改密码
             [self toReviewPassword];
         }else{
+            //注册
             [self toRegister];
         }
      
@@ -137,7 +147,7 @@
             [weakself showMessage:msg];
         }
         
-    } failure:^(NSError *err) {
+    } failure:^(NSString *err) {
         [weakself showMessage:@"网络连接失败"];
     }];
     
@@ -159,7 +169,7 @@
             [weakself showMessage:msg];
         }
         
-    } failure:^(NSError *err) {
+    } failure:^(NSString *err) {
         [weakself showMessage:@"网络连接失败"];
     }];
 }
@@ -185,7 +195,7 @@
         numberCount = 60;
         [_timer setFireDate:[NSDate distantPast]];
         
-    } failure:^(NSError *err) {
+    } failure:^(NSString *err) {
     [weakself showMessage:@"网络连接失败"];
     }];
     
@@ -210,6 +220,10 @@
     [CDUserInfor shareUserInfor].userPword = [CDXML md5:self.PwordNum];
     [[CDUserInfor shareUserInfor] updateInforWithAll:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
+    //    写入UserDefault
+    NSUserDefaults *userdf = [NSUserDefaults standardUserDefaults];
+    [userdf setBool:YES forKey:@"isLogin"];
+    [userdf synchronize];
     
 }
 //密码修改成功
@@ -223,5 +237,11 @@
    
     [self presentViewController:alert animated:YES completion:nil];
 
+}
+#pragma mark - CDBarViewDelegate
+-(void)popUpViewController{
+    
+    NSArray *subs = self.navigationController.childViewControllers;
+    [self.navigationController popToViewController:[subs objectAtIndex:subs.count-2] animated:YES];
 }
 @end

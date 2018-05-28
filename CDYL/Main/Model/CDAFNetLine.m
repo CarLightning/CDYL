@@ -36,9 +36,17 @@
         
         NSString *str = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSDictionary *dic = [CDXML requestFromString:str AndUseString:xmlStr];
-        success (dic);
+        
+        NSString *is_ok = [NSString stringWithFormat:@"%@",dic[@"success"]];
+        NSString *messa =[NSString stringWithFormat:@"%@",dic[@"message"]];
+        
+        if ([is_ok isEqualToString:@"1"]) {
+            success (dic);
+        }else{
+            failure (messa);
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        failure (error);
+        failure (@"网络错误");
     }];
 }
 
@@ -48,9 +56,17 @@
         
         NSString *str = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSDictionary *dic = [CDXML requestFromString:str AndUseString:xmlStr];
+        
+        NSString *is_ok = [NSString stringWithFormat:@"%@",dic[@"success"]];
+        NSString *messa =[NSString stringWithFormat:@"%@",dic[@"message"]];
+        
+        if ([is_ok isEqualToString:@"1"]) {
         success (dic);
+        }else{
+            failure (messa);
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        failure (error);
+        failure (@"网络错误");
     }];
 }
 @end

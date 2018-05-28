@@ -66,16 +66,16 @@ static CDUserInfor * _userInfor;
                     
                     NSMutableArray *lastArr = [[NSMutableArray alloc]initWithArray:cardArr];
                     
+                    
                     for (NSDictionary *isDefault in lastArr) {
                         NSString * defaulttCard = [NSString stringWithFormat:@"%@",isDefault[@"isdefaultt"]];
                         if ([defaulttCard isEqualToString:@"1"]) {
-                            weakself.defaultCard = [NSString stringWithFormat:@"%@",isDefault[@"cardno"]];
                             [lastArr removeObject:isDefault];
                             [lastArr insertObject:isDefault atIndex:0];
                             break;
                         }
                     }
-                    
+                    weakself.defaultCard = lastArr.firstObject[@"cardno"];
                     NSDictionary *userInfor = self.toDictionary;
                     NSString *file = [[NSFileManager defaultManager] userAccountPath:YES];
                     [userInfor writeToFile:file atomically:YES];
@@ -84,7 +84,7 @@ static CDUserInfor * _userInfor;
                     NSLog(@"用户信息更新失败");
                 }
                 
-            } failure:^(NSError *err) {
+            } failure:^(NSString *err) {
                 NSLog(@"用户信息更新失败");
             }];
         }else{
@@ -98,7 +98,7 @@ static CDUserInfor * _userInfor;
 }
 -(NSString<Optional> *)userName{
     if (_userName == nil) {
-        return self.phoneNum;
+        return @"Eason";
     }
     return _userName;
 }

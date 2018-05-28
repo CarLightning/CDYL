@@ -9,8 +9,9 @@
 #import "CDReViewController.h"
 #import "CDLoginView.h"
 #import "CDCodeViewController.h"
+#import "CDBarView.h"
 
-@interface CDReViewController ()
+@interface CDReViewController () <CDBarViewDelagate>
 @property (nonatomic, strong) CDLoginView *loginView;
 @property (nonatomic, strong) UIButton *LoginButton;
 @end
@@ -23,11 +24,17 @@
     [self registerCth];
 }
 -(void)registerCth {
-    self.title = @"重设密码";
-    CGFloat black = 79;
+    
+    CGFloat Height = 64;
     if (is_iphoneX) {
-        black = 103;
+        Height = 88;
     }
+    CDBarView *barView = [[CDBarView alloc]initWithFrame:CGRectMake(0, 0, DEAppWidth, Height)];
+    barView.delegate = self;
+    [self.view addSubview:barView];
+    barView.title = @"重设密码";
+    CGFloat black = barView.bounds.size.height+15;
+    
     CDLoginView *lgView = [[CDLoginView alloc]initWithFrame:CGRectMake(0, black, DEAppWidth, 88) wight:35];
     [self.view addSubview:lgView];
     self.loginView = lgView;
@@ -35,17 +42,14 @@
 }
 -(void)setBtnblack:(CGFloat)black title:(NSString *)title tag:(NSUInteger)tag{
     UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(15, black+130, DEAppWidth-30, 40)];
-    btn.backgroundColor = LHColor(251, 102, 110);
+    btn.backgroundColor = LHColor(255, 198, 80);
     [btn setTitle:title forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(clickTheBtn:) forControlEvents:UIControlEventTouchUpInside];
     btn.tag = tag;
-    [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [btn setTitleColor:LHColor(34, 34, 34) forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [self.view addSubview:btn];
     btn.layer.cornerRadius = 20;
-    btn.layer.masksToBounds = YES;
-    btn.layer.borderColor = [UIColor redColor].CGColor;
-    btn.layer.borderWidth = 0.5;
     self.LoginButton = btn;
 }
 #pragma mark - Btn点击方法
@@ -63,7 +67,7 @@
         
         [CDWebRequest requestsendVerCodeWithTel:phone AndBack:^(NSDictionary *backDic) {
             
-        } failure:^(NSError *err) {
+        } failure:^(NSString *err) {
             
         }];
         CDCodeViewController *codeView = [[CDCodeViewController alloc]init];
@@ -108,5 +112,12 @@
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+#pragma mark - CDBarViewDelagate
+-(void)popUpViewController{
+    
+    NSArray *subs = self.navigationController.childViewControllers;
+    
+    [self.navigationController popToViewController:[subs objectAtIndex:subs.count-2] animated:YES];
 }
 @end

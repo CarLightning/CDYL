@@ -95,31 +95,31 @@
     
     [lb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).offset(10);
-        make.top.mas_equalTo(self).offset(12);
+        make.top.mas_equalTo(self).offset(10);
         make.width.mas_equalTo(self);
         make.height.mas_equalTo(25);
     }];
     [server mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).offset(10);
-        make.top.mas_equalTo(lb.mas_bottom).offset(8);
+        make.top.mas_equalTo(lb.mas_bottom).offset(0);
         make.width.mas_equalTo(150);
         make.height.mas_equalTo(25);
     }];
     [addre mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).offset(10);
-        make.top.mas_equalTo(server.mas_bottom).offset(8);
+        make.top.mas_equalTo(server.mas_bottom).offset(0);
         make.width.mas_equalTo(self);
         make.height.mas_equalTo(25);
     }];
     [distance mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).offset(10);
-        make.top.mas_equalTo(addre.mas_bottom).offset(8);
+        make.top.mas_equalTo(addre.mas_bottom).offset(0);
         make.width.mas_equalTo(80);
         make.height.mas_equalTo(25);
     }];
     [company mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).offset(10);
-        make.top.mas_equalTo(distance.mas_bottom).offset(8);
+        make.top.mas_equalTo(distance.mas_bottom).offset(0);
         make.width.mas_equalTo(self);
         make.height.mas_equalTo(25);
     }];
@@ -150,10 +150,10 @@
    
     CGFloat width = self.py_width/2;
     [navigaBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self).offset(20);
-        make.right.mas_equalTo(self).offset(- width -20);
+        make.left.mas_equalTo(self).offset(10);
+        make.right.mas_equalTo(self).offset(- width -10);
         make.top.mas_equalTo(company.mas_bottom).offset(15);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(30);
     }];
     
     UIButton *appointmentBtn = [[UIButton alloc]init];
@@ -166,10 +166,10 @@
     self.appBtn = appointmentBtn;
    
     [appointmentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self).offset(-20);
-        make.left.mas_equalTo(self).offset(width +20);
+        make.right.mas_equalTo(self).offset(-10);
+        make.left.mas_equalTo(self).offset(width +10);
         make.top.mas_equalTo(company.mas_bottom).offset(15);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(30);
     }];
 }
 

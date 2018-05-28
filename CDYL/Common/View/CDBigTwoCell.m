@@ -31,7 +31,7 @@
         NSData *data = [[NSFileManager defaultManager]contentsAtPath:file];
         self.headView.image = [[UIImage alloc]initWithData:data];
     }else{
-        self.headView.backgroundColor =[[UIColor orangeColor]colorWithAlphaComponent:0.5];
+       self.headView.image = [UIImage imageNamed:@"headIg"];
     }
 }
 -(UIImageView *)headView{

@@ -8,6 +8,10 @@
 
 #import "CDLocationViewController.h"
 #import "CDShowCell.h"
+#import "CDPoleViewController.h"
+#import "CDUserLocation.h"
+#import <AMapNaviKit/AMapNaviKit.h>
+#import "GPSNaviViewController.h"
 
 @interface CDLocationViewController ()<UITableViewDelegate,UITableViewDataSource,ShowCellDelegate>
 @property (nonatomic, strong) NSArray *stationSource;
@@ -24,37 +28,30 @@ static NSString *const identifyCell = @"SHOWCELL";
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self getSourceFromWeb];
+    
+    if (self.navigationController.navigationBar.hidden) {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+    }
+    if (self.cthType == 0) {
+        [self getSourceFromWeb];
+    }else{
+        [self getSourceWithCollection];
+    }
 }
--(void)getSourceFromWeb{
-    NSString *lat = [NSString stringWithFormat:@"%.3f",self.nowCoordinate.latitude];
-    NSString *lon = [NSString stringWithFormat:@"%.3f",self.nowCoordinate.longitude];
-    NSTimeInterval beginTime = [[NSDate date] timeIntervalSince1970];
-    NSTimeInterval  endTime = beginTime +3600;
-NSString *begin = [NSString stringWithFormat:@"%.0f",beginTime];
-    NSString *end = [NSString stringWithFormat:@"%.0f",endTime];
-    __block typeof(self) weakself = self;
-    [CDWebRequest requestsearchCanBespeakChargePoleWithlat:lat lon:lon radius:@"100" type:@"0" status:@"0" startTime:begin endTime:end regId:@"" AndBack:^(NSDictionary *backDic) {
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
         
-        NSString *is_ok = [NSString stringWithFormat:@"%@",backDic[@"success"]];
-       
-        if ([is_ok isEqualToString:@"1"]) {
-            
-           weakself.stationSource =[weakself changeArrFrom:backDic[@"stationlist"]];
-            [weakself.tabaleV reloadData];
-        }
-    } failure:^(NSError *err) {
-        
-        
-    }];
+    }
 }
-- (void)initSubs {
-    UITableView *tv=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEAppWidth, DEAppHeight)];
-    tv.delegate=self;
-    tv.dataSource=self;
-    [tv registerClass:[CDShowCell class] forCellReuseIdentifier:identifyCell];
-    [self.view addSubview:tv];
-    self.tabaleV =tv;
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
 }
 #pragma mark -  tableViewDelagate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -62,14 +59,18 @@ NSString *begin = [NSString stringWithFormat:@"%.0f",beginTime];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CDShowCell *cell = [tableView dequeueReusableCellWithIdentifier:identifyCell forIndexPath:indexPath];
-
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;
     cell.model = self.stationSource[indexPath.row];
+    cell.btnName = @"取消收藏";
+    if (self.cthType == 0) {
+        cell.btnName = @"收藏";
+    }
     cell.delegate = self ;
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 140;
+    return 135;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     return [[UIView alloc]init];
@@ -85,26 +86,119 @@ NSString *begin = [NSString stringWithFormat:@"%.0f",beginTime];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     CDShowCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    CDPoleViewController *poleView = [[CDPoleViewController alloc]init];
+    poleView.stationModel = cell.model;
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:poleView animated:YES];
+    self.hidesBottomBarWhenPushed = YES;
 }
 #pragma mark -  ShowCellDelegate
 
 /***点击导航按钮***/
--(void)clickTheNavigationButton{
+-(void)clickTheNavigationButtonWithCDStation:(CDStation *)model{
     NSLog(@"点击导航");
+    //    CLLocationCoordinate2D  location  = self.nowCoordinate;
+    CLLocationCoordinate2D  location  = [CDUserLocation share].userCoordinate;
+    AMapNaviPoint *startPoint =  [AMapNaviPoint locationWithLatitude:location.latitude longitude:location.longitude];
+    AMapNaviPoint *endPoint =  [AMapNaviPoint locationWithLatitude:model.lat longitude:model.lon];
+    GPSNaviViewController *gpsNavi = [[GPSNaviViewController alloc]init];
+    gpsNavi.startPoint = startPoint;
+    gpsNavi.endPoint = endPoint;
+    
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:gpsNavi animated:YES];
+    
 }
 /***点击收藏按钮***/
--(void)clickTheCollectionButton{
+-(void)clickTheCollectionButtonWithCDStation:(CDStation *)model{
     NSLog(@"点击收藏");
+    NSString *phoneNub = [CDUserInfor shareUserInfor].phoneNum;
+    NSString *PwNub = [CDUserInfor shareUserInfor].userPword;
+    NSString *facType = @"1";
+    NSString *facId = model.pid;
+    __weak typeof(self) weakself = self;
+    if (self.cthType ==0) {
+        
+        
+        [CDWebRequest requestgaddCollectWithidentity:@"1" cardNo:phoneNub Pass:PwNub facId:facId facType:facType AndBack:^(NSDictionary *backDic) {
+            
+            [weakself showAlert:@"收藏成功"];
+            
+        } failure:^(NSString *err) {
+            [weakself showAlert:err];
+            
+        }];
+        
+    }else{
+        [CDWebRequest requestdeleteColleteWithidentity:@"1" cardNo:phoneNub Pass:PwNub facId:facId AndBack:^(NSDictionary *backDic) {
+            [weakself showAlert:@"取消成功"];
+            [weakself getSourceWithCollection];
+        } failure:^(NSString *err) {
+             [weakself showAlert:err];
+        }];
+    }
 }
 
+#pragma mark -  Method
+-(void)getSourceFromWeb{
+    NSString *lat = [NSString stringWithFormat:@"%.3f",self.nowCoordinate.latitude];
+    NSString *lon = [NSString stringWithFormat:@"%.3f",self.nowCoordinate.longitude];
+    NSTimeInterval beginTime = [[NSDate date] timeIntervalSince1970];
+    NSTimeInterval  endTime = beginTime +3600;
+    NSString *begin = [NSString stringWithFormat:@"%.0f",beginTime];
+    NSString *end = [NSString stringWithFormat:@"%.0f",endTime];
+    __block typeof(self) weakself = self;
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CDWebRequest requestsearchCanBespeakChargePoleWithlat:lat lon:lon radius:@"100" type:@"0" status:@"0" startTime:begin endTime:end regId:@"" AndBack:^(NSDictionary *backDic) {
+    
+        weakself.stationSource =[weakself changeArrFrom:backDic[@"stationlist"]];
+        [hud hideAnimated:YES];
+        [weakself.tabaleV reloadData];
+        
+    } failure:^(NSString *err) {
+        
+        
+    }];
+}
+- (void)getSourceWithCollection{
+    __block typeof(self) weakself = self;
+    NSString *cardNo = [CDUserInfor shareUserInfor].phoneNum;
+    NSString *pass = [CDUserInfor shareUserInfor].userPword;
+     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CDWebRequest requestgetMyCollectWithidentity:@"1" cardNo:cardNo Pass:pass AndBack:^(NSDictionary *backDic) {
+        
+        weakself.stationSource =[weakself changeArrFrom:backDic[@"stationlist"]];
+        [hud hideAnimated:YES];
+        [weakself.tabaleV reloadData];
+    } failure:^(NSString *err) {
+        
+        
+    }];
+}
+
+- (void)initSubs {
+    UITableView *tv=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEAppWidth, DEAppHeight)];
+    tv.delegate=self;
+    tv.dataSource=self;
+    tv.backgroundColor = [UIColor clearColor];
+    [tv registerClass:[CDShowCell class] forCellReuseIdentifier:identifyCell];
+    [self.view addSubview:tv];
+    self.tabaleV =tv;
+}
 //排序
 -(NSArray *)changeArrFrom:(NSArray *)arr{
-   ;
+    NSString *keyStr = [[NSString alloc]init];
+    if (self.cthType == 0) {
+        keyStr = @"distance";
+    }else{
+        keyStr = @"id";
+    }
     NSArray *newArr=[arr sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        NSString * distance1=[NSString stringWithFormat:@"%@",obj1[@"distance"]];
+        NSString * distance1=[NSString stringWithFormat:@"%@",obj1[keyStr]];
         float dis1= distance1.floatValue;
-        NSString * distance2=[NSString stringWithFormat:@"%@",obj2[@"distance"]];
+        NSString * distance2=[NSString stringWithFormat:@"%@",obj2[keyStr]];
         
         float dis2=distance2.floatValue;
         
@@ -117,5 +211,14 @@ NSString *begin = [NSString stringWithFormat:@"%.0f",beginTime];
     }];
     NSArray *lastArr = [CDStation arrayOfModelsFromDictionaries:newArr error:nil];
     return lastArr;
+}
+- (void)showAlert:(NSString *)msg{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:msg message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+    
+    [alert addAction:action1];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
 }
 @end

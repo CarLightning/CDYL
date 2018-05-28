@@ -11,11 +11,13 @@
 #import "CDoderViewController.h"
 #import "CDchargeViewController.h"
 #import "CDscanViewController.h"
-#import "CDcommonViewController.h"
+//#import "CDcommonViewController.h"
+#import "CDMineViewController.h"
 #import "CDTabbar.h"
 #import "CDNav.h"
 #import "Global.h"
 #import "StyleDIY.h"
+#import "CDViewController.h"
 
 @interface CDTabbarCtl ()<CDTabbarDelegate>
 
@@ -32,13 +34,38 @@
     [self addChildViewController:[[CDMapViewController alloc] init] image:@"tab_home_nor" seletedImage:@"tab_home_press" title:@"地图"];
     [self addChildViewController:[[CDoderViewController alloc] init] image:@"tab_classify_nor"  seletedImage:@"tab_classify_press"  title:@"订单"];
     [self addChildViewController:[[CDchargeViewController alloc] init] image:@"tab_community_nor"  seletedImage:@"tab_community_press"  title:@"预约"];
-    [self addChildViewController:[[CDcommonViewController alloc] init] image:@"tab_me_nor"  seletedImage:@"tab_me_press"  title:@"我的"];
+    [self addChildViewController:[[CDMineViewController alloc] init] image:@"tab_me_nor"  seletedImage:@"tab_me_press"  title:@"我的"];
 
     
     CDTabbar *tabBar = [CDTabbar tabBar];
     tabBar.delegate = self;
     // 设置自定义tabBar(使用kvc)
     [self setValue:tabBar forKeyPath:@"tabBar"];
+    
+    // 判断是否登录
+   
+    
+    if (![self is_login]) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+           
+                
+                CDViewController *cview = [[CDViewController alloc]init];
+                CDNav *navi = [[CDNav alloc]initWithRootViewController:cview];
+                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navi animated:YES completion:nil];
+         
+            
+        });
+        
+    }
+    
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    
+    
+    
 }
 - (void)addChildViewController:(UIViewController *)childController image:(NSString *)image seletedImage:(NSString *)selectedImage title:(NSString *)title
 {
@@ -50,8 +77,10 @@
     // 设置图片
     [childController.tabBarItem setImage:[[UIImage imageNamed:image] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [childController.tabBarItem setSelectedImage:[[UIImage imageNamed:selectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    
-    
+    //选中字体颜色
+    [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:LHColor(34, 34, 34)} forState:UIControlStateSelected];
+//    选中字体颜色
+    [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:LHColor(34, 34, 34)} forState:UIControlStateNormal];
     // 添加子控制器
     [self addChildViewController:nav];
     //    return childController;
@@ -70,9 +99,13 @@
 //     CDNav *navi = [[CDNav alloc]initWithRootViewController:vc];
    [self.selectedViewController presentViewController:vc animated:YES completion:nil];
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (BOOL)is_login{
+    NSUserDefaults *userdf = [NSUserDefaults standardUserDefaults];
+    BOOL is_login = [userdf boolForKey:@"isLogin"];
+    if (is_login) {
+        return YES;
+    }
+    return NO;
 }
 
 
