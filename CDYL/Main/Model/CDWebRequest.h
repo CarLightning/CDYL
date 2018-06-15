@@ -45,10 +45,16 @@
 
 //查询未支付账单
 + (void)requestqueryCardBillWithidentity:(NSString *)identity cardNo:(NSString *)cardNo Pass:(NSString *)pass  AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
-//读取用户的充点卡
+//读取用户的充zhi卡
 + (void)requestGetUserCardWithidentity:(NSString *)identity cardNo:(NSString *)cardNo Pass:(NSString *)pass AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
 //设置默认卡
 + (void)requesSetDefaultCardnumidentity:(NSString *)identity cardNo:(NSString *)cardNo pass:(NSString *)pass cardId:(NSString *)cardId AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
 //取消默认卡
 + (void)requesCancleCardDefaultWithidentity:(NSString *)identity cardNo:(NSString *)cardNo pass:(NSString *)pass cardId:(NSString *)cardId AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
+//消费明细
++ (void)requestgetConsumRecordWithidentity:(NSString *)identity cardNo:(NSString *)cardNo Pass:(NSString *)pass  cardId:(NSString *)cardId pageSize:(NSString *)pageSize index:(NSString *)index AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
+//充值明细
++ (void)requestgetRechRecordWithidentity:(NSString *)identity cardNo:(NSString *)cardNo Pass:(NSString *)pass  cardId:(NSString *)cardId pageSize:(NSString *)pageSize index:(NSString *)index AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
+//获取消息
++ (void)requestGetNewMessageWithIdentify:(NSString *)identity cardNo:(NSString *)cardNo pass:(NSString *)pass AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
 @end

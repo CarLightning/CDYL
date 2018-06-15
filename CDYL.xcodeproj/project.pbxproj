@@ -8,71 +8,90 @@
 
 /* Begin PBXBuildFile section */
 		7CD945EAB881FD2288E6FE7F /* libPods-CDYL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B48407BCB546847CE696A5 /* libPods-CDYL.a */; };
-		84228509207B04030078139F /* AliMapViewCustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84228507207B04030078139F /* AliMapViewCustomAnnotationView.m */; };
-		8422850C207B356C0078139F /* AliMapViewCustomCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422850B207B356C0078139F /* AliMapViewCustomCalloutView.m */; };
-		8422850F207B40430078139F /* CDPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422850E207B40430078139F /* CDPointAnnotation.m */; };
-		84228512207C8FC90078139F /* CDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84228511207C8FC90078139F /* CDViewController.m */; };
-		84228517207DEEAE0078139F /* LBXAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 84228515207DEEAD0078139F /* LBXAlertAction.m */; };
-		8422851C207DF08C0078139F /* UIActionSheet+LBXAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 84228519207DF08B0078139F /* UIActionSheet+LBXAlertAction.m */; };
-		8422851D207DF08C0078139F /* UIWindow+LBXHierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422851B207DF08C0078139F /* UIWindow+LBXHierarchy.m */; };
-		84228520207DF0E10078139F /* UIAlertView+LBXAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422851E207DF0E00078139F /* UIAlertView+LBXAlertAction.m */; };
-		84228523207DF9730078139F /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 84228521207DF9720078139F /* Global.m */; };
-		84228526207DF9C10078139F /* StyleDIY.m in Sources */ = {isa = PBXBuildFile; fileRef = 84228525207DF9C10078139F /* StyleDIY.m */; };
-		84233AE620736C01007D1E09 /* CDBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84233AE520736C01007D1E09 /* CDBaseViewController.m */; };
+		8415097120D38DB6003082DD /* CDBaseSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = 8415097020D38DB6003082DD /* CDBaseSqlite.m */; };
+		8415097420D3A15A003082DD /* CDMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8415097320D3A15A003082DD /* CDMessageCell.m */; };
 		842D071A20AEB822009B7A4A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 842D071920AEB822009B7A4A /* Images.xcassets */; };
-		84302B1C20996AB600D29C8B /* CDCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84302B1B20996AB600D29C8B /* CDCodeViewController.m */; };
 		843146FB1EE109FE00E41BBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843146FA1EE109FE00E41BBD /* Assets.xcassets */; };
 		843146FE1EE109FE00E41BBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843146FC1EE109FE00E41BBD /* LaunchScreen.storyboard */; };
-		843147271EE111FD00E41BBD /* CDNav.m in Sources */ = {isa = PBXBuildFile; fileRef = 843147261EE111FD00E41BBD /* CDNav.m */; };
-		8431472A1EE1123500E41BBD /* CDTabbarCtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 843147291EE1123500E41BBD /* CDTabbarCtl.m */; };
-		8431472D1EE1160200E41BBD /* CDMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8431472C1EE1160200E41BBD /* CDMapViewController.m */; };
-		843147301EE1162A00E41BBD /* CDoderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8431472F1EE1162A00E41BBD /* CDoderViewController.m */; };
-		843147331EE1165D00E41BBD /* CDchargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843147321EE1165D00E41BBD /* CDchargeViewController.m */; };
-		843147361EE1167500E41BBD /* CDscanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843147351EE1167500E41BBD /* CDscanViewController.m */; };
-		843147401EE1178700E41BBD /* CDTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8431473F1EE1178700E41BBD /* CDTabbar.m */; };
-		847E46AA20A92EC400675762 /* CDPoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847E46A920A92EC400675762 /* CDPoleViewController.m */; };
-		847E46AD20A9353800675762 /* CDPoleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 847E46AC20A9353800675762 /* CDPoleCell.m */; };
-		8480BE8A20AA71FD00A992EF /* GPSNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480BE8920AA71FC00A992EF /* GPSNaviViewController.m */; };
-		8480BE8D20AA72BE00A992EF /* SpeechSynthesizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480BE8B20AA72BE00A992EF /* SpeechSynthesizer.m */; };
+		84600BD020D2758200E73D64 /* CDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ADAF7A20870AE300555B27 /* CDAppDelegate.m */; };
+		84600BD120D2758200E73D64 /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E429E32074B7A6001AE931 /* Const.m */; };
+		84600BD220D2758200E73D64 /* CDNav.m in Sources */ = {isa = PBXBuildFile; fileRef = 843147261EE111FD00E41BBD /* CDNav.m */; };
+		84600BD320D2758200E73D64 /* CDTabbarCtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 843147291EE1123500E41BBD /* CDTabbarCtl.m */; };
+		84600BD420D2758200E73D64 /* CDTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8431473F1EE1178700E41BBD /* CDTabbar.m */; };
+		84600BD520D2758200E73D64 /* CDBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84233AE520736C01007D1E09 /* CDBaseViewController.m */; };
+		84600BD620D2758200E73D64 /* CDWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E429E62074CAA0001AE931 /* CDWebRequest.m */; };
+		84600BD720D2758200E73D64 /* CDAFNetLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E429E92074CB6C001AE931 /* CDAFNetLine.m */; };
+		84600BD820D2758200E73D64 /* CDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B6B092079BE1200ED46E3 /* CDXML.m */; };
+		84600BD920D2758200E73D64 /* CDStation.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B6B0C2079ED8B00ED46E3 /* CDStation.m */; };
+		84600BDA20D2758200E73D64 /* CDPoliList.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B6B0F2079F15D00ED46E3 /* CDPoliList.m */; };
+		84600BDB20D2758200E73D64 /* CDUserInfor.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6BB4E20808D7200131835 /* CDUserInfor.m */; };
+		84600BDD20D2758200E73D64 /* CDMoneyCardInfor.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EB00E620B2ADAC00997781 /* CDMoneyCardInfor.m */; };
+		84600BDE20D2758200E73D64 /* NSFileManager+CDFilePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51A5A2090696F00333A2A /* NSFileManager+CDFilePath.m */; };
+		84600BDF20D2758200E73D64 /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 84228521207DF9720078139F /* Global.m */; };
+		84600BE020D2758200E73D64 /* StyleDIY.m in Sources */ = {isa = PBXBuildFile; fileRef = 84228525207DF9C10078139F /* StyleDIY.m */; };
+		84600BE120D2758200E73D64 /* CDMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8431472C1EE1160200E41BBD /* CDMapViewController.m */; };
+		84600BE220D2758200E73D64 /* CDLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A1226220A43E59003AB2F1 /* CDLocationViewController.m */; };
+		84600BE320D2758200E73D64 /* CDPoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847E46A920A92EC400675762 /* CDPoleViewController.m */; };
+		84600BE420D2758200E73D64 /* CDCompanyShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480BE9920ABFEE600A992EF /* CDCompanyShow.m */; };
+		84600BE520D2758200E73D64 /* CDPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422850E207B40430078139F /* CDPointAnnotation.m */; };
+		84600BE620D2758200E73D64 /* CDUserLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7CBEB20B5503F003E0879 /* CDUserLocation.m */; };
+		84600BE720D2758200E73D64 /* LocationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B6B11207A123500ED46E3 /* LocationAnnotationView.m */; };
+		84600BE820D2758200E73D64 /* AliMapViewCustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84228507207B04030078139F /* AliMapViewCustomAnnotationView.m */; };
+		84600BE920D2758200E73D64 /* AliMapViewCustomCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422850B207B356C0078139F /* AliMapViewCustomCalloutView.m */; };
+		84600BEA20D2758200E73D64 /* CDShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D3652C20A52A1300E9063E /* CDShowCell.m */; };
+		84600BEB20D2758200E73D64 /* CDPoleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 847E46AC20A9353800675762 /* CDPoleCell.m */; };
+		84600BEC20D2758200E73D64 /* LSXView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480BE9420ABFE1300A992EF /* LSXView.m */; };
+		84600BED20D2758200E73D64 /* CDoderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8431472F1EE1162A00E41BBD /* CDoderViewController.m */; };
+		84600BEE20D2758200E73D64 /* CDchargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843147321EE1165D00E41BBD /* CDchargeViewController.m */; };
+		84600BEF20D2758200E73D64 /* CDscanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843147351EE1167500E41BBD /* CDscanViewController.m */; };
+		84600BF020D2758200E73D64 /* LBXAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 84228515207DEEAD0078139F /* LBXAlertAction.m */; };
+		84600BF120D2758200E73D64 /* UIAlertView+LBXAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422851E207DF0E00078139F /* UIAlertView+LBXAlertAction.m */; };
+		84600BF220D2758200E73D64 /* UIActionSheet+LBXAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 84228519207DF08B0078139F /* UIActionSheet+LBXAlertAction.m */; };
+		84600BF320D2758200E73D64 /* UIWindow+LBXHierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422851B207DF08C0078139F /* UIWindow+LBXHierarchy.m */; };
+		84600BF420D2758200E73D64 /* CDMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7CBE220B4FEBF003E0879 /* CDMineViewController.m */; };
+		84600BF520D2758200E73D64 /* CDHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51A4E208EC4FA00333A2A /* CDHeaderController.m */; };
+		84600BF620D2758200E73D64 /* CDHeadimageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51A57208F198100333A2A /* CDHeadimageViewController.m */; };
+		84600BF720D2758200E73D64 /* CDChangeStrController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FC4E47209174640060ED91 /* CDChangeStrController.m */; };
+		84600BF820D2758200E73D64 /* CDMoneyCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EB00E020B2744700997781 /* CDMoneyCardController.m */; };
+		84600BF920D2758200E73D64 /* CDMessageCth.m in Sources */ = {isa = PBXBuildFile; fileRef = 84600B7C20D2270500E73D64 /* CDMessageCth.m */; };
+		84600BFA20D2758200E73D64 /* CDOneCardCth.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BDB6E20BBE8D30025DED0 /* CDOneCardCth.m */; };
+		84600BFB20D2758200E73D64 /* CDDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8426928B20C635FA0060B9D4 /* CDDetailViewController.m */; };
+		84600BFC20D2758200E73D64 /* CDConsumeCth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481522220CE68EA003264A1 /* CDConsumeCth.m */; };
+		84600BFD20D2758200E73D64 /* CDCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8426929120C680F10060B9D4 /* CDCellModel.m */; };
+		84600BFE20D2758200E73D64 /* MsgCellFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 84600B7F20D256B200E73D64 /* MsgCellFrame.m */; };
+		84600BFF20D2758200E73D64 /* UserMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84600B7920D1057700E73D64 /* UserMessage.m */; };
+		84600C0020D2758200E73D64 /* CDMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84600B7620D1032C00E73D64 /* CDMessage.m */; };
+		84600C0120D2758200E73D64 /* CDBigTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51A51208EC6EB00333A2A /* CDBigTwoCell.m */; };
+		84600C0220D2758200E73D64 /* CDSmallTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51A54208EC70F00333A2A /* CDSmallTwoCell.m */; };
+		84600C0320D2758200E73D64 /* CDMoneyCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EB00E320B2AC9B00997781 /* CDMoneyCard.m */; };
+		84600C0420D2758200E73D64 /* CDHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7CBE520B50489003E0879 /* CDHeadView.m */; };
+		84600C0520D2758200E73D64 /* CDCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7CBE820B511FF003E0879 /* CDCellView.m */; };
+		84600C0620D2758200E73D64 /* CDcell.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BDB7120BBF0690025DED0 /* CDcell.m */; };
+		84600C0720D2758200E73D64 /* CDClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E91DFF20C1387C00F95DDE /* CDClipView.m */; };
+		84600C0820D2758200E73D64 /* UIImage+CDResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 8426929720C9061E0060B9D4 /* UIImage+CDResize.m */; };
+		84600C0920D2758200E73D64 /* CDchargeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8426928E20C674590060B9D4 /* CDchargeCell.m */; };
+		84600C0A20D2758200E73D64 /* CDBgVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 8426929420C7C5080060B9D4 /* CDBgVIew.m */; };
+		84600C0B20D2758200E73D64 /* CDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84228511207C8FC90078139F /* CDViewController.m */; };
+		84600C0C20D2758200E73D64 /* CDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849048E920943ECF00F4FC87 /* CDLoginViewController.m */; };
+		84600C0D20D2758200E73D64 /* CDReViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ACCB4020A29DEE0004D514 /* CDReViewController.m */; };
+		84600C0E20D2758200E73D64 /* CDCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84302B1B20996AB600D29C8B /* CDCodeViewController.m */; };
+		84600C0F20D2758200E73D64 /* CDLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849048EE209442AF00F4FC87 /* CDLoginView.m */; };
+		84600C1020D2758200E73D64 /* CDBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F865D620B8037A00E800E1 /* CDBarView.m */; };
+		84600C1120D2758200E73D64 /* GPSNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480BE8920AA71FC00A992EF /* GPSNaviViewController.m */; };
+		84600C1220D2758200E73D64 /* SpeechSynthesizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480BE8B20AA72BE00A992EF /* SpeechSynthesizer.m */; };
+		84600C1320D2758200E73D64 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ADAF7C20870C5B00555B27 /* main.m */; };
+		84600C1420D2758200E73D64 /* UIView+PYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B6B062079BC3A00ED46E3 /* UIView+PYExtension.m */; };
+		84600C1520D2758200E73D64 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B6B012079BBE800ED46E3 /* XMLReader.m */; };
 		8480BE9620ABFE1300A992EF /* LSXView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8480BE9320ABFE1200A992EF /* LSXView.xib */; };
-		8480BE9720ABFE1300A992EF /* LSXView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480BE9420ABFE1300A992EF /* LSXView.m */; };
-		8480BE9A20ABFEE600A992EF /* CDCompanyShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8480BE9920ABFEE600A992EF /* CDCompanyShow.m */; };
 		848B6B022079BBE800ED46E3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 848B6AFF2079BBE800ED46E3 /* README.md */; };
-		848B6B032079BBE800ED46E3 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B6B012079BBE800ED46E3 /* XMLReader.m */; };
-		848B6B072079BC3A00ED46E3 /* UIView+PYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B6B062079BC3A00ED46E3 /* UIView+PYExtension.m */; };
-		848B6B0A2079BE1200ED46E3 /* CDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B6B092079BE1200ED46E3 /* CDXML.m */; };
-		848B6B0D2079ED8B00ED46E3 /* CDStation.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B6B0C2079ED8B00ED46E3 /* CDStation.m */; };
-		848B6B102079F15D00ED46E3 /* CDPoliList.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B6B0F2079F15D00ED46E3 /* CDPoliList.m */; };
-		848B6B13207A123500ED46E3 /* LocationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848B6B11207A123500ED46E3 /* LocationAnnotationView.m */; };
-		849048EA20943ECF00F4FC87 /* CDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849048E920943ECF00F4FC87 /* CDLoginViewController.m */; };
-		849048F0209442AF00F4FC87 /* CDLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849048EE209442AF00F4FC87 /* CDLoginView.m */; };
-		84A1226320A43E59003AB2F1 /* CDLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A1226220A43E59003AB2F1 /* CDLocationViewController.m */; };
-		84A6BB4F20808D7200131835 /* CDUserInfor.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6BB4E20808D7200131835 /* CDUserInfor.m */; };
-		84A7CBE320B4FEBF003E0879 /* CDMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7CBE220B4FEBF003E0879 /* CDMineViewController.m */; };
-		84A7CBE620B50489003E0879 /* CDHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7CBE520B50489003E0879 /* CDHeadView.m */; };
-		84A7CBE920B511FF003E0879 /* CDCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7CBE820B511FF003E0879 /* CDCellView.m */; };
-		84A7CBEC20B55040003E0879 /* CDUserLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7CBEB20B5503F003E0879 /* CDUserLocation.m */; };
-		84ACCB4120A29DEE0004D514 /* CDReViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ACCB4020A29DEE0004D514 /* CDReViewController.m */; };
-		84ADAF7B20870AE300555B27 /* CDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ADAF7A20870AE300555B27 /* CDAppDelegate.m */; };
-		84ADAF7D20870C5B00555B27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ADAF7C20870C5B00555B27 /* main.m */; };
-		84B51A4F208EC4FA00333A2A /* CDHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51A4E208EC4FA00333A2A /* CDHeaderController.m */; };
-		84B51A52208EC6EB00333A2A /* CDBigTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51A51208EC6EB00333A2A /* CDBigTwoCell.m */; };
-		84B51A55208EC70F00333A2A /* CDSmallTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51A54208EC70F00333A2A /* CDSmallTwoCell.m */; };
-		84B51A58208F198100333A2A /* CDHeadimageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51A57208F198100333A2A /* CDHeadimageViewController.m */; };
-		84B51A5B2090696F00333A2A /* NSFileManager+CDFilePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B51A5A2090696F00333A2A /* NSFileManager+CDFilePath.m */; };
-		84D3652D20A52A1300E9063E /* CDShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D3652C20A52A1300E9063E /* CDShowCell.m */; };
-		84E429E42074B7A6001AE931 /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E429E32074B7A6001AE931 /* Const.m */; };
-		84E429E72074CAA0001AE931 /* CDWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E429E62074CAA0001AE931 /* CDWebRequest.m */; };
-		84E429EA2074CB6C001AE931 /* CDAFNetLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E429E92074CB6C001AE931 /* CDAFNetLine.m */; };
-		84EB00E120B2744700997781 /* CDMoneyCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EB00E020B2744700997781 /* CDMoneyCardController.m */; };
-		84EB00E420B2AC9B00997781 /* CDMoneyCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EB00E320B2AC9B00997781 /* CDMoneyCard.m */; };
-		84EB00E720B2ADAC00997781 /* CDMoneyCardInfor.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EB00E620B2ADAC00997781 /* CDMoneyCardInfor.m */; };
-		84F865D720B8037A00E800E1 /* CDBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F865D620B8037A00E800E1 /* CDBarView.m */; };
-		84FC4E48209174640060ED91 /* CDChangeStrController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FC4E47209174640060ED91 /* CDChangeStrController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		809684D8F75C0F5EC0ABBAB5 /* Pods-CDYL.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYL.release.xcconfig"; path = "Pods/Target Support Files/Pods-CDYL/Pods-CDYL.release.xcconfig"; sourceTree = "<group>"; };
+		8415096F20D38DB6003082DD /* CDBaseSqlite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDBaseSqlite.h; sourceTree = "<group>"; };
+		8415097020D38DB6003082DD /* CDBaseSqlite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDBaseSqlite.m; sourceTree = "<group>"; };
+		8415097220D3A15A003082DD /* CDMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDMessageCell.h; sourceTree = "<group>"; };
+		8415097320D3A15A003082DD /* CDMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDMessageCell.m; sourceTree = "<group>"; };
 		84228507207B04030078139F /* AliMapViewCustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AliMapViewCustomAnnotationView.m; sourceTree = "<group>"; };
 		84228508207B04030078139F /* AliMapViewCustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliMapViewCustomAnnotationView.h; sourceTree = "<group>"; };
 		8422850A207B356C0078139F /* AliMapViewCustomCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliMapViewCustomCalloutView.h; sourceTree = "<group>"; };
@@ -96,6 +115,16 @@
 		84233AE420736C01007D1E09 /* CDBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDBaseViewController.h; sourceTree = "<group>"; };
 		84233AE520736C01007D1E09 /* CDBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDBaseViewController.m; sourceTree = "<group>"; };
 		84233AE820736FE5007D1E09 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		8426928A20C635FA0060B9D4 /* CDDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDDetailViewController.h; sourceTree = "<group>"; };
+		8426928B20C635FA0060B9D4 /* CDDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDDetailViewController.m; sourceTree = "<group>"; };
+		8426928D20C674590060B9D4 /* CDchargeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDchargeCell.h; sourceTree = "<group>"; };
+		8426928E20C674590060B9D4 /* CDchargeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDchargeCell.m; sourceTree = "<group>"; };
+		8426929020C680F10060B9D4 /* CDCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDCellModel.h; sourceTree = "<group>"; };
+		8426929120C680F10060B9D4 /* CDCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDCellModel.m; sourceTree = "<group>"; };
+		8426929320C7C5080060B9D4 /* CDBgVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDBgVIew.h; sourceTree = "<group>"; };
+		8426929420C7C5080060B9D4 /* CDBgVIew.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDBgVIew.m; sourceTree = "<group>"; };
+		8426929620C9061E0060B9D4 /* UIImage+CDResize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+CDResize.h"; sourceTree = "<group>"; };
+		8426929720C9061E0060B9D4 /* UIImage+CDResize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CDResize.m"; sourceTree = "<group>"; };
 		842D071920AEB822009B7A4A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		84302B1A20996AB600D29C8B /* CDCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDCodeViewController.h; sourceTree = "<group>"; };
 		84302B1B20996AB600D29C8B /* CDCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDCodeViewController.m; sourceTree = "<group>"; };
@@ -117,6 +146,18 @@
 		843147351EE1167500E41BBD /* CDscanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDscanViewController.m; sourceTree = "<group>"; };
 		8431473E1EE1178700E41BBD /* CDTabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDTabbar.h; sourceTree = "<group>"; };
 		8431473F1EE1178700E41BBD /* CDTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDTabbar.m; sourceTree = "<group>"; };
+		844BDB6D20BBE8D30025DED0 /* CDOneCardCth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDOneCardCth.h; sourceTree = "<group>"; };
+		844BDB6E20BBE8D30025DED0 /* CDOneCardCth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDOneCardCth.m; sourceTree = "<group>"; };
+		844BDB7020BBF0690025DED0 /* CDcell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDcell.h; sourceTree = "<group>"; };
+		844BDB7120BBF0690025DED0 /* CDcell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDcell.m; sourceTree = "<group>"; };
+		84600B7520D1032C00E73D64 /* CDMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDMessage.h; sourceTree = "<group>"; };
+		84600B7620D1032C00E73D64 /* CDMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDMessage.m; sourceTree = "<group>"; };
+		84600B7820D1057700E73D64 /* UserMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserMessage.h; sourceTree = "<group>"; };
+		84600B7920D1057700E73D64 /* UserMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserMessage.m; sourceTree = "<group>"; };
+		84600B7B20D2270500E73D64 /* CDMessageCth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDMessageCth.h; sourceTree = "<group>"; };
+		84600B7C20D2270500E73D64 /* CDMessageCth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDMessageCth.m; sourceTree = "<group>"; };
+		84600B7E20D256B200E73D64 /* MsgCellFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MsgCellFrame.h; sourceTree = "<group>"; };
+		84600B7F20D256B200E73D64 /* MsgCellFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MsgCellFrame.m; sourceTree = "<group>"; };
 		847E46A820A92EC400675762 /* CDPoleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDPoleViewController.h; sourceTree = "<group>"; };
 		847E46A920A92EC400675762 /* CDPoleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDPoleViewController.m; sourceTree = "<group>"; };
 		847E46AB20A9353800675762 /* CDPoleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDPoleCell.h; sourceTree = "<group>"; };
@@ -130,6 +171,8 @@
 		8480BE9520ABFE1300A992EF /* LSXView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSXView.h; sourceTree = "<group>"; };
 		8480BE9820ABFEE600A992EF /* CDCompanyShow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDCompanyShow.h; sourceTree = "<group>"; };
 		8480BE9920ABFEE600A992EF /* CDCompanyShow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDCompanyShow.m; sourceTree = "<group>"; };
+		8481522120CE68EA003264A1 /* CDConsumeCth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDConsumeCth.h; sourceTree = "<group>"; };
+		8481522220CE68EA003264A1 /* CDConsumeCth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDConsumeCth.m; sourceTree = "<group>"; };
 		848B6AFF2079BBE800ED46E3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		848B6B002079BBE800ED46E3 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
 		848B6B012079BBE800ED46E3 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
@@ -182,6 +225,8 @@
 		84E429E62074CAA0001AE931 /* CDWebRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDWebRequest.m; sourceTree = "<group>"; };
 		84E429E82074CB6C001AE931 /* CDAFNetLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDAFNetLine.h; sourceTree = "<group>"; };
 		84E429E92074CB6C001AE931 /* CDAFNetLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDAFNetLine.m; sourceTree = "<group>"; };
+		84E91DFE20C1387C00F95DDE /* CDClipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDClipView.h; sourceTree = "<group>"; };
+		84E91DFF20C1387C00F95DDE /* CDClipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDClipView.m; sourceTree = "<group>"; };
 		84EB00DF20B2744700997781 /* CDMoneyCardController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDMoneyCardController.h; sourceTree = "<group>"; };
 		84EB00E020B2744700997781 /* CDMoneyCardController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDMoneyCardController.m; sourceTree = "<group>"; };
 		84EB00E220B2AC9B00997781 /* CDMoneyCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDMoneyCard.h; sourceTree = "<group>"; };
@@ -302,6 +347,8 @@
 				84E429E62074CAA0001AE931 /* CDWebRequest.m */,
 				84E429E82074CB6C001AE931 /* CDAFNetLine.h */,
 				84E429E92074CB6C001AE931 /* CDAFNetLine.m */,
+				8415096F20D38DB6003082DD /* CDBaseSqlite.h */,
+				8415097020D38DB6003082DD /* CDBaseSqlite.m */,
 				848B6B082079BE1200ED46E3 /* CDXML.h */,
 				848B6B092079BE1200ED46E3 /* CDXML.m */,
 				848B6B0B2079ED8B00ED46E3 /* CDStation.h */,
@@ -356,6 +403,8 @@
 		8431470C1EE10DC600E41BBD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8415097220D3A15A003082DD /* CDMessageCell.h */,
+				8415097320D3A15A003082DD /* CDMessageCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -546,6 +595,14 @@
 				84FC4E47209174640060ED91 /* CDChangeStrController.m */,
 				84EB00DF20B2744700997781 /* CDMoneyCardController.h */,
 				84EB00E020B2744700997781 /* CDMoneyCardController.m */,
+				84600B7B20D2270500E73D64 /* CDMessageCth.h */,
+				84600B7C20D2270500E73D64 /* CDMessageCth.m */,
+				844BDB6D20BBE8D30025DED0 /* CDOneCardCth.h */,
+				844BDB6E20BBE8D30025DED0 /* CDOneCardCth.m */,
+				8426928A20C635FA0060B9D4 /* CDDetailViewController.h */,
+				8426928B20C635FA0060B9D4 /* CDDetailViewController.m */,
+				8481522120CE68EA003264A1 /* CDConsumeCth.h */,
+				8481522220CE68EA003264A1 /* CDConsumeCth.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -553,6 +610,14 @@
 		843147391EE116B600E41BBD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8426929020C680F10060B9D4 /* CDCellModel.h */,
+				8426929120C680F10060B9D4 /* CDCellModel.m */,
+				84600B7E20D256B200E73D64 /* MsgCellFrame.h */,
+				84600B7F20D256B200E73D64 /* MsgCellFrame.m */,
+				84600B7820D1057700E73D64 /* UserMessage.h */,
+				84600B7920D1057700E73D64 /* UserMessage.m */,
+				84600B7520D1032C00E73D64 /* CDMessage.h */,
+				84600B7620D1032C00E73D64 /* CDMessage.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -570,6 +635,16 @@
 				84A7CBE520B50489003E0879 /* CDHeadView.m */,
 				84A7CBE720B511FF003E0879 /* CDCellView.h */,
 				84A7CBE820B511FF003E0879 /* CDCellView.m */,
+				844BDB7020BBF0690025DED0 /* CDcell.h */,
+				844BDB7120BBF0690025DED0 /* CDcell.m */,
+				84E91DFE20C1387C00F95DDE /* CDClipView.h */,
+				84E91DFF20C1387C00F95DDE /* CDClipView.m */,
+				8426929620C9061E0060B9D4 /* UIImage+CDResize.h */,
+				8426929720C9061E0060B9D4 /* UIImage+CDResize.m */,
+				8426928D20C674590060B9D4 /* CDchargeCell.h */,
+				8426928E20C674590060B9D4 /* CDchargeCell.m */,
+				8426929320C7C5080060B9D4 /* CDBgVIew.h */,
+				8426929420C7C5080060B9D4 /* CDBgVIew.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -672,10 +747,10 @@
 			buildConfigurationList = 843147021EE109FE00E41BBD /* Build configuration list for PBXNativeTarget "CDYL" */;
 			buildPhases = (
 				62CFEF466FA45D01D506ABEE /* [CP] Check Pods Manifest.lock */,
-				843146E71EE109FD00E41BBD /* Sources */,
 				843146E81EE109FD00E41BBD /* Frameworks */,
 				843146E91EE109FD00E41BBD /* Resources */,
 				975B7B7070755ADD9B323547 /* [CP] Copy Pods Resources */,
+				84600BCF20D274D100E73D64 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -770,6 +845,7 @@
 				"${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle",
 				"${PODS_ROOT}/AMapNavi/AMapNaviKit.framework/AMapNavi.bundle",
 				"${PODS_ROOT}/LBXScan/LBXScan/UI/CodeScan.bundle",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/ZBarSDK/iphone/res/zbar-back.png",
 				"${PODS_ROOT}/ZBarSDK/iphone/res/zbar-help.html",
 				"${PODS_ROOT}/ZBarSDK/iphone/res/zbar-helpicons.png",
@@ -780,6 +856,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMapNavi.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CodeScan.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zbar-back.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zbar-help.html",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zbar-helpicons.png",
@@ -793,66 +870,81 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		843146E71EE109FD00E41BBD /* Sources */ = {
+		84600BCF20D274D100E73D64 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				843147271EE111FD00E41BBD /* CDNav.m in Sources */,
-				849048EA20943ECF00F4FC87 /* CDLoginViewController.m in Sources */,
-				8480BE9720ABFE1300A992EF /* LSXView.m in Sources */,
-				843147331EE1165D00E41BBD /* CDchargeViewController.m in Sources */,
-				84EB00E720B2ADAC00997781 /* CDMoneyCardInfor.m in Sources */,
-				84A7CBE920B511FF003E0879 /* CDCellView.m in Sources */,
-				848B6B0A2079BE1200ED46E3 /* CDXML.m in Sources */,
-				8422851D207DF08C0078139F /* UIWindow+LBXHierarchy.m in Sources */,
-				849048F0209442AF00F4FC87 /* CDLoginView.m in Sources */,
-				84B51A5B2090696F00333A2A /* NSFileManager+CDFilePath.m in Sources */,
-				84D3652D20A52A1300E9063E /* CDShowCell.m in Sources */,
-				8431472A1EE1123500E41BBD /* CDTabbarCtl.m in Sources */,
-				84B51A58208F198100333A2A /* CDHeadimageViewController.m in Sources */,
-				84228526207DF9C10078139F /* StyleDIY.m in Sources */,
-				84EB00E120B2744700997781 /* CDMoneyCardController.m in Sources */,
-				8422850C207B356C0078139F /* AliMapViewCustomCalloutView.m in Sources */,
-				848B6B0D2079ED8B00ED46E3 /* CDStation.m in Sources */,
-				843147361EE1167500E41BBD /* CDscanViewController.m in Sources */,
-				8431472D1EE1160200E41BBD /* CDMapViewController.m in Sources */,
-				84A7CBE620B50489003E0879 /* CDHeadView.m in Sources */,
-				84233AE620736C01007D1E09 /* CDBaseViewController.m in Sources */,
-				848B6B032079BBE800ED46E3 /* XMLReader.m in Sources */,
-				84228512207C8FC90078139F /* CDViewController.m in Sources */,
-				84B51A4F208EC4FA00333A2A /* CDHeaderController.m in Sources */,
-				84EB00E420B2AC9B00997781 /* CDMoneyCard.m in Sources */,
-				84228517207DEEAE0078139F /* LBXAlertAction.m in Sources */,
-				848B6B072079BC3A00ED46E3 /* UIView+PYExtension.m in Sources */,
-				84E429E72074CAA0001AE931 /* CDWebRequest.m in Sources */,
-				84A6BB4F20808D7200131835 /* CDUserInfor.m in Sources */,
-				848B6B13207A123500ED46E3 /* LocationAnnotationView.m in Sources */,
-				84F865D720B8037A00E800E1 /* CDBarView.m in Sources */,
-				84228520207DF0E10078139F /* UIAlertView+LBXAlertAction.m in Sources */,
-				84A7CBE320B4FEBF003E0879 /* CDMineViewController.m in Sources */,
-				843147401EE1178700E41BBD /* CDTabbar.m in Sources */,
-				84E429EA2074CB6C001AE931 /* CDAFNetLine.m in Sources */,
-				84B51A55208EC70F00333A2A /* CDSmallTwoCell.m in Sources */,
-				8480BE9A20ABFEE600A992EF /* CDCompanyShow.m in Sources */,
-				84ACCB4120A29DEE0004D514 /* CDReViewController.m in Sources */,
-				848B6B102079F15D00ED46E3 /* CDPoliList.m in Sources */,
-				8422850F207B40430078139F /* CDPointAnnotation.m in Sources */,
-				84302B1C20996AB600D29C8B /* CDCodeViewController.m in Sources */,
-				84B51A52208EC6EB00333A2A /* CDBigTwoCell.m in Sources */,
-				84228509207B04030078139F /* AliMapViewCustomAnnotationView.m in Sources */,
-				847E46AA20A92EC400675762 /* CDPoleViewController.m in Sources */,
-				84A7CBEC20B55040003E0879 /* CDUserLocation.m in Sources */,
-				84A1226320A43E59003AB2F1 /* CDLocationViewController.m in Sources */,
-				84ADAF7B20870AE300555B27 /* CDAppDelegate.m in Sources */,
-				84FC4E48209174640060ED91 /* CDChangeStrController.m in Sources */,
-				8480BE8A20AA71FD00A992EF /* GPSNaviViewController.m in Sources */,
-				84E429E42074B7A6001AE931 /* Const.m in Sources */,
-				843147301EE1162A00E41BBD /* CDoderViewController.m in Sources */,
-				84228523207DF9730078139F /* Global.m in Sources */,
-				84ADAF7D20870C5B00555B27 /* main.m in Sources */,
-				847E46AD20A9353800675762 /* CDPoleCell.m in Sources */,
-				8480BE8D20AA72BE00A992EF /* SpeechSynthesizer.m in Sources */,
-				8422851C207DF08C0078139F /* UIActionSheet+LBXAlertAction.m in Sources */,
+				84600BD020D2758200E73D64 /* CDAppDelegate.m in Sources */,
+				84600BD120D2758200E73D64 /* Const.m in Sources */,
+				84600BD220D2758200E73D64 /* CDNav.m in Sources */,
+				84600BD320D2758200E73D64 /* CDTabbarCtl.m in Sources */,
+				84600BD420D2758200E73D64 /* CDTabbar.m in Sources */,
+				84600BD520D2758200E73D64 /* CDBaseViewController.m in Sources */,
+				84600BD620D2758200E73D64 /* CDWebRequest.m in Sources */,
+				84600BD720D2758200E73D64 /* CDAFNetLine.m in Sources */,
+				84600BD820D2758200E73D64 /* CDXML.m in Sources */,
+				84600BD920D2758200E73D64 /* CDStation.m in Sources */,
+				84600BDA20D2758200E73D64 /* CDPoliList.m in Sources */,
+				84600BDB20D2758200E73D64 /* CDUserInfor.m in Sources */,
+				84600BDD20D2758200E73D64 /* CDMoneyCardInfor.m in Sources */,
+				84600BDE20D2758200E73D64 /* NSFileManager+CDFilePath.m in Sources */,
+				84600BDF20D2758200E73D64 /* Global.m in Sources */,
+				84600BE020D2758200E73D64 /* StyleDIY.m in Sources */,
+				84600BE120D2758200E73D64 /* CDMapViewController.m in Sources */,
+				84600BE220D2758200E73D64 /* CDLocationViewController.m in Sources */,
+				84600BE320D2758200E73D64 /* CDPoleViewController.m in Sources */,
+				84600BE420D2758200E73D64 /* CDCompanyShow.m in Sources */,
+				84600BE520D2758200E73D64 /* CDPointAnnotation.m in Sources */,
+				84600BE620D2758200E73D64 /* CDUserLocation.m in Sources */,
+				84600BE720D2758200E73D64 /* LocationAnnotationView.m in Sources */,
+				84600BE820D2758200E73D64 /* AliMapViewCustomAnnotationView.m in Sources */,
+				84600BE920D2758200E73D64 /* AliMapViewCustomCalloutView.m in Sources */,
+				84600BEA20D2758200E73D64 /* CDShowCell.m in Sources */,
+				84600BEB20D2758200E73D64 /* CDPoleCell.m in Sources */,
+				84600BEC20D2758200E73D64 /* LSXView.m in Sources */,
+				84600BED20D2758200E73D64 /* CDoderViewController.m in Sources */,
+				84600BEE20D2758200E73D64 /* CDchargeViewController.m in Sources */,
+				84600BEF20D2758200E73D64 /* CDscanViewController.m in Sources */,
+				84600BF020D2758200E73D64 /* LBXAlertAction.m in Sources */,
+				84600BF120D2758200E73D64 /* UIAlertView+LBXAlertAction.m in Sources */,
+				84600BF220D2758200E73D64 /* UIActionSheet+LBXAlertAction.m in Sources */,
+				84600BF320D2758200E73D64 /* UIWindow+LBXHierarchy.m in Sources */,
+				84600BF420D2758200E73D64 /* CDMineViewController.m in Sources */,
+				84600BF520D2758200E73D64 /* CDHeaderController.m in Sources */,
+				84600BF620D2758200E73D64 /* CDHeadimageViewController.m in Sources */,
+				84600BF720D2758200E73D64 /* CDChangeStrController.m in Sources */,
+				84600BF820D2758200E73D64 /* CDMoneyCardController.m in Sources */,
+				84600BF920D2758200E73D64 /* CDMessageCth.m in Sources */,
+				84600BFA20D2758200E73D64 /* CDOneCardCth.m in Sources */,
+				84600BFB20D2758200E73D64 /* CDDetailViewController.m in Sources */,
+				84600BFC20D2758200E73D64 /* CDConsumeCth.m in Sources */,
+				84600BFD20D2758200E73D64 /* CDCellModel.m in Sources */,
+				84600BFE20D2758200E73D64 /* MsgCellFrame.m in Sources */,
+				84600BFF20D2758200E73D64 /* UserMessage.m in Sources */,
+				84600C0020D2758200E73D64 /* CDMessage.m in Sources */,
+				84600C0120D2758200E73D64 /* CDBigTwoCell.m in Sources */,
+				84600C0220D2758200E73D64 /* CDSmallTwoCell.m in Sources */,
+				84600C0320D2758200E73D64 /* CDMoneyCard.m in Sources */,
+				84600C0420D2758200E73D64 /* CDHeadView.m in Sources */,
+				84600C0520D2758200E73D64 /* CDCellView.m in Sources */,
+				8415097420D3A15A003082DD /* CDMessageCell.m in Sources */,
+				84600C0620D2758200E73D64 /* CDcell.m in Sources */,
+				84600C0720D2758200E73D64 /* CDClipView.m in Sources */,
+				84600C0820D2758200E73D64 /* UIImage+CDResize.m in Sources */,
+				84600C0920D2758200E73D64 /* CDchargeCell.m in Sources */,
+				84600C0A20D2758200E73D64 /* CDBgVIew.m in Sources */,
+				84600C0B20D2758200E73D64 /* CDViewController.m in Sources */,
+				8415097120D38DB6003082DD /* CDBaseSqlite.m in Sources */,
+				84600C0C20D2758200E73D64 /* CDLoginViewController.m in Sources */,
+				84600C0D20D2758200E73D64 /* CDReViewController.m in Sources */,
+				84600C0E20D2758200E73D64 /* CDCodeViewController.m in Sources */,
+				84600C0F20D2758200E73D64 /* CDLoginView.m in Sources */,
+				84600C1020D2758200E73D64 /* CDBarView.m in Sources */,
+				84600C1120D2758200E73D64 /* GPSNaviViewController.m in Sources */,
+				84600C1220D2758200E73D64 /* SpeechSynthesizer.m in Sources */,
+				84600C1320D2758200E73D64 /* main.m in Sources */,
+				84600C1420D2758200E73D64 /* UIView+PYExtension.m in Sources */,
+				84600C1520D2758200E73D64 /* XMLReader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

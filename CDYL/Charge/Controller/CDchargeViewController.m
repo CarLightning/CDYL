@@ -16,7 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+ 
+    [self showEmptyViewWith:@"当前没有预约"];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -17,4 +17,6 @@
 @property (nonatomic, weak) id <CDCellViewDelegate> delegate;
 
 -(instancetype)initWithFrame:(CGRect)frame showUpLb:(BOOL)showUp showLineLb:(BOOL)showline cellName:(NSString *)nameStr;
+-(void)reloadNotifiImage:(NSString *)name;
+
 @end

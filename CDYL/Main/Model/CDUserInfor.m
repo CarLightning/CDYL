@@ -7,6 +7,8 @@
 //
 
 #import "CDUserInfor.h"
+#import "CDMessage.h"
+
 @interface CDUserInfor()
 
 @end
@@ -80,6 +82,9 @@ static CDUserInfor * _userInfor;
                     NSString *file = [[NSFileManager defaultManager] userAccountPath:YES];
                     [userInfor writeToFile:file atomically:YES];
                     NSLog(@"用户信息更新成功");
+                    //创建当前新表和开启timer，可实现不同用户切换。
+                    [[CDMessage shareMessage]creatTable];
+                    [[CDMessage shareMessage]futureTimer];
                 }else{
                     NSLog(@"用户信息更新失败");
                 }

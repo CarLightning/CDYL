@@ -141,8 +141,19 @@ static  NSString *const SmallCELL = @"CDSMALLTWOCELL";
  
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    NSArray *viewControllers = self.navigationController.viewControllers;//获取当前的视图控制其
+    if (viewControllers.count > 1 && [viewControllers objectAtIndex:viewControllers.count-2] == self) {
+        //当前视图控制器在栈中，故为push操作
+        NSLog(@"push");
+    } else if ([viewControllers indexOfObject:self] == NSNotFound) {
+        //当前视图控制器不在栈中，故为pop操作
+        self.navigationController.navigationBarHidden = YES;
+    }
+}
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     self.array = nil;
+    
 }
 @end

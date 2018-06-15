@@ -11,4 +11,8 @@
 @interface CDBaseViewController : UIViewController
 @property (nonatomic, copy) NSDictionary * typeDic;
 @property (nonatomic, assign) NSInteger cthType;
+
+
+- (void)showEmptyViewWith:(NSString *)text;
+- (void)hiddenAllBaseView;
 @end

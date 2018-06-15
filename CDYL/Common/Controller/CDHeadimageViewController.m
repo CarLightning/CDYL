@@ -8,10 +8,12 @@
 
 #import "CDHeadimageViewController.h"
 #import "CDUserInfor.h"
-
-@interface CDHeadimageViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+#import "CDClipView.h"
+#import "UIImage+CDResize.h"
+@interface CDHeadimageViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CDClipViewDelagate>
 @property (nonatomic, strong) UIImagePickerController *pickCtl;
-@property (nonatomic, strong) UIImageView *igview;
+
+@property (nonatomic, strong) CDClipView *clipView;
 
 @end
 
@@ -19,35 +21,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  
     [self setSubViews];
     [self getDataSource];
-    [self reloadHeadImage];
+    
 }
 -(void)setSubViews{
     self.title = @"个人头像";
-    UIImageView *igview = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEAppWidth, DEAppWidth)];
-    igview.center = self.view.center;
-    igview.contentMode = UIViewContentModeScaleAspectFill;
-    igview.clipsToBounds = YES;
-    [self.view addSubview:igview];
-    
-    self.igview = igview;
+   self.clipView = [[CDClipView alloc]initWithFrame:self.view.bounds];
+    self.clipView.delagate = self;
+    [self.view addSubview:self.clipView];
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(clickTheitem)];
     self.navigationItem.rightBarButtonItem = item;
     
 }
--(void)reloadHeadImage{
-    
-    NSString *file =[[NSFileManager defaultManager] headImagePath:NO];
-    BOOL headPath = [[NSFileManager defaultManager]fileExistsAtPath:file];
-    if (headPath) {
-        NSData *data = [[NSFileManager defaultManager]contentsAtPath:file];
-        self.igview.image = [[UIImage alloc]initWithData:data];
-    }else{
-        self.igview.image = [UIImage imageNamed:@"headIg"];
-    }
-}
+
 -(void)getDataSource{
     
     
@@ -65,7 +54,7 @@
      UIAlertAction *action3=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:action1];
     [alert addAction:action2];
-     [alert addAction:action3];
+    [alert addAction:action3];
     [self presentViewController:alert animated:YES completion:nil];
 
 }
@@ -77,21 +66,39 @@
     }
     return _pickCtl;
 }
+#pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     UIImage *image =info[UIImagePickerControllerOriginalImage];
-    NSURL * url = info [UIImagePickerControllerMediaURL];
-    NSData *ImageData = [NSData data];
-    if ([[url description]hasSuffix:@"PNG"]) {
-        ImageData = UIImagePNGRepresentation(image);
-    }else{
-        ImageData = UIImageJPEGRepresentation(image, 0.5f);
-    }
-    self.igview.image = image;
+    
+    UIImage *newIg = [image resizeImage:image];
+   
+    self.clipView.Headimage = newIg;
+    self.clipView.is_ShowBtn = YES;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+#pragma mark - CDClipViewDelagate
+-(void)didSaveImage:(UIImage *)image{
+    self.clipView.hidden = YES;
+     NSArray *subs = self.navigationController.childViewControllers;
+    [self.navigationController popToViewController:[subs objectAtIndex:subs.count-2] animated:YES];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self saveNewHeadImage:image];
+    });
+}
+
+-(void)saveNewHeadImage:(UIImage *)newIg
+{
+    NSData * ImageData = UIImageJPEGRepresentation(newIg, 0.5f);
     NSString *file = [[NSFileManager defaultManager] headImagePath:YES];
     [ImageData writeToFile:file atomically:YES];
     [CDUserInfor shareUserInfor].headImagePath = file;
     [[CDUserInfor shareUserInfor] updateInforWithAll:NO];
-    [picker dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+
 
 @end

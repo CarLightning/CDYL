@@ -70,9 +70,12 @@ static NSString *const identifyCell = @"POLECELL";
             
        weakself.poleSource = [CDPoliList arrayOfModelsFromDictionaries:backDic[@"list"] error:nil];
             [weakself.tabaleV reloadData];
+            if (weakself.poleSource.count == 0) {
+                [weakself showEmptyViewWith:@"没有找到充电桩"];
+            }
         }
     } failure:^(NSString *err) {
-        
+        [weakself showEmptyViewWith:err];
     }];
     
 

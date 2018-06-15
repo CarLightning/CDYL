@@ -38,9 +38,11 @@ PODS:
     - LBXScan/Types (~> 2.2)
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
+  - MJRefresh (3.1.15.3)
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
+  - YYText (1.0.7)
   - ZBarSDK (1.3.1)
 
 DEPENDENCIES:
@@ -55,7 +57,9 @@ DEPENDENCIES:
   - LBXScan/UI
   - Masonry
   - MBProgressHUD
+  - MJRefresh
   - SDWebImage (~> 4.0)
+  - YYText
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -69,7 +73,9 @@ SPEC REPOS:
     - LBXScan
     - Masonry
     - MBProgressHUD
+    - MJRefresh
     - SDWebImage
+    - YYText
     - ZBarSDK
 
 SPEC CHECKSUMS:
@@ -83,9 +89,11 @@ SPEC CHECKSUMS:
   LBXScan: e51449f0832d1fe17da632af0d22adeb3cfa3543
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZBarSDK: 4c1b5daeb7d6cc67dc9355e690af0230a661f6ec
 
-PODFILE CHECKSUM: 8ca8bfad52df9166df55be3cb7c08c33d519f6d0
+PODFILE CHECKSUM: 6151e5cb3b0081bec6a71a05b0d8de5bc4563252
 
 COCOAPODS: 1.5.0

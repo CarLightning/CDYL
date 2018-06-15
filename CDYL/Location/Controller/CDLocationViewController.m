@@ -33,25 +33,25 @@ static NSString *const identifyCell = @"SHOWCELL";
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     }
     if (self.cthType == 0) {
+        //附近
         [self getSourceFromWeb];
     }else{
+        //收藏
         [self getSourceWithCollection];
     }
 }
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    if([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-        
-    }
-}
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
-    if([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        
-        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+     if (self.cthType != 0) {
+    NSArray *viewControllers = self.navigationController.viewControllers;//获取当前的视图控制其
+    if (viewControllers.count > 1 && [viewControllers objectAtIndex:viewControllers.count-2] == self) {
+        //当前视图控制器在栈中，故为push操作
+        NSLog(@"push");
+    } else if ([viewControllers indexOfObject:self] == NSNotFound) {
+        //当前视图控制器不在栈中，故为pop操作
+        self.navigationController.navigationBarHidden = YES;
     }
+     }
 }
 #pragma mark -  tableViewDelagate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -151,14 +151,19 @@ static NSString *const identifyCell = @"SHOWCELL";
     __block typeof(self) weakself = self;
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.contentColor = [UIColor blackColor];
+    [self hiddenAllBaseView];
     [CDWebRequest requestsearchCanBespeakChargePoleWithlat:lat lon:lon radius:@"100" type:@"0" status:@"0" startTime:begin endTime:end regId:@"" AndBack:^(NSDictionary *backDic) {
     
         weakself.stationSource =[weakself changeArrFrom:backDic[@"stationlist"]];
         [hud hideAnimated:YES];
         [weakself.tabaleV reloadData];
-        
+        if (weakself.stationSource.count == 0) {
+            [weakself showEmptyViewWith:@"附近没有找到充电桩"];
+        }
     } failure:^(NSString *err) {
-        
+        [hud hideAnimated:YES];
+        [weakself showEmptyViewWith:err];
         
     }];
 }

@@ -24,7 +24,7 @@
         [self addSubViews];
         [self add_masonryshowUpLb:showUp showLineLb:showline];
         [self updataImage:nameStr];
-       
+        
     }
     return self;
 }
@@ -37,9 +37,12 @@
     }else if ([str isEqualToString:@"收藏"]){
         self.showIg.image = [UIImage imageNamed:@"collecIcon"];
         self.row = 1;
-    }else{
-       self.showIg.image = [UIImage imageNamed:@"setIcon"];
+    }else if([str isEqualToString:@"消息"]){
+        self.showIg.image = [UIImage imageNamed:@"notifiIcon"];
         self.row = 2;
+    }else if([str isEqualToString:@"设置"]){
+        self.showIg.image = [UIImage imageNamed:@"setIcon"];
+        self.row = 3;
     }
 }
 - (void)addSubViews{
@@ -51,11 +54,11 @@
 }
 - (void)add_masonryshowUpLb:(BOOL)showUp showLineLb:(BOOL)showline{
     [self.upLb mas_makeConstraints:^(MASConstraintMaker *make) {
-         make.left.right.top.equalTo(self);
+        make.left.right.top.equalTo(self);
         if (showUp) {
             make.height.equalTo(@15);
         }else{
-             make.height.equalTo(@0);
+            make.height.equalTo(@0);
         }
     }];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -67,7 +70,7 @@
     [self.showIg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(20);
         make.centerY.equalTo(self.contentView);
-       
+        
         make.height.width.equalTo(@20);
     }];
     [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -75,7 +78,7 @@
         make.centerY.equalTo(self.contentView);
         make.width.equalTo(@120);
         make.height.equalTo(@20);
-       
+        
     }];
     
     
@@ -84,7 +87,7 @@
         make.right.equalTo(self).offset(-10);
         make.top.equalTo(self.contentView.mas_bottom).offset(-0.5);
         if (showline) {
-           make.height.equalTo(@0.5);
+            make.height.equalTo(@0.5);
         }else{
             make.height.equalTo(@0);
         }
@@ -131,7 +134,14 @@
 }
 - (void)tapTheRow{
     if (self.delegate &&[self.delegate respondsToSelector:@selector(userTapTheCellIndex:)]) {
+        if (self.row == 2) {
+            [self reloadNotifiImage:@"notifiIcon"];
+        }
         [self.delegate userTapTheCellIndex:self.row];
     }
+}
+-(void)reloadNotifiImage:(NSString *)name{
+    
+     self.showIg.image = [UIImage imageNamed:name];
 }
 @end

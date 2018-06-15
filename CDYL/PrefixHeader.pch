@@ -26,6 +26,14 @@
 #define DEAppHeight ([UIScreen mainScreen].bounds.size.height)
 #define IS_IPHONE_X (DEAppHeight==812? YES:NO)
 
+
+
+#define SQL_CREATE_USER_TABLE @"CREATE TABLE IF NOT EXISTS %@(phoneNum TEXT,cardNo TEXT,msg_time TEXT,info TEXT);"
+
+#define     SQL_DELE_CONV   @"delete from %@ where phoneNum like %@"
+#define     SQL_iNSERT_CONV   @"INSERT INTO %@ (phoneNum, cardNo, msg_time, info) VALUES (:phoneNum, :cardNo, :msg_time, :info)"
+#define TABLE_NAME  [NSString stringWithFormat:@"user_%@",[CDUserInfor shareUserInfor].phoneNum]
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 //LBXScan 如果需要使用LBXScanViewController控制器代码，那么下载了那些模块，请定义对应的宏

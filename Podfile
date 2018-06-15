@@ -13,6 +13,8 @@ pod 'LBXScan/LBXZXing'
 pod 'LBXScan/LBXZBar'
 pod 'LBXScan/UI'
 pod 'SDWebImage', '~> 4.0'
+pod 'MJRefresh'
+pod 'YYText'
 end
 
 

@@ -17,7 +17,7 @@
 @property (nonatomic, strong) CDLoginView *loginView;
 @property (nonatomic, strong) UIView *HUDView;
 @property (nonatomic, strong) UIButton *LoginButton;
-@property (nonatomic, strong) UIButton *reviewBtn; //重设密码
+
 @property (nonatomic, strong) UIView *LoginAnimView;
 //登录转圈的那条白线所在的layer
 @property (nonatomic,strong) CAShapeLayer *shapeLayer;
@@ -58,16 +58,15 @@
     self.loginView = lgView;
     [self setBtnblack:block title:@"登录" tag:100];
    
-    UIButton *reviewBtn=[[UIButton alloc]initWithFrame:CGRectMake(15, block+200, DEAppWidth-30, 40)];
-    
-    [reviewBtn setTitle:@"重设密码" forState:UIControlStateNormal];
-    reviewBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    [reviewBtn addTarget:self action:@selector(clickThereviewBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [reviewBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [self.view addSubview:reviewBtn];
-    self.reviewBtn = reviewBtn;
-    
-    
+
+//  重新设置密码
+    UILabel *lb=[[UILabel alloc]initWithFrame:CGRectMake(15, block+200, DEAppWidth-30, 40)];
+    lb.attributedText = [self downStringWithStr:@"重设密码"];
+    lb.textAlignment=NSTextAlignmentCenter;
+    lb.userInteractionEnabled = YES;
+    [self.view addSubview:lb];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(reSetSecret)];
+    [lb addGestureRecognizer:tap];
 }
 -(void)registerCth:(CGFloat )block title:(NSString *)string  {
     self.barView.title = string;
@@ -99,7 +98,7 @@
         
     }
 }
--(void)clickThereviewBtn:(UIButton *)btn{
+-(void)reSetSecret{
     CDReViewController *review = [[CDReViewController alloc]init];
     [self.navigationController pushViewController:review animated:YES];
 }
@@ -296,6 +295,12 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
+- (NSMutableAttributedString *)downStringWithStr:(NSString *)string{
+    NSDictionary *attri = @{NSForegroundColorAttributeName:[UIColor grayColor],NSFontAttributeName:[UIFont systemFontOfSize:14],NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+    NSMutableAttributedString *mutableStr = [[NSMutableAttributedString alloc]initWithString:string attributes:attri];
+    return mutableStr;
+}
+
 #pragma mark - CDBarViewDelagate
 -(void)popUpViewController{
     NSArray *subs = self.navigationController.childViewControllers;

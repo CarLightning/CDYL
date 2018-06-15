@@ -26,9 +26,9 @@
         [plusBtn setImage:[[UIImage imageNamed:@"tab_publish_nor"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         // 设置监听事件
         [plusBtn addTarget:self action:@selector(plusClick:) forControlEvents:UIControlEventTouchUpInside];
-       
+        
         [self addSubview:plusBtn];
-         self.plusBtn = plusBtn;
+        self.plusBtn = plusBtn;
     }
     return self;
 }
@@ -50,11 +50,12 @@
     
     // 添加plusBtn的位置
     self.plusBtn.center = CGPointMake(self.center.x, 0);
-   
+    
     
     // 引出下标
     NSInteger index = 0;
     // 判断是否为控制器按钮
+    
     for (UIView *child in self.subviews) {
         Class class = NSClassFromString(@"UITabBarButton");
         if ([child.class isSubclassOfClass:class]) {

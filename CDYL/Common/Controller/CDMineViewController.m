@@ -10,9 +10,12 @@
 #import "CDHeadView.h"
 #import "CDCellView.h"
 #import "CDNav.h"
+#import "CDMessage.h"
+#import "CDMessageCth.h"
 
 @interface CDMineViewController ()<CDHeadViewDelagate,CDCellViewDelegate>
 @property (nonatomic, strong) CDHeadView *headView;
+@property (nonatomic, strong) CDCellView *notiView;
 
 @end
 
@@ -21,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initSubviews];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNotifiedImageState:) name:@"CHANGENOTIFITY" object:nil];
 }
 - (void)initSubviews{
     CGFloat black = 115+64;
@@ -39,7 +43,12 @@
      collectView.delegate = self;
     [self.view addSubview:collectView];
     
-    CDCellView *setView = [[CDCellView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(collectView.frame), DEAppWidth, 48) showUpLb:NO showLineLb:NO cellName:@"设置"];
+    CDCellView *nitifiView = [[CDCellView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(collectView.frame), DEAppWidth, 48) showUpLb:NO showLineLb:YES cellName:@"消息"];
+    nitifiView.delegate = self;
+    [self.view addSubview:nitifiView];
+    self.notiView = nitifiView;
+    
+    CDCellView *setView = [[CDCellView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nitifiView.frame), DEAppWidth, 48) showUpLb:NO showLineLb:NO cellName:@"设置"];
     setView.delegate = self;
     [self.view addSubview:setView];
 }
@@ -53,7 +62,12 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-   self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBarHidden = NO;
+}
+- (void)changeNotifiedImageState:(NSNotification *)noti{
+    if (self.notiView) {
+        [self.notiView reloadNotifiImage:@"chatNotifi"];
+    }
 }
 #pragma mark - CDHeadViewDelagate
 - (void)didClickTheEditBtn {
@@ -73,6 +87,12 @@
        
         basecth = [[NSClassFromString(@"CDLocationViewController") alloc]init];
         basecth.cthType = 1;
+        
+    }else if (index == 2){
+        
+        basecth = [[NSClassFromString(@"CDMessageCth") alloc]init];
+      
+        
     }else{
        basecth = [[NSClassFromString(@"CDViewController") alloc]init];
       
@@ -86,4 +106,7 @@
     [self.navigationController pushViewController:basecth animated:YES];
     self.hidesBottomBarWhenPushed = NO;
 }
+
+
+
 @end

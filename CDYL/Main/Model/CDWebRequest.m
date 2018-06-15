@@ -10,7 +10,7 @@
 #import "CDWebRequest.h"
 #import "CDAFNetLine.h"
 
-
+//http://183.129.254.28/webservice/services/IcCardWebService/wxOrderId?total_fee=1&accName=&accId=&cardId=3050120160821006
 @implementation CDWebRequest
 
 static NSString *const headStr = @"http://183.129.254.28/webservice/services";
@@ -22,16 +22,7 @@ static NSString *const headStr = @"http://183.129.254.28/webservice/services";
 }
 
 //查询充电站
-+ (void)requestsearchChargePoleWithlat:(NSString *)lat
-                                   lon:(NSString *)lon
-                                radius:(NSString *)radius
-                                  type:(NSString *)type
-                                status:(NSString *)status
-                             startTime:(NSString *)startTime
-                               endTime:(NSString *)endTime
-                                 regId:(NSString *)regId
-                               AndBack:(void (^)(NSDictionary * backDic))success
-                               failure:(void (^)(NSString * _Nonnull))failure{
++ (void)requestsearchChargePoleWithlat:(NSString *)lat lon:(NSString *)lon radius:(NSString *)radius type:(NSString *)type status:(NSString *)status startTime:(NSString *)startTime endTime:(NSString *)endTime regId:(NSString *)regId AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * _Nonnull))failure{
 
    NSDictionary *parameter = @{@"lat":lat,@"lon":lon, @"radius":radius, @"type":type, @"status":status, @"startTime":startTime,@"endTime":endTime, @"regId":regId};
     
@@ -177,6 +168,28 @@ static NSString *const headStr = @"http://183.129.254.28/webservice/services";
 + (void)requesCancleCardDefaultWithidentity:(NSString *)identity cardNo:(NSString *)cardNo pass:(NSString *)pass cardId:(NSString *)cardId AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure{
     NSString * string =@"IcCardWebService/cancleCardDefault";
     NSDictionary *parameter = @{@"identity":identity,@"cardNo":cardNo,@"pass":pass,@"cardId":cardId};
+    
+    [self addLastString:string parameter:parameter AndBack:success failure:failure];
+}
+//消费明细
+//@"http://183.129.254.28/webservice/services/IcCardWebService/getConsumRecord?identity=1&cardNo=13136111092&pass=E10ADC3949BA59ABBE56E057F20F883E&pageSize=1&index=50&cardId=3050120160821006
++ (void)requestgetConsumRecordWithidentity:(NSString *)identity cardNo:(NSString *)cardNo Pass:(NSString *)pass  cardId:(NSString *)cardId pageSize:(NSString *)pageSize index:(NSString *)index AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure{
+    NSString * string =@"IcCardWebService/getConsumRecord";
+    NSDictionary *parameter = @{@"identity":identity,@"cardNo":cardNo,@"pass":pass,@"pageSize":pageSize,@"index":index,@"cardId":cardId};
+   
+    [self addLastString:string parameter:parameter AndBack:success failure:failure];
+}
+//充值明细
++ (void)requestgetRechRecordWithidentity:(NSString *)identity cardNo:(NSString *)cardNo Pass:(NSString *)pass  cardId:(NSString *)cardId pageSize:(NSString *)pageSize index:(NSString *)index AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure{
+    NSString * string =@"IcCardWebService/getRechRecord";
+    NSDictionary *parameter = @{@"identity":identity,@"cardNo":cardNo,@"pass":pass,@"pageSize":pageSize,@"index":index,@"cardId":cardId};
+    
+    [self addLastString:string parameter:parameter AndBack:success failure:failure];
+}
+//获取消息
++ (void)requestGetNewMessageWithIdentify:(NSString *)identity cardNo:(NSString *)cardNo pass:(NSString *)pass AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure{
+    NSString * string =@"IcCardWebService/getPushInfo";
+    NSDictionary *parameter = @{@"identity":identity,@"cardNo":cardNo,@"pass":pass};
     
     [self addLastString:string parameter:parameter AndBack:success failure:failure];
 }

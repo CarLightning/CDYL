@@ -60,7 +60,7 @@
         make.height.mas_equalTo(40);
     }];
     [self.moneyiv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.moneyLb.mas_bottom);
+        make.centerY.equalTo(self.moneyLb.mas_centerY);
         make.right.equalTo(self.moneyLb.mas_left).offset(-10);
         make.width.mas_equalTo(20);
         make.height.mas_equalTo(20);
@@ -96,7 +96,7 @@
 -(UILabel *)moneyLb{
     if (_moneyLb == nil) {
         _moneyLb = [[UILabel alloc]init];
-        _moneyLb.font = [UIFont systemFontOfSize:43];
+        _moneyLb.font = [UIFont systemFontOfSize:33];
         _moneyLb.textColor = LHColor(255, 255, 255);
     }
     return _moneyLb;

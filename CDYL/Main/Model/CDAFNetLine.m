@@ -32,6 +32,7 @@
     return helper;
 }
 -(void)Get:(NSString *)urlString Parameter:(NSDictionary *)parameter XMLString:(NSString *)xmlStr success:(SuccessedData)success failure:(FailureMessage)failure{
+     if (whetherHaveNetwork) {
     [manager GET:urlString parameters:parameter progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSString *str = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -48,9 +49,14 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure (@"网络错误");
     }];
+}else{
+        failure(@"网络无法连接");
+    }
 }
 
 - (void)Post:(NSString *)urlString Parameter:(NSDictionary *)parameter XMLString:(NSString *)xmlStr success:(SuccessedData)success failure:(FailureMessage)failure{
+    
+    if (whetherHaveNetwork) {
     
     [manager POST:urlString parameters:parameter progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -66,7 +72,10 @@
             failure (messa);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        failure (@"网络错误");
+        failure (@"获取失败");
     }];
+    }else{
+        failure(@"网络无法连接");
+    }
 }
 @end

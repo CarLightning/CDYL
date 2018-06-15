@@ -11,7 +11,7 @@
 #import "CDoderViewController.h"
 #import "CDchargeViewController.h"
 #import "CDscanViewController.h"
-//#import "CDcommonViewController.h"
+#import "CDMessage.h"
 #import "CDMineViewController.h"
 #import "CDTabbar.h"
 #import "CDNav.h"
@@ -46,7 +46,7 @@
    
     
     if (![self is_login]) {
-        
+//        未登录哦
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
            
                 
@@ -57,15 +57,14 @@
             
         });
         
+    }else{
+//        已经登录哦
+        [CDMessage shareMessage];
     }
     
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    
-    
-    
 }
 - (void)addChildViewController:(UIViewController *)childController image:(NSString *)image seletedImage:(NSString *)selectedImage title:(NSString *)title
 {
@@ -107,6 +106,4 @@
     }
     return NO;
 }
-
-
 @end

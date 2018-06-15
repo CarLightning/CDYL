@@ -22,6 +22,7 @@
     if (_contentImageView == nil) {
         _contentImageView = [[UIImageView alloc] init];
         [self addSubview:_contentImageView];
+        
     }
     
     return _contentImageView;

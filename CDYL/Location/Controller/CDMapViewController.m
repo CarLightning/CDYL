@@ -228,8 +228,7 @@
     return nil;
 }
 //获取标注视图
-- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
-{
+- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation {
     /* 自定义userLocation对应的annotationView. */
     if ([annotation isKindOfClass:[MAUserLocation class]]){
         static NSString *userLocationStyleReuseIndetifier = @"userLocationStyleReuseIndetifier";

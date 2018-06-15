@@ -22,7 +22,7 @@
     [self setSubViews];
 }
 -(void)setSubViews{
-   
+    self.navigationController.navigationBarHidden = NO;
     NSString *titile = [self.typeDic objectForKey:@"whatName"];
     self.title = [NSString stringWithFormat:@"修改%@",titile];
     self.oldStr =[self.typeDic objectForKey:@"Name"];
