@@ -389,6 +389,8 @@
 		8431470A1EE10DC600E41BBD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				84600B7B20D2270500E73D64 /* CDMessageCth.h */,
+				84600B7C20D2270500E73D64 /* CDMessageCth.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -396,6 +398,12 @@
 		8431470B1EE10DC600E41BBD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				84600B7E20D256B200E73D64 /* MsgCellFrame.h */,
+				84600B7F20D256B200E73D64 /* MsgCellFrame.m */,
+				84600B7820D1057700E73D64 /* UserMessage.h */,
+				84600B7920D1057700E73D64 /* UserMessage.m */,
+				84600B7520D1032C00E73D64 /* CDMessage.h */,
+				84600B7620D1032C00E73D64 /* CDMessage.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -403,8 +411,8 @@
 		8431470C1EE10DC600E41BBD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8415097220D3A15A003082DD /* CDMessageCell.h */,
 				8415097320D3A15A003082DD /* CDMessageCell.m */,
+				8415097220D3A15A003082DD /* CDMessageCell.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -595,8 +603,6 @@
 				84FC4E47209174640060ED91 /* CDChangeStrController.m */,
 				84EB00DF20B2744700997781 /* CDMoneyCardController.h */,
 				84EB00E020B2744700997781 /* CDMoneyCardController.m */,
-				84600B7B20D2270500E73D64 /* CDMessageCth.h */,
-				84600B7C20D2270500E73D64 /* CDMessageCth.m */,
 				844BDB6D20BBE8D30025DED0 /* CDOneCardCth.h */,
 				844BDB6E20BBE8D30025DED0 /* CDOneCardCth.m */,
 				8426928A20C635FA0060B9D4 /* CDDetailViewController.h */,
@@ -612,12 +618,6 @@
 			children = (
 				8426929020C680F10060B9D4 /* CDCellModel.h */,
 				8426929120C680F10060B9D4 /* CDCellModel.m */,
-				84600B7E20D256B200E73D64 /* MsgCellFrame.h */,
-				84600B7F20D256B200E73D64 /* MsgCellFrame.m */,
-				84600B7820D1057700E73D64 /* UserMessage.h */,
-				84600B7920D1057700E73D64 /* UserMessage.m */,
-				84600B7520D1032C00E73D64 /* CDMessage.h */,
-				84600B7620D1032C00E73D64 /* CDMessage.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
