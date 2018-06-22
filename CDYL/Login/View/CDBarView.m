@@ -76,7 +76,7 @@
     if (_downLb == nil) {
         _downLb = [[UILabel alloc]init];
         _downLb.backgroundColor = LHColor(187, 187, 187);
-        _downLb.hidden = YES;
+        
     }
     return _downLb;
 }
@@ -105,7 +105,8 @@
 }
 -(void)setIs_showFun:(BOOL)is_showFun{
     _is_showFun = is_showFun;
-    self.selectBtn.hidden = _downLb.hidden = !is_showFun;
+    self.selectBtn.hidden  = !is_showFun;
+    
 }
 -(void)setBgImage:(UIImage *)bgImage{
     _bgImage = bgImage;

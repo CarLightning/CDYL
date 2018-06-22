@@ -11,7 +11,7 @@
 
 @protocol PoleDelegate <NSObject>
 /***点击预约**/
-- (void)clickTheBespeakBtn;
+- (void)clickTheBespeakBtn:(CDPoliList *)model;
 
 @end
 @interface CDPoleCell : UITableViewCell

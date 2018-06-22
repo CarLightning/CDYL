@@ -12,9 +12,10 @@
 #import "MsgCellFrame.h"
 #import "CDMessageCell.h"
 
-@interface CDMessageCth ()<UITableViewDelegate,UITableViewDataSource>
+@interface CDMessageCth ()<UITableViewDelegate,UITableViewDataSource,MsgCellDelegate>
 @property (nonatomic, strong) NSMutableArray *msgArr;
 @property (nonatomic, strong) UITableView *tableV;
+@property (nonatomic, strong)  UILabel*showLb;
 
 @end
 
@@ -25,6 +26,21 @@ static NSString * const identy = @"MESSAGEIDENTY";
     [super viewDidLoad];
     [self setSubViews];
     [self getSource];
+}
+-(UILabel *)showLb{
+    if (_showLb == nil) {
+        _showLb = [[UILabel alloc]init];
+        _showLb.frame = CGRectMake(DEAppWidth/2, DEAppHeight/2, 50, 50);
+        _showLb.backgroundColor = [UIColor whiteColor];
+        _showLb.textAlignment = NSTextAlignmentCenter;
+        _showLb.font = [UIFont systemFontOfSize:25];
+        _showLb.numberOfLines = 0;
+        _showLb.textColor = LHColor(34, 34, 34);
+        _showLb.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissLabel:)];
+        [_showLb addGestureRecognizer: tap];
+    }
+    return _showLb;
 }
 - (void)viewWillDisappear:(BOOL)animated{
     NSArray *viewControllers = self.navigationController.viewControllers;//获取当前的视图控制其
@@ -37,7 +53,7 @@ static NSString * const identy = @"MESSAGEIDENTY";
     }
 }
 -(void)setSubViews{
-//    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.title = @"消息";
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"trash"] style:UIBarButtonItemStyleDone target:self action:@selector(tapTheNavigationBarItem:)];
     self.navigationItem.rightBarButtonItem = item;
     
@@ -49,6 +65,8 @@ static NSString * const identy = @"MESSAGEIDENTY";
     [tv registerClass:[CDMessageCell class] forCellReuseIdentifier:identy];
     [self.view addSubview:tv];
     self.tableV =tv;
+    
+    
 }
 #pragma mark -  tableViewDelagate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -56,6 +74,7 @@ static NSString * const identy = @"MESSAGEIDENTY";
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CDMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:identy forIndexPath:indexPath];
+    cell.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     MsgCellFrame *cellFrame = self.msgArr[indexPath.row];
     cell.frameModel = cellFrame;
@@ -115,4 +134,27 @@ static NSString * const identy = @"MESSAGEIDENTY";
     [self presentViewController:alert animated:YES completion:nil];
 
 }
+-(void)dismissLabel:(UITapGestureRecognizer *)tap{
+   self.showLb.text = nil;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.showLb.frame = CGRectMake(DEAppWidth/2, DEAppHeight/2, 0, 0);
+      
+    } completion:^(BOOL finished) {
+        [self.showLb removeFromSuperview];
+    }];
+}
+#pragma  mark - CDMessageDelagate
+- (void)tapZoomTheMessage:(NSString *)msg{
+    NSLog(@"放大字体：%@",msg);
+    [[UIApplication sharedApplication].keyWindow addSubview:self.showLb];
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        self.showLb.frame = [UIScreen mainScreen].bounds;
+        self.showLb.text = msg;
+    } completion:^(BOOL finished) {
+        self.showLb.text = msg;
+    }];
+}
+
+
 @end

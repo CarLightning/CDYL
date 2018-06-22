@@ -68,7 +68,7 @@
     CGFloat bgIvX = 55;
     CGFloat bgIvY = CDBlockBW+20+CDBlockBW;
     CGFloat bgIvW = textW+30;
-    CGFloat bgIvH = textH+25+noticeH;
+    CGFloat bgIvH = textH+20+noticeH;
     self.bgIvFrame = CGRectMake(bgIvX, bgIvY, bgIvW, bgIvH);
     
     // 头像

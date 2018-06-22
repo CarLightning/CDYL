@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "MsgCellFrame.h"
+
+@protocol MsgCellDelegate <NSObject>
+- (void)tapZoomTheMessage:(NSString *)msg;
+@end
+
 @interface CDMessageCell : UITableViewCell
 @property (nonatomic, strong) MsgCellFrame *frameModel;
+@property (nonatomic, weak) id <MsgCellDelegate>  delegate;
 @end

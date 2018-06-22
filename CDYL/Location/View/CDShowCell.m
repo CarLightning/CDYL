@@ -142,7 +142,7 @@
         _nameLb.text=@"进出口加工区充电点";
         _nameLb.textAlignment=NSTextAlignmentLeft;
         _nameLb.font=[UIFont systemFontOfSize:13];
-        _nameLb.textColor=[UIColor blackColor];
+        _nameLb.textColor= LHColor(34, 34, 34);
     }
     return _nameLb;
 }
@@ -169,7 +169,7 @@
         _locationLb.text=@"杭州十二号大街15号";
         _locationLb.textAlignment=NSTextAlignmentLeft;
         _locationLb.font=[UIFont systemFontOfSize:13];
-        _locationLb.textColor=[UIColor blackColor];
+        _locationLb.textColor=LHColor(34, 34, 34);
     }
     return _locationLb;
 }
@@ -181,16 +181,17 @@
         _distanceLb.text=@"0.34km";
         _distanceLb.textAlignment=NSTextAlignmentLeft;
         _distanceLb.font=[UIFont systemFontOfSize:12.5];
-        _distanceLb.textColor=[UIColor blackColor];
+        _distanceLb.textColor=LHColor(34, 34, 34);
     }
     return _distanceLb;
 }
 - (UIButton *)navigaBtn{
     if (_navigaBtn == nil) {
         _navigaBtn = [[UIButton alloc]init];
-        _navigaBtn.backgroundColor = LHColor(22, 177, 184);
+        _navigaBtn.backgroundColor = LHColor(255, 198, 0);
         _navigaBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_navigaBtn setTitle:@"导航" forState:UIControlStateNormal];
+         [_navigaBtn setTitleColor:LHColor(34, 34, 34) forState:UIControlStateNormal];
         [_navigaBtn addTarget:self action:@selector(clickThtNaviBtn:) forControlEvents:UIControlEventTouchUpInside];
         _navigaBtn.layer.cornerRadius =4;
         _navigaBtn.layer.masksToBounds = YES;
@@ -200,9 +201,10 @@
 - (UIButton *)collecBtn{
     if (_collecBtn == nil) {
         _collecBtn = [[UIButton alloc]init];
-        _collecBtn.backgroundColor = LHColor(22, 177, 184);
+        _collecBtn.backgroundColor = LHColor(255, 198, 0);
         _collecBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_collecBtn setTitle:self.btnName forState:UIControlStateNormal];
+        [_collecBtn setTitleColor:LHColor(34, 34, 34) forState:UIControlStateNormal];
         [_collecBtn addTarget:self action:@selector(clickThtCollecBtn:) forControlEvents:UIControlEventTouchUpInside];
         _collecBtn.layer.cornerRadius =4;
         _collecBtn.layer.masksToBounds = YES;

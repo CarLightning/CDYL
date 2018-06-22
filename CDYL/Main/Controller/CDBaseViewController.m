@@ -18,7 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = LHColor(236, 236, 236);
+//    236 236 236
+    self.view.backgroundColor = LHColor(223, 223, 223);
      [self.view addSubview:self.bgNilIg];
      [self.view addSubview:self.empytLb];
 }

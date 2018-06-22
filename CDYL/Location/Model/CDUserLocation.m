@@ -8,6 +8,9 @@
 
 #import "CDUserLocation.h"
 
+@interface CDUserLocation () 
+
+@end
 @implementation CDUserLocation
 static CDUserLocation * _userInfor;
 
@@ -20,4 +23,5 @@ static CDUserLocation * _userInfor;
     });
     return _userInfor;
 }
+
 @end

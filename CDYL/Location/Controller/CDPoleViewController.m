@@ -9,6 +9,8 @@
 #import "CDPoleViewController.h"
 #import "CDPoliList.h"
 #import "CDPoleCell.h"
+#import "CDPoleSettingCth.h"
+
 @interface CDPoleViewController ()<UITableViewDelegate,UITableViewDataSource,PoleDelegate>
 @property (nonatomic, strong) NSArray *poleSource;
 //@property (nonatomic, strong) CDPoliList *poliModel;
@@ -91,7 +93,12 @@ static NSString *const identifyCell = @"POLECELL";
     self.tabaleV =tv;
 }
 #pragma mark - PoleDelegate
-- (void)clickTheBespeakBtn{
+- (void)clickTheBespeakBtn:(CDPoliList *)model{
+    CDPoleSettingCth *pole = [[CDPoleSettingCth alloc]init];
+    pole.model = model;
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:pole animated:YES];
+    self.hidesBottomBarWhenPushed = YES;
     NSLog(@"点击预约");
 }
 @end
