@@ -65,7 +65,7 @@ DEPENDENCIES:
   - YYText
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - AFNetworking
     - AMap3DMap
     - AMapFoundation
@@ -101,4 +101,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: fd5a84a77b95f81a00abfec4a8c55452487fe149
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2

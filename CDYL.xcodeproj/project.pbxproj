@@ -452,8 +452,8 @@
 		8431470C1EE10DC600E41BBD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8415097220D3A15A003082DD /* CDMessageCell.h */,
 				8415097320D3A15A003082DD /* CDMessageCell.m */,
+				8415097220D3A15A003082DD /* CDMessageCell.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
