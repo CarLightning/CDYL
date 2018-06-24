@@ -19,20 +19,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    
     [self initializationSub];
     
-   
+    
 }
 
 
 - (void)initializationSub {
     
     UIScrollView *scrollview=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, DEAppWidth, DEAppHeight)];
-    [self.view addSubview:scrollview];
-    scrollview.backgroundColor=[UIColor whiteColor];
-    scrollview.contentSize=CGSizeMake(DEAppWidth, 600);
     
+    scrollview.backgroundColor=[UIColor whiteColor];
+    scrollview.showsHorizontalScrollIndicator= NO;
+    scrollview.showsVerticalScrollIndicator = NO;
+    [scrollview setContentOffset:CGPointMake(0, 0) animated:YES];
+    scrollview .bounces=YES;
+    scrollview.alwaysBounceVertical=YES;
+    [self.view addSubview:scrollview];
+    
+    CGFloat block = 64;
+    if (is_iphoneX) {
+        block = 88;
+    }
     LSXView *iv=[[[NSBundle mainBundle]loadNibNamed:@"LSXView" owner:self options:nil]lastObject];
     iv.frame=CGRectMake(0, 0, DEAppWidth, DEAppHeight);
     iv.delegate = self;

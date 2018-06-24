@@ -22,7 +22,7 @@
 #define is_iphoneX  (DEAppHeight == 812 ? YES:NO)
 #define is_iphone6  (DEAppHeight == 667 ? YES:NO)
 #define is_iphone6P (DEAppHeight == 736 ? YES:NO)
-
+#define commentColor LHColor(223, 223, 223)
 #define DEAppHeight ([UIScreen mainScreen].bounds.size.height)
 #define IS_IPHONE_X (DEAppHeight==812? YES:NO)
 

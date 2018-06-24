@@ -11,5 +11,6 @@
 
 @interface CDLocationViewController : CDBaseViewController
 @property (nonatomic, assign) CLLocationCoordinate2D nowCoordinate;
+@property (nonatomic, strong) NSString *radius;
 
 @end

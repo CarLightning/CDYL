@@ -8,8 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		7CD945EAB881FD2288E6FE7F /* libPods-CDYL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B48407BCB546847CE696A5 /* libPods-CDYL.a */; };
+		8414D0CB20DB7D440017B957 /* CDAppointmentOrderCth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8414D0CA20DB7D440017B957 /* CDAppointmentOrderCth.m */; };
+		8414D0CE20DB7D610017B957 /* CDShowChangeCth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8414D0CD20DB7D610017B957 /* CDShowChangeCth.m */; };
+		8414D0D120DB7D910017B957 /* CDWaitPayCth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8414D0D020DB7D910017B957 /* CDWaitPayCth.m */; };
+		8414D0D420DB85C10017B957 /* CDTopLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8414D0D320DB85C10017B957 /* CDTopLabel.m */; };
+		8414D0D720DCA5BD0017B957 /* CDOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8414D0D620DCA5BD0017B957 /* CDOrderView.m */; };
+		8414D0D920DCA5DF0017B957 /* CDOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8414D0D820DCA5DF0017B957 /* CDOrderView.xib */; };
 		8415097120D38DB6003082DD /* CDBaseSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = 8415097020D38DB6003082DD /* CDBaseSqlite.m */; };
 		8415097420D3A15A003082DD /* CDMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8415097320D3A15A003082DD /* CDMessageCell.m */; };
+		8425A9D320D8A63000CE053B /* CDBespeakTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8425A9D220D8A63000CE053B /* CDBespeakTableViewCell.m */; };
+		8425A9D620D8D2AA00CE053B /* CDRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8425A9D520D8D2AA00CE053B /* CDRowCell.m */; };
+		8425A9DB20D8E81A00CE053B /* HSDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8425A9D920D8E81900CE053B /* HSDatePickerViewController.m */; };
+		8425A9DC20D8E81A00CE053B /* HSDatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8425A9DA20D8E81900CE053B /* HSDatePickerViewController.xib */; };
+		8425A9DF20D8F2B600CE053B /* CDPoleSettingCth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8425A9DE20D8F2B600CE053B /* CDPoleSettingCth.m */; };
 		842D071A20AEB822009B7A4A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 842D071920AEB822009B7A4A /* Images.xcassets */; };
 		843146FB1EE109FE00E41BBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843146FA1EE109FE00E41BBD /* Assets.xcassets */; };
 		843146FE1EE109FE00E41BBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843146FC1EE109FE00E41BBD /* LaunchScreen.storyboard */; };
@@ -88,6 +99,17 @@
 
 /* Begin PBXFileReference section */
 		809684D8F75C0F5EC0ABBAB5 /* Pods-CDYL.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYL.release.xcconfig"; path = "Pods/Target Support Files/Pods-CDYL/Pods-CDYL.release.xcconfig"; sourceTree = "<group>"; };
+		8414D0C920DB7D440017B957 /* CDAppointmentOrderCth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDAppointmentOrderCth.h; sourceTree = "<group>"; };
+		8414D0CA20DB7D440017B957 /* CDAppointmentOrderCth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDAppointmentOrderCth.m; sourceTree = "<group>"; };
+		8414D0CC20DB7D610017B957 /* CDShowChangeCth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDShowChangeCth.h; sourceTree = "<group>"; };
+		8414D0CD20DB7D610017B957 /* CDShowChangeCth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDShowChangeCth.m; sourceTree = "<group>"; };
+		8414D0CF20DB7D910017B957 /* CDWaitPayCth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDWaitPayCth.h; sourceTree = "<group>"; };
+		8414D0D020DB7D910017B957 /* CDWaitPayCth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDWaitPayCth.m; sourceTree = "<group>"; };
+		8414D0D220DB85C10017B957 /* CDTopLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDTopLabel.h; sourceTree = "<group>"; };
+		8414D0D320DB85C10017B957 /* CDTopLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDTopLabel.m; sourceTree = "<group>"; };
+		8414D0D520DCA5BD0017B957 /* CDOrderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDOrderView.h; sourceTree = "<group>"; };
+		8414D0D620DCA5BD0017B957 /* CDOrderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDOrderView.m; sourceTree = "<group>"; };
+		8414D0D820DCA5DF0017B957 /* CDOrderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CDOrderView.xib; sourceTree = "<group>"; };
 		8415096F20D38DB6003082DD /* CDBaseSqlite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDBaseSqlite.h; sourceTree = "<group>"; };
 		8415097020D38DB6003082DD /* CDBaseSqlite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDBaseSqlite.m; sourceTree = "<group>"; };
 		8415097220D3A15A003082DD /* CDMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDMessageCell.h; sourceTree = "<group>"; };
@@ -115,6 +137,15 @@
 		84233AE420736C01007D1E09 /* CDBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDBaseViewController.h; sourceTree = "<group>"; };
 		84233AE520736C01007D1E09 /* CDBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDBaseViewController.m; sourceTree = "<group>"; };
 		84233AE820736FE5007D1E09 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		8425A9D120D8A63000CE053B /* CDBespeakTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDBespeakTableViewCell.h; sourceTree = "<group>"; };
+		8425A9D220D8A63000CE053B /* CDBespeakTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDBespeakTableViewCell.m; sourceTree = "<group>"; };
+		8425A9D420D8D2AA00CE053B /* CDRowCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRowCell.h; sourceTree = "<group>"; };
+		8425A9D520D8D2AA00CE053B /* CDRowCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDRowCell.m; sourceTree = "<group>"; };
+		8425A9D820D8E81900CE053B /* HSDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSDatePickerViewController.h; sourceTree = "<group>"; };
+		8425A9D920D8E81900CE053B /* HSDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSDatePickerViewController.m; sourceTree = "<group>"; };
+		8425A9DA20D8E81900CE053B /* HSDatePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSDatePickerViewController.xib; sourceTree = "<group>"; };
+		8425A9DD20D8F2B600CE053B /* CDPoleSettingCth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDPoleSettingCth.h; sourceTree = "<group>"; };
+		8425A9DE20D8F2B600CE053B /* CDPoleSettingCth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDPoleSettingCth.m; sourceTree = "<group>"; };
 		8426928A20C635FA0060B9D4 /* CDDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDDetailViewController.h; sourceTree = "<group>"; };
 		8426928B20C635FA0060B9D4 /* CDDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDDetailViewController.m; sourceTree = "<group>"; };
 		8426928D20C674590060B9D4 /* CDchargeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDchargeCell.h; sourceTree = "<group>"; };
@@ -260,6 +291,16 @@
 				809684D8F75C0F5EC0ABBAB5 /* Pods-CDYL.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8425A9D720D8E81900CE053B /* HSDatePickerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8425A9D820D8E81900CE053B /* HSDatePickerViewController.h */,
+				8425A9D920D8E81900CE053B /* HSDatePickerViewController.m */,
+				8425A9DA20D8E81900CE053B /* HSDatePickerViewController.xib */,
+			);
+			path = HSDatePickerViewController;
 			sourceTree = "<group>";
 		};
 		843146E21EE109FD00E41BBD = {
@@ -446,6 +487,10 @@
 		843147101EE10DC600E41BBD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8425A9D120D8A63000CE053B /* CDBespeakTableViewCell.h */,
+				8425A9D220D8A63000CE053B /* CDBespeakTableViewCell.m */,
+				8425A9D420D8D2AA00CE053B /* CDRowCell.h */,
+				8425A9D520D8D2AA00CE053B /* CDRowCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -469,6 +514,8 @@
 				84A1226220A43E59003AB2F1 /* CDLocationViewController.m */,
 				847E46A820A92EC400675762 /* CDPoleViewController.h */,
 				847E46A920A92EC400675762 /* CDPoleViewController.m */,
+				8425A9DD20D8F2B600CE053B /* CDPoleSettingCth.h */,
+				8425A9DE20D8F2B600CE053B /* CDPoleSettingCth.m */,
 				8480BE9820ABFEE600A992EF /* CDCompanyShow.h */,
 				8480BE9920ABFEE600A992EF /* CDCompanyShow.m */,
 			);
@@ -562,6 +609,12 @@
 			children = (
 				8431472E1EE1162A00E41BBD /* CDoderViewController.h */,
 				8431472F1EE1162A00E41BBD /* CDoderViewController.m */,
+				8414D0C920DB7D440017B957 /* CDAppointmentOrderCth.h */,
+				8414D0CA20DB7D440017B957 /* CDAppointmentOrderCth.m */,
+				8414D0CC20DB7D610017B957 /* CDShowChangeCth.h */,
+				8414D0CD20DB7D610017B957 /* CDShowChangeCth.m */,
+				8414D0CF20DB7D910017B957 /* CDWaitPayCth.h */,
+				8414D0D020DB7D910017B957 /* CDWaitPayCth.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -576,6 +629,8 @@
 		843147241EE10E3100E41BBD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8414D0D220DB85C10017B957 /* CDTopLabel.h */,
+				8414D0D320DB85C10017B957 /* CDTopLabel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -645,6 +700,9 @@
 				8426928E20C674590060B9D4 /* CDchargeCell.m */,
 				8426929320C7C5080060B9D4 /* CDBgVIew.h */,
 				8426929420C7C5080060B9D4 /* CDBgVIew.m */,
+				8414D0D520DCA5BD0017B957 /* CDOrderView.h */,
+				8414D0D620DCA5BD0017B957 /* CDOrderView.m */,
+				8414D0D820DCA5DF0017B957 /* CDOrderView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -652,6 +710,7 @@
 		843147411EE12C9500E41BBD /* 3Th */ = {
 			isa = PBXGroup;
 			children = (
+				8425A9D720D8E81900CE053B /* HSDatePickerViewController */,
 				848B6B042079BC3A00ED46E3 /* Extension */,
 				848B6AFE2079BBE800ED46E3 /* XMLReader */,
 			);
@@ -808,7 +867,9 @@
 			files = (
 				848B6B022079BBE800ED46E3 /* README.md in Resources */,
 				842D071A20AEB822009B7A4A /* Images.xcassets in Resources */,
+				8414D0D920DCA5DF0017B957 /* CDOrderView.xib in Resources */,
 				843146FE1EE109FE00E41BBD /* LaunchScreen.storyboard in Resources */,
+				8425A9DC20D8E81A00CE053B /* HSDatePickerViewController.xib in Resources */,
 				8480BE9620ABFE1300A992EF /* LSXView.xib in Resources */,
 				843146FB1EE109FE00E41BBD /* Assets.xcassets in Resources */,
 			);
@@ -877,6 +938,7 @@
 				84600BD020D2758200E73D64 /* CDAppDelegate.m in Sources */,
 				84600BD120D2758200E73D64 /* Const.m in Sources */,
 				84600BD220D2758200E73D64 /* CDNav.m in Sources */,
+				8425A9DF20D8F2B600CE053B /* CDPoleSettingCth.m in Sources */,
 				84600BD320D2758200E73D64 /* CDTabbarCtl.m in Sources */,
 				84600BD420D2758200E73D64 /* CDTabbar.m in Sources */,
 				84600BD520D2758200E73D64 /* CDBaseViewController.m in Sources */,
@@ -893,11 +955,13 @@
 				84600BE120D2758200E73D64 /* CDMapViewController.m in Sources */,
 				84600BE220D2758200E73D64 /* CDLocationViewController.m in Sources */,
 				84600BE320D2758200E73D64 /* CDPoleViewController.m in Sources */,
+				8414D0D120DB7D910017B957 /* CDWaitPayCth.m in Sources */,
 				84600BE420D2758200E73D64 /* CDCompanyShow.m in Sources */,
 				84600BE520D2758200E73D64 /* CDPointAnnotation.m in Sources */,
 				84600BE620D2758200E73D64 /* CDUserLocation.m in Sources */,
 				84600BE720D2758200E73D64 /* LocationAnnotationView.m in Sources */,
 				84600BE820D2758200E73D64 /* AliMapViewCustomAnnotationView.m in Sources */,
+				8425A9D320D8A63000CE053B /* CDBespeakTableViewCell.m in Sources */,
 				84600BE920D2758200E73D64 /* AliMapViewCustomCalloutView.m in Sources */,
 				84600BEA20D2758200E73D64 /* CDShowCell.m in Sources */,
 				84600BEB20D2758200E73D64 /* CDPoleCell.m in Sources */,
@@ -911,8 +975,10 @@
 				84600BF320D2758200E73D64 /* UIWindow+LBXHierarchy.m in Sources */,
 				84600BF420D2758200E73D64 /* CDMineViewController.m in Sources */,
 				84600BF520D2758200E73D64 /* CDHeaderController.m in Sources */,
+				8414D0CB20DB7D440017B957 /* CDAppointmentOrderCth.m in Sources */,
 				84600BF620D2758200E73D64 /* CDHeadimageViewController.m in Sources */,
 				84600BF720D2758200E73D64 /* CDChangeStrController.m in Sources */,
+				8425A9D620D8D2AA00CE053B /* CDRowCell.m in Sources */,
 				84600BF820D2758200E73D64 /* CDMoneyCardController.m in Sources */,
 				84600BF920D2758200E73D64 /* CDMessageCth.m in Sources */,
 				84600BFA20D2758200E73D64 /* CDOneCardCth.m in Sources */,
@@ -923,6 +989,7 @@
 				84600BFF20D2758200E73D64 /* UserMessage.m in Sources */,
 				84600C0020D2758200E73D64 /* CDMessage.m in Sources */,
 				84600C0120D2758200E73D64 /* CDBigTwoCell.m in Sources */,
+				8414D0D420DB85C10017B957 /* CDTopLabel.m in Sources */,
 				84600C0220D2758200E73D64 /* CDSmallTwoCell.m in Sources */,
 				84600C0320D2758200E73D64 /* CDMoneyCard.m in Sources */,
 				84600C0420D2758200E73D64 /* CDHeadView.m in Sources */,
@@ -938,13 +1005,16 @@
 				84600C0C20D2758200E73D64 /* CDLoginViewController.m in Sources */,
 				84600C0D20D2758200E73D64 /* CDReViewController.m in Sources */,
 				84600C0E20D2758200E73D64 /* CDCodeViewController.m in Sources */,
+				8414D0D720DCA5BD0017B957 /* CDOrderView.m in Sources */,
 				84600C0F20D2758200E73D64 /* CDLoginView.m in Sources */,
 				84600C1020D2758200E73D64 /* CDBarView.m in Sources */,
+				8414D0CE20DB7D610017B957 /* CDShowChangeCth.m in Sources */,
 				84600C1120D2758200E73D64 /* GPSNaviViewController.m in Sources */,
 				84600C1220D2758200E73D64 /* SpeechSynthesizer.m in Sources */,
 				84600C1320D2758200E73D64 /* main.m in Sources */,
 				84600C1420D2758200E73D64 /* UIView+PYExtension.m in Sources */,
 				84600C1520D2758200E73D64 /* XMLReader.m in Sources */,
+				8425A9DB20D8E81A00CE053B /* HSDatePickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

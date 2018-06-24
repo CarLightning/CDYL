@@ -92,6 +92,7 @@
     }
     return _loginbtn;
 }
+
 -(UIButton *)registBtn{
     if (_registBtn == nil) {
         _registBtn=[[UIButton alloc]init];

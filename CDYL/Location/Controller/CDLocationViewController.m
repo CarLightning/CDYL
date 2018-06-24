@@ -25,6 +25,7 @@ static NSString *const identifyCell = @"SHOWCELL";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initSubs];
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -153,7 +154,10 @@ static NSString *const identifyCell = @"SHOWCELL";
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.contentColor = [UIColor blackColor];
     [self hiddenAllBaseView];
-    [CDWebRequest requestsearchCanBespeakChargePoleWithlat:lat lon:lon radius:@"100" type:@"0" status:@"0" startTime:begin endTime:end regId:@"" AndBack:^(NSDictionary *backDic) {
+    if (self.radius == nil) {
+        self.radius =@"100";
+    }
+    [CDWebRequest requestsearchCanBespeakChargePoleWithlat:lat lon:lon radius:self.radius type:@"0" status:@"0" startTime:begin endTime:end regId:@"" AndBack:^(NSDictionary *backDic) {
     
         weakself.stationSource =[weakself changeArrFrom:backDic[@"stationlist"]];
         [hud hideAnimated:YES];

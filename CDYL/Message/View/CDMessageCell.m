@@ -31,7 +31,7 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.contentView.backgroundColor = LHColor(236, 236, 236);
+        self.contentView.backgroundColor = commentColor;
         [self setSubViews];
     }
     return self;
@@ -62,6 +62,10 @@
     self.textLB = [[YYLabel alloc]init];
     self.textLB.numberOfLines = 0 ;
     self.textLB.textAlignment = NSTextAlignmentLeft;
+    self.textLB.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapTheMessage:)];
+    tap.numberOfTapsRequired = 2;
+    [self.textLB addGestureRecognizer:tap];
     [self.contentView addSubview:self.textLB];
     
     
@@ -74,6 +78,8 @@
     
 }
 -(void)setFrameModel:(MsgCellFrame *)frameModel{
+    _frameModel = frameModel;
+    
     //转化
     _frameModel = frameModel;
     UserMessage *message = frameModel.model;
@@ -81,7 +87,7 @@
     //时间
      self.timeLb.frame = frameModel.timeFrame;
      self.timeLb.text = message.msg_time;
-    NSLog(@"%@",message.msg_time);
+//    NSLog(@"%@",message.msg_time);
     
     //提醒
      self.noticeLb.frame = frameModel.noticeFrame;
@@ -95,5 +101,10 @@
      self.bgIv.frame = frameModel.bgIvFrame;
      self.headView.frame = frameModel.headViewFrame;
 }
-
+-  (void)tapTheMessage:(UITapGestureRecognizer *)tap{
+    if (self.delegate &&[self.delegate respondsToSelector:@selector(tapZoomTheMessage:)]) {
+         UserMessage *message = _frameModel.model;
+        [self.delegate tapZoomTheMessage:message.info];
+    }
+}
 @end

@@ -10,7 +10,7 @@
 #import <Masonry.h>
 #import "UIView+PYExtension.h"
 
-#define CanTouchColor LHColor(22, 177, 184)
+#define CanTouchColor LHColor(255, 198, 0)
 #define CanntTouchColor LHColor(192, 192, 192)
 
 @interface AliMapViewCustomCalloutView ()
@@ -49,9 +49,8 @@
 - (void)initSubViews{
     UILabel *lb=[[UILabel alloc]init];
     lb.text=@"保税物流站点";
-    lb.font=[UIFont systemFontOfSize:15];
     lb.textAlignment=NSTextAlignmentLeft;
-    lb.textColor=[UIColor blackColor];
+    lb.textColor = LHColor(34, 34, 34);
     [self addSubview:lb];
     lb.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickTheLabel:)];
@@ -63,7 +62,7 @@
 //    server.backgroundColor = [UIColor blackColor];
     server.font=[UIFont systemFontOfSize:14];
     server.textAlignment=NSTextAlignmentLeft;
-    server.textColor=[UIColor blackColor];
+    server.textColor = LHColor(34, 34, 34);
     [self addSubview:server];
     
     UILabel *addre=[[UILabel alloc]init];
@@ -71,7 +70,7 @@
 //    addre.backgroundColor = [UIColor blackColor];
     addre.font=[UIFont systemFontOfSize:14];
     addre.textAlignment=NSTextAlignmentLeft;
-    addre.textColor=[UIColor blackColor];
+    addre.textColor = LHColor(34, 34, 34);
     [self addSubview:addre];
     self.addre = addre;
     
@@ -80,7 +79,7 @@
 //    distance.backgroundColor = [UIColor blackColor];
     distance.font=[UIFont systemFontOfSize:14];
     distance.textAlignment=NSTextAlignmentLeft;
-    distance.textColor=[UIColor blackColor];
+    distance.textColor = LHColor(34, 34, 34);
     [self addSubview:distance];
     self.distance = distance;
     
@@ -89,7 +88,7 @@
 //    company.backgroundColor = [UIColor blackColor];
     company.font=[UIFont systemFontOfSize:14];
     company.textAlignment=NSTextAlignmentLeft;
-    company.textColor=[UIColor blackColor];
+    company.textColor = LHColor(34, 34, 34);
     [self addSubview:company];
     self.companyName = company;
     
@@ -126,11 +125,12 @@
     
     UIButton *collectBtn=[[UIButton alloc]init];
     collectBtn.backgroundColor = CanTouchColor;
-    collectBtn.titleLabel.textColor=[UIColor whiteColor];
+  
     collectBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [collectBtn setTitle:@"收藏" forState:UIControlStateNormal];
+    [collectBtn setTitleColor:LHColor(34, 34, 34) forState:UIControlStateNormal];
     [collectBtn addTarget:self action:@selector(clickTheBtn:) forControlEvents:UIControlEventTouchUpInside];
-    collectBtn.layer.cornerRadius=4;
+    collectBtn.layer.cornerRadius = 3;
     [self addSubview:collectBtn];
     
     [collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -142,10 +142,10 @@
     
     UIButton *navigaBtn = [[UIButton alloc]init];
     navigaBtn.backgroundColor = CanTouchColor;
-    navigaBtn.titleLabel.textColor=[UIColor whiteColor];
+    [navigaBtn setTitleColor:LHColor(34, 34, 34) forState:UIControlStateNormal];
     [navigaBtn setTitle:@"导航" forState:UIControlStateNormal];
     [navigaBtn addTarget:self action:@selector(clickTheNaviBtn:) forControlEvents:UIControlEventTouchUpInside];
-    navigaBtn.layer.cornerRadius=4;
+    navigaBtn.layer.cornerRadius=15;
     [self addSubview:navigaBtn];
    
     CGFloat width = self.py_width/2;
@@ -158,10 +158,10 @@
     
     UIButton *appointmentBtn = [[UIButton alloc]init];
     appointmentBtn.backgroundColor = CanTouchColor;
-    appointmentBtn.titleLabel.textColor=[UIColor whiteColor];
+    [appointmentBtn setTitleColor:LHColor(34, 34, 34) forState:UIControlStateNormal];
     [appointmentBtn setTitle:@"预约" forState:UIControlStateNormal];
     [appointmentBtn addTarget:self action:@selector(clickTheAppBtn:) forControlEvents:UIControlEventTouchUpInside];
-    appointmentBtn.layer.cornerRadius=4;
+    appointmentBtn.layer.cornerRadius=15;
     [self addSubview:appointmentBtn];
     self.appBtn = appointmentBtn;
    
@@ -191,7 +191,7 @@
 #pragma mark - method
 -(NSMutableAttributedString *)showString:(NSString *)str{
     
-    NSDictionary *dic = @{NSUnderlineStyleAttributeName : [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSForegroundColorAttributeName : CanTouchColor,NSFontAttributeName : [UIFont systemFontOfSize:16]};
+    NSDictionary *dic = @{NSUnderlineStyleAttributeName : [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSForegroundColorAttributeName : LHColor(34, 34, 34),NSFontAttributeName : [UIFont systemFontOfSize:16]};
     NSMutableAttributedString *attribute = [[NSMutableAttributedString alloc]initWithString:str attributes:dic];
     return attribute;
     

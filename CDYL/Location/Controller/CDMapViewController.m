@@ -5,7 +5,6 @@
 //  Created by admin on 2017/6/2.
 //  Copyright © 2017年 admin. All rights reserved.
 //
-
 #import "CDMapViewController.h"
 #import <MAMapKit/MAMapKit.h>
 #import <AMapFoundationKit/AMapFoundationKit.h>
@@ -21,6 +20,8 @@
 #import "GPSNaviViewController.h"
 #import "CDCompanyShow.h"
 #import "CDUserLocation.h"
+#import "CDPoleViewController.h"
+
 #define paoHight (is_iphoneX ? CDPaoHight+34: CDPaoHight)
 @interface CDMapViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,CallViewDelegate>{
     LocationAnnotationView *_locationAnnotationView;
@@ -131,7 +132,7 @@
     }else{
         btn.frame = CGRectMake(30, DEAppHeight-44-60, 30, 30);
     }
-    btn.backgroundColor=[UIColor colorWithRed:0/255.0 green:182/255.0 blue:193/255.0 alpha:1.0];
+    btn.backgroundColor=LHColor(255, 198, 0);
     [btn setTitle:@"定" forState:UIControlStateNormal];
     
     
@@ -413,6 +414,12 @@
 }
 /** 点击预约的事件回调 */
 - (void)stationModel:(CDStation *)model didAppointmentBtn:(BOOL)appointment{
+    
+    CDPoleViewController *poleView = [[CDPoleViewController alloc]init];
+    poleView.stationModel = model;
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:poleView animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
      NSLog(@"点击预约");
 }
 @end

@@ -12,4 +12,5 @@
 @property (nonatomic, assign) CLLocationCoordinate2D  userCoordinate;
 
 +(instancetype)share;
+
 @end
