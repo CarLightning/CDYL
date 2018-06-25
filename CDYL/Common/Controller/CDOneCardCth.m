@@ -10,6 +10,7 @@
 #import "CDMoneyCard.h"
 #import "CDcell.h"
 #import "CDDetailViewController.h"
+#import "CDRechangeCth.h"
 
 @interface CDOneCardCth ()<CDcellDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -64,7 +65,9 @@
 }
 #pragma mark - CDcellDelagate
 -(void)jumpToAddmoney{
-    
+    CDRechangeCth * recharge = [[CDRechangeCth alloc]init];
+    recharge.model = self.model;
+    [self.navigationController pushViewController:recharge animated:YES];
 }
 
 

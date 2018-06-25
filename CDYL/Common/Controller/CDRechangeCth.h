@@ -1,13 +1,15 @@
 //
-//  CDDetailViewController.h
+//  CDRechangeCth.h
 //  CDYL
 //
-//  Created by admin on 2018/6/5.
+//  Created by admin on 2018/6/25.
 //  Copyright © 2018年 admin. All rights reserved.
-//  明细界面
+//  充值界面
 
 #import "CDBaseViewController.h"
 #import "CDMoneyCardInfor.h"
-@interface CDDetailViewController : CDBaseViewController
+
+@interface CDRechangeCth : CDBaseViewController
+
 @property (nonatomic, strong) CDMoneyCardInfor *model;
 @end
