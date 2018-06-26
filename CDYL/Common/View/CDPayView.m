@@ -92,7 +92,7 @@
 -(UITextField *)textFiled{
     if (_textFiled == nil) {
         _textFiled = [[UITextField alloc]init];
-        _textFiled.font = [UIFont systemFontOfSize:14];
+        _textFiled.font = [UIFont systemFontOfSize:18];
         _textFiled.delegate = self;
         _textFiled.textColor = LHColor(34, 34, 34);
         _textFiled.keyboardType = UIKeyboardTypeDecimalPad;

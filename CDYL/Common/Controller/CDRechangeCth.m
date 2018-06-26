@@ -9,6 +9,8 @@
 #import "CDRechangeCth.h"
 #import "CDPayCell.h"
 #import "CDPayView.h"
+#import "CDPayHandle.h"
+
 @interface CDRechangeCth ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSArray *array;
 @property (nonatomic, strong) UITableView *tableV;
@@ -58,13 +60,13 @@ static NSString *const identifer = @"recharge";
 }
 -(UIButton *)payBtn{
     if (_payBtn == nil) {
-        _payBtn=[[UIButton alloc]initWithFrame:CGRectMake(37, CGRectGetMaxY(self.payView.frame)+34, DEAppWidth-74, (DEAppWidth-74)*0.1125)];
+        _payBtn=[[UIButton alloc]initWithFrame:CGRectMake(37, CGRectGetMaxY(self.payView.frame)+34, DEAppWidth-74, (DEAppWidth-74)*0.12)];
         _payBtn.backgroundColor = LHColor(255, 198, 80);
         [_payBtn addTarget:self action:@selector(clickThePayBtn) forControlEvents:UIControlEventTouchUpInside];
         [_payBtn setTitle:@"立即充值" forState:UIControlStateNormal];
         [_payBtn setTitleColor:LHColor(34, 34, 34) forState:UIControlStateNormal];
         [_payBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-        _payBtn.layer.cornerRadius = (DEAppWidth-74)*0.1125/2;;
+        _payBtn.layer.cornerRadius = (DEAppWidth-74)*0.12/2;;
         _payBtn.layer.masksToBounds = YES;
     }
     return _payBtn;
@@ -141,10 +143,15 @@ static NSString *const identifer = @"recharge";
     if (self.payView.textFiled.text.length == 0) {
         [self showAlert:@"请输入正确的金额"];
     }else{
+        [self.view endEditing:YES];
+        NSString *string = self.payView.textFiled.text;
+        
         if (self.selectRow == 0) {
             // 支付宝支付
         }else{
             //微信支付
+            NSString *payMoney = [self getWXpayMoney:string];
+            [CDPayHandle WXPayWithMoney:payMoney];
         }
     }
 }
@@ -176,6 +183,45 @@ static NSString *const identifer = @"recharge";
     UIAlertAction *action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:action1];
     [self presentViewController:alert animated:YES completion:nil];
-
+    
 }
+- (NSString *)getWXpayMoney:(NSString *)string{
+    
+    NSMutableString * payMoney = [[NSMutableString alloc]initWithString:@""];
+    if (![string containsString:@"."]) {//不带小数点
+        [payMoney appendString:string];
+        [payMoney appendString:@"00"];
+    }else{//带小数点
+        NSString *lastStr = [string componentsSeparatedByString:@"."].lastObject;
+        
+        if (lastStr.length==1) {//小数点后只有一位
+            
+            if ([string hasPrefix:@"0"]) { //是否以0开头、如0.1
+                payMoney = [[NSMutableString alloc]initWithString:lastStr];
+                [payMoney appendFormat:@"0"];
+            }else{
+                NSString * newStr = [string stringByReplacingOccurrencesOfString:@"." withString:@""];
+                [payMoney appendString:newStr];
+                [payMoney appendString:@"0"];
+            }
+            
+        }else if (lastStr.length == 2){//小数点后有两位
+            if ([string hasPrefix:@"0"]) {//是否以0开头、如0.1
+                if ([lastStr hasPrefix:@"0"]) { //是否以0开头、如0.01
+                    NSString *lstr = [lastStr componentsSeparatedByString:@"0"].lastObject;
+                    payMoney = [[NSMutableString alloc]initWithString:lstr];
+                }else{
+                    payMoney = [[NSMutableString alloc]initWithString:lastStr];
+                }
+            }else{
+                NSString * newStr = [string stringByReplacingOccurrencesOfString:@"." withString:@""];
+                [payMoney appendString:newStr];
+            }
+        }
+    }
+    return [payMoney copy];
+}
+
+
+
 @end

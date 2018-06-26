@@ -11,6 +11,7 @@
 		84018D6C20E07B12005B16BF /* CDRechangeCth.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018D6B20E07B12005B16BF /* CDRechangeCth.m */; };
 		84018D6F20E08764005B16BF /* CDPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018D6E20E08764005B16BF /* CDPayCell.m */; };
 		84018D7220E0B34E005B16BF /* CDPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018D7120E0B34E005B16BF /* CDPayView.m */; };
+		84018D7520E2069D005B16BF /* CDPayHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018D7420E2069D005B16BF /* CDPayHandle.m */; };
 		8414D0CB20DB7D440017B957 /* CDAppointmentOrderCth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8414D0CA20DB7D440017B957 /* CDAppointmentOrderCth.m */; };
 		8414D0CE20DB7D610017B957 /* CDShowChangeCth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8414D0CD20DB7D610017B957 /* CDShowChangeCth.m */; };
 		8414D0D120DB7D910017B957 /* CDWaitPayCth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8414D0D020DB7D910017B957 /* CDWaitPayCth.m */; };
@@ -108,6 +109,8 @@
 		84018D6E20E08764005B16BF /* CDPayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDPayCell.m; sourceTree = "<group>"; };
 		84018D7020E0B34E005B16BF /* CDPayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDPayView.h; sourceTree = "<group>"; };
 		84018D7120E0B34E005B16BF /* CDPayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDPayView.m; sourceTree = "<group>"; };
+		84018D7320E2069D005B16BF /* CDPayHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDPayHandle.h; sourceTree = "<group>"; };
+		84018D7420E2069D005B16BF /* CDPayHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDPayHandle.m; sourceTree = "<group>"; };
 		8414D0C920DB7D440017B957 /* CDAppointmentOrderCth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDAppointmentOrderCth.h; sourceTree = "<group>"; };
 		8414D0CA20DB7D440017B957 /* CDAppointmentOrderCth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDAppointmentOrderCth.m; sourceTree = "<group>"; };
 		8414D0CC20DB7D610017B957 /* CDShowChangeCth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDShowChangeCth.h; sourceTree = "<group>"; };
@@ -684,6 +687,8 @@
 			children = (
 				8426929020C680F10060B9D4 /* CDCellModel.h */,
 				8426929120C680F10060B9D4 /* CDCellModel.m */,
+				84018D7320E2069D005B16BF /* CDPayHandle.h */,
+				84018D7420E2069D005B16BF /* CDPayHandle.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -975,6 +980,7 @@
 				84018D6C20E07B12005B16BF /* CDRechangeCth.m in Sources */,
 				84600BE420D2758200E73D64 /* CDCompanyShow.m in Sources */,
 				84600BE520D2758200E73D64 /* CDPointAnnotation.m in Sources */,
+				84018D7520E2069D005B16BF /* CDPayHandle.m in Sources */,
 				84600BE620D2758200E73D64 /* CDUserLocation.m in Sources */,
 				84600BE720D2758200E73D64 /* LocationAnnotationView.m in Sources */,
 				84600BE820D2758200E73D64 /* AliMapViewCustomAnnotationView.m in Sources */,
