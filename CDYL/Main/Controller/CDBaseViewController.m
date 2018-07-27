@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    236 236 236
-    self.view.backgroundColor = LHColor(223, 223, 223);
+    self.view.backgroundColor = commentColor;
      [self.view addSubview:self.bgNilIg];
      [self.view addSubview:self.empytLb];
 }

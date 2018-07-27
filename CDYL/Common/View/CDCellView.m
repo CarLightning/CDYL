@@ -38,7 +38,15 @@
         self.showIg.image = [UIImage imageNamed:@"collecIcon"];
         self.row = 1;
     }else if([str isEqualToString:@"消息"]){
-        self.showIg.image = [UIImage imageNamed:@"notifiIcon"];
+        NSUserDefaults *df = [NSUserDefaults standardUserDefaults];
+        BOOL haveMsg = [df boolForKey:@"HaveNewMsg"];
+        
+        if (haveMsg) {
+            self.showIg.image = [UIImage imageNamed:@"chatNotifi"];
+        }else{
+            self.showIg.image = [UIImage imageNamed:@"notifiIcon"];
+        }
+        
         self.row = 2;
     }else if([str isEqualToString:@"设置"]){
         self.showIg.image = [UIImage imageNamed:@"setIcon"];
@@ -142,6 +150,7 @@
 }
 -(void)reloadNotifiImage:(NSString *)name{
     
-     self.showIg.image = [UIImage imageNamed:name];
+    self.showIg.image = [UIImage imageNamed:name];
+    
 }
 @end

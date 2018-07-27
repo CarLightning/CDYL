@@ -59,16 +59,24 @@
     }];
 }
 - (void)reloadData {
-    NSString *file =[[NSFileManager defaultManager] headImagePath:NO];
-    BOOL headPath = [[NSFileManager defaultManager]fileExistsAtPath:file];
-    if (headPath) {
-        NSData *data = [[NSFileManager defaultManager]contentsAtPath:file];
-        self.headView.image = [[UIImage alloc]initWithData:data];
+    if ([CDXML isLogin]) {
+        
+        NSString *file =[[NSFileManager defaultManager] headImagePath:NO];
+        BOOL headPath = [[NSFileManager defaultManager]fileExistsAtPath:file];
+        if (headPath) {
+            NSData *data = [[NSFileManager defaultManager]contentsAtPath:file];
+            self.headView.image = [[UIImage alloc]initWithData:data];
+        }else{
+            self.headView.image = [UIImage imageNamed:@"headIg"];
+        }
+        
+        self.nameLb.text = [CDUserInfor shareUserInfor].userName;
+        self.phoneLb.text = [NSString stringWithFormat:@"手机号 %@",[CDUserInfor shareUserInfor].phoneNum];
     }else{
-        self.headView.image = [UIImage imageNamed:@"headIg"];
+        self.headView.image = [UIImage imageNamed:@"headLogin"];
+        self.nameLb.text = @"登录";
+        self.phoneLb.text = [NSString stringWithFormat:@"点击头像"];
     }
-    self.nameLb.text = [CDUserInfor shareUserInfor].userName;
-    self.phoneLb.text = [NSString stringWithFormat:@"手机号 %@",[CDUserInfor shareUserInfor].phoneNum];
 }
 -(UIImageView *)bgView{
     if (_bgView == nil) {
@@ -82,6 +90,12 @@
         _headView = [[UIImageView alloc]init];
         _headView.layer.cornerRadius = 83/2;
         _headView.layer.masksToBounds = YES;
+        _headView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapTheHeadToLogin:)];
+        [_headView addGestureRecognizer:tap];
+        
+        
+        
     }
     return _headView;
 }
@@ -113,5 +127,15 @@
     if (self.delegate &&[self.delegate respondsToSelector:@selector(didClickTheEditBtn)]) {
         [self.delegate didClickTheEditBtn];
     }
+}
+- (void)tapTheHeadToLogin:(UITapGestureRecognizer *)tap{
+    if ([CDXML isLogin]) {
+        return;
+    }
+    CDBaseViewController*  basecth = [[NSClassFromString(@"CDViewController") alloc]init];
+    
+    CDNav *navi = [[CDNav alloc]initWithRootViewController:basecth];
+    navi.navigationBar.hidden = YES;
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navi animated:YES completion:nil];
 }
 @end

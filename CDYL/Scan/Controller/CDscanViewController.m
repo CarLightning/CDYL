@@ -8,11 +8,9 @@
 
 #import "CDscanViewController.h"
 #import "LBXAlertAction.h"
-//#import "CreateBarCodeViewController.h"
-//#import "ScanResultViewController.h"
-
-//#import "LBXPermission.h"
-//#import "LBXPermissionSetting.h"
+#import "LSXPointViewController.h"
+#import "CDNav.h"
+#import "CDAppDelegate.h"
 
 @interface CDscanViewController ()
 
@@ -156,10 +154,7 @@
         return;
     }
     
-    //震动提醒
-    // [LBXScanWrapper systemVibrate];
-    //声音提醒
-    //[LBXScanWrapper systemSound];
+   
     
     [self showNextVCWithScanResult:scanResult];
     
@@ -181,17 +176,25 @@
 
 - (void)showNextVCWithScanResult:(LBXScanResult*)strResult
 {
-    //    ScanResultViewController *vc = [ScanResultViewController new];
-    //    vc.imgScan = strResult.imgScanned;
-    //
-    //    vc.strScan = strResult.strScanned;
-    //
-    //    vc.strCodeType = strResult.strBarCodeType;
-    //
-    
     NSString *resultStr = strResult.strScanned;
-    NSLog(@"扫描结果：%@",resultStr);
-    //    [self.navigationController pushViewController:vc animated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+        CDAppDelegate *app=(CDAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        
+        
+        LSXPointViewController *pointV = [[LSXPointViewController alloc]init];
+        CDNav *selectNavi = app.tabbarCtl.selectedViewController;
+        pointV.poldId = resultStr;
+        UIViewController *victh = [self visibleViewController];
+        victh.hidesBottomBarWhenPushed = YES;
+        [selectNavi pushViewController:pointV animated:YES];
+       victh.hidesBottomBarWhenPushed = NO;
+        
+        
+        
+    }];
+    
+
 }
 
 
@@ -219,4 +222,25 @@
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
+
+- (UIViewController *)visibleViewController {
+    UIViewController *rootViewController =[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    return [self getVisibleViewControllerFrom:rootViewController];
+}
+
+- (UIViewController *)getVisibleViewControllerFrom:(UIViewController *)vc {
+    if ([vc isKindOfClass:[UINavigationController class]]) {
+        return [self getVisibleViewControllerFrom:[((UINavigationController *) vc) visibleViewController]];
+    } else if ([vc isKindOfClass:[UITabBarController class]]) {
+        return [self getVisibleViewControllerFrom:[((UITabBarController *) vc) selectedViewController]];
+    } else {
+        if (vc.presentedViewController) {
+            return [self getVisibleViewControllerFrom:vc.presentedViewController];
+        } else {
+            return vc;
+        }
+    }
+}
+
+
 @end

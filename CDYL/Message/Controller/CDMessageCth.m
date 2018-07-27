@@ -147,10 +147,10 @@ static NSString * const identy = @"MESSAGEIDENTY";
 - (void)tapZoomTheMessage:(NSString *)msg{
     NSLog(@"放大字体：%@",msg);
     [[UIApplication sharedApplication].keyWindow addSubview:self.showLb];
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.2 animations:^{
         
         self.showLb.frame = [UIScreen mainScreen].bounds;
-        self.showLb.text = msg;
+//        self.showLb.text = msg;
     } completion:^(BOOL finished) {
         self.showLb.text = msg;
     }];

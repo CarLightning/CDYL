@@ -19,7 +19,7 @@
 #import "StyleDIY.h"
 #import "CDViewController.h"
 
-@interface CDTabbarCtl ()<CDTabbarDelegate>
+@interface CDTabbarCtl ()<CDTabbarDelegate,UITabBarControllerDelegate>
 
 @end
 
@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    self.delegate = self;
     
     // 首页
     [self addChildViewController:[[CDMapViewController alloc] init] image:@"tab_home_nor" seletedImage:@"tab_home_press" title:@"地图"];
@@ -41,7 +41,8 @@
     tabBar.delegate = self;
     // 设置自定义tabBar(使用kvc)
     [self setValue:tabBar forKeyPath:@"tabBar"];
-    
+    //不透明
+    self.tabBar.translucent = NO ;
     // 判断是否登录
    
     
@@ -59,7 +60,7 @@
         
     }else{
 //        已经登录哦
-        [CDMessage shareMessage];
+//        [CDMessage shareMessage];
     }
     
 }
@@ -105,5 +106,21 @@
         return YES;
     }
     return NO;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+      CDNav * tbselect=tabBarController.selectedViewController;
+    if (tabBarController.selectedIndex == 0) {
+        if ([tbselect isEqual:viewController]) {
+            NSArray *arr = viewController.childViewControllers;
+            NSLog(@"%@",arr);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [tbselect popToViewController:tbselect.childViewControllers[0] animated:YES];
+            });
+           
+            return;
+        }
+    }
+    
 }
 @end

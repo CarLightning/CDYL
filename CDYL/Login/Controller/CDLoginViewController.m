@@ -240,7 +240,7 @@
     //跳转到另一个控制器
     [CDUserInfor shareUserInfor].phoneNum = phone;
     [CDUserInfor shareUserInfor].userPword = pword;
-    [[CDUserInfor shareUserInfor] updateInforWithAll:YES];
+     [[CDUserInfor shareUserInfor] updateInforWithAll:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 //    写入UserDefault
     NSUserDefaults *userdf = [NSUserDefaults standardUserDefaults];
@@ -306,5 +306,15 @@
     NSArray *subs = self.navigationController.childViewControllers;
    
     [self.navigationController popToViewController:[subs objectAtIndex:subs.count-2] animated:YES];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    NSArray *viewControllers = self.navigationController.viewControllers;//获取当前的视图控制其
+    if (viewControllers.count > 1 && [viewControllers objectAtIndex:viewControllers.count-2] == self) {
+        //当前视图控制器在栈中，故为push操作
+        NSLog(@"push");
+    } else if ([viewControllers indexOfObject:self] == NSNotFound) {
+        //当前视图控制器不在栈中，故为pop操作
+        self.navigationController.navigationBarHidden = YES;
+    }
 }
 @end

@@ -84,7 +84,7 @@ static CDUserInfor * _userInfor;
                     NSLog(@"用户信息更新成功");
                     //创建当前新表和开启timer，可实现不同用户切换。
                     [[CDMessage shareMessage]creatTable];
-                    [[CDMessage shareMessage]futureTimer];
+                    [[CDMessage shareMessage]pastTimer];
                 }else{
                     NSLog(@"用户信息更新失败");
                 }
@@ -98,8 +98,17 @@ static CDUserInfor * _userInfor;
             [userInfor writeToFile:file atomically:YES];
         }
         
-        
     });
+}
+- (void)logOut{
+  [[CDMessage shareMessage]futureTimer];
+    NSUserDefaults *userdf = [NSUserDefaults standardUserDefaults];
+    [userdf setBool:NO forKey:@"isLogin"];
+    [userdf synchronize];
+    _userInfor = nil;
+    _userInfor = [[CDUserInfor alloc]init];
+    [[NSFileManager defaultManager]removeItemAtPath:LHAccountPath error:nil];
+    
 }
 -(NSString<Optional> *)userName{
     if (_userName == nil) {

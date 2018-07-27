@@ -43,7 +43,9 @@ static CDMessage *shareMessage = nil;
     [[CDBaseSqlite shareSqlite]createTable:TABLE_NAME withSQL:sqlString];
 }
 - (void)getNewMessage{
-   
+    NSUserDefaults *df = [NSUserDefaults standardUserDefaults];
+    if ([df boolForKey:@"isLogin"]) {
+    
     [CDWebRequest requestGetNewMessageWithIdentify:@"1" cardNo:[CDUserInfor shareUserInfor].phoneNum pass:[CDUserInfor shareUserInfor].userPword AndBack:^(NSDictionary *backDic) {
         NSArray *arr = [backDic objectForKey:@"list"];
         if (arr.count>0) {
@@ -73,6 +75,7 @@ static CDMessage *shareMessage = nil;
         NSLog(@"消息:%@",err);
     }];
 }
+     }
 #pragma mark - 删除所有消息
 - (void)deleteAllMessage{
  
@@ -86,8 +89,9 @@ static CDMessage *shareMessage = nil;
 #pragma mark - 从数据库拿到所有消息
 -(NSMutableArray *)getAllMessages{
     NSMutableArray *arr = [NSMutableArray array];
-    
-
+    if (![CDXML isLogin]) {
+        return [@[] mutableCopy];
+    }
     NSString *sqlString = [NSString stringWithFormat:@"select * from %@",TABLE_NAME];
     [[CDBaseSqlite shareSqlite]excuteQuerySQL:sqlString resultBlock:^(FMResultSet *reSet) {
         
@@ -105,12 +109,12 @@ static CDMessage *shareMessage = nil;
     return arr;
 }
 
-//暂停Timer
+//开启Timer
 - (void)pastTimer
 {
     [_timer setFireDate:[NSDate distantPast]];
 }
-//从启timer
+//暂停timer
 - (void)futureTimer
 {
     [_timer setFireDate:[NSDate distantFuture]];

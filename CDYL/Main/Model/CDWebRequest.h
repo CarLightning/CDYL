@@ -57,4 +57,21 @@
 + (void)requestgetRechRecordWithidentity:(NSString *)identity cardNo:(NSString *)cardNo Pass:(NSString *)pass  cardId:(NSString *)cardId pageSize:(NSString *)pageSize index:(NSString *)index AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
 //获取消息
 + (void)requestGetNewMessageWithIdentify:(NSString *)identity cardNo:(NSString *)cardNo pass:(NSString *)pass AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
+
+//读取我的充电
++(void)requestgetStartChargingPoleidentity:(NSString *)iden cardNo:(NSString *)cardNo Pass:(NSString *)pass AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
+//读取充电实时信息
++ (void)requestgetRealByPoleIdid:(NSString *)Uid AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
+//读取未支付订单
++ (void)requestgetqueryCardBillWithidentity:(NSString *)identity cardNo:(NSString *)cardNo Pass:(NSString *)pass AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
+//关闭充电桩
++ (void)requestClosePoidWithidentity:(NSString *)identity poldId:(NSString *)poldId cardNo:(NSString *)cardNo Pass:(NSString *)pass cardId:(NSString *)cardId AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
+//产生订单编号
++ (void)requestgenTransNocardId:(NSString *)cardId total_fee:(NSString *)total_fee accName:(NSString *)accName accId:(NSString *)accId AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
+//通过预约开启充电桩
++ (void)requestOpenPoldWithIdentity:(NSString *)identity poleId:(NSString *)poleId cardNo:(NSString *)userNo pass:(NSString *)pass cardId:(NSString *)cardId type:(NSString *)type value:(NSString *)value pwm:(NSString *)pwm bespeak_serv_id:(NSString *)bespeak_serv_id AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
+//余额支付
++ (void)requestpayChargeRecordidentity:(NSString *)iden billId:(NSString *)billId cardId:(NSString *)cardId payPass:(NSString *)payPass AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
+//扫码充电开启充电桩
++ (void)requestOpenPoleByScanWithIdentity:(NSString *)identity cardNo:(NSString *)userNo pass:(NSString *)pass cardId:(NSString *)cardId poleId:(NSString *)poleId AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure;
 @end

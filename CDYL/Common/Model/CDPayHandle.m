@@ -9,7 +9,7 @@
 #import "CDPayHandle.h"
 #import <AFNetworking.h>
 #import <WXApi.h>
-
+#import <AlipaySDK/AlipaySDK.h>
 @implementation CDPayHandle
 #pragma mark - 微信支付
 + (void)WXPayWithMoney:(NSString *)payMoney{
@@ -60,9 +60,12 @@
         
     }];
 }
-+ (void)AliPayWithMoney:(NSString *)money{
-    NSString *string = @"http://www.evnetworks.cn:8088/ali/pay/app/getsign";
-    NSDictionary *paramater = @{@"subject":@"车电云联",@"total_amount":money,@"product_code":@"QUICK_MSECURITY_PAY"};
+#pragma mark - 支付宝支付
++ (void)AliPayWithMoney:(NSString *)money outTradeNO:(NSString *)outTradeNO{
+    NSString *string = @"https://www.evnetworks.cn/ali/pay/app/getsign";
+  
+ 
+    NSDictionary *paramater = @{@"subject":@"1",@"total_amount":money,@"product_code":@"QUICK_MSECURITY_PAY",@"outTradeNO":outTradeNO,@"notify_url":@"http://183.129.254.28/webservice/recharge!notifyURL.action"};
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer.timeoutInterval = 30.0f;
     // 设置允许接收返回数据类型： 加上@"application/xml"
@@ -70,21 +73,41 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     [manager GET:string parameters:paramater progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSString *str = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSDictionary *data = [dic objectForKey:@"data"];
+        NSString *orderStr = [data objectForKey:@"last"];
+        
+//        NSData *JSONData = [orderStr dataUsingEncoding:NSUTF8StringEncoding];
+//
+//        NSString *sth = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
+        
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self payOrder:str fromScheme:@"alisdkdemo"];
+            
+            [self payOrder:orderStr fromScheme:@"alisdkdemo"];
         });
-        NSLog(@"%@",str);
+        NSLog(@"%@",orderStr);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];
 }
 + (void)payOrder:(NSString *)orderString fromScheme:(NSString *)appScheme{
     // NOTE: 调用支付结果开始支付
-//    [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-//        
-//        
-//        NSLog(@"reslut = %@",resultDic);
-//    }];
+    [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic){
+        
+        
+        NSLog(@"reslut = %@",resultDic);
+    }];
 }
+
++ (NSString*)encodeValue:(NSString*)value
+{
+    NSString* encodedValue = value;
+    if (value.length > 0) {
+        NSCharacterSet *charset = [[NSCharacterSet characterSetWithCharactersInString:@"!*'();:@&=+$,/?%#[]"]invertedSet];
+        encodedValue = [value stringByAddingPercentEncodingWithAllowedCharacters:charset];
+    }
+    return encodedValue;
+}
+
 @end

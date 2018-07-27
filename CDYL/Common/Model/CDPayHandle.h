@@ -12,5 +12,5 @@
 
 + (void)WXPayWithMoney:(NSString *)payMoney;
 
-+ (void)AliPayWithMoney:(NSString *)money;
++ (void)AliPayWithMoney:(NSString *)money outTradeNO:(NSString *)outTradeNO;
 @end

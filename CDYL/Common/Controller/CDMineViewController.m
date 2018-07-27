@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initSubviews];
+      self.navigationController.navigationBarHidden = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNotifiedImageState:) name:@"CHANGENOTIFITY" object:nil];
 }
 - (void)initSubviews{
@@ -67,11 +68,14 @@
 - (void)changeNotifiedImageState:(NSNotification *)noti{
     if (self.notiView) {
         [self.notiView reloadNotifiImage:@"chatNotifi"];
+        NSUserDefaults *df = [NSUserDefaults standardUserDefaults];
+        [df setBool:YES forKey:@"HaveNewMsg"];
+        [df synchronize];
     }
 }
 #pragma mark - CDHeadViewDelagate
 - (void)didClickTheEditBtn {
-    
+    if (![CDXML isLogin]) return;
     CDBaseViewController *basecth  = [[NSClassFromString(@"CDHeaderController") alloc]init];
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:basecth animated:YES];
@@ -90,22 +94,29 @@
         
     }else if (index == 2){
         
+        NSUserDefaults *df = [NSUserDefaults standardUserDefaults];
+        [df setBool:NO forKey:@"HaveNewMsg"];
+        [df synchronize];
         basecth = [[NSClassFromString(@"CDMessageCth") alloc]init];
       
         
     }else{
-       basecth = [[NSClassFromString(@"CDViewController") alloc]init];
-      
-
-         CDNav *navi = [[CDNav alloc]initWithRootViewController:basecth];
-        navi.navigationBar.hidden = YES;
-        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navi animated:YES completion:nil];
-        return ;
+//        登录界面
+//       basecth = [[NSClassFromString(@"CDViewController") alloc]init];
+//         CDNav *navi = [[CDNav alloc]initWithRootViewController:basecth];
+//        navi.navigationBar.hidden = YES;
+//        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navi animated:YES completion:nil];
+//        return ;
+        
+        basecth = [[NSClassFromString(@"CDSetting") alloc]init];
+        
     }
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:basecth animated:YES];
     self.hidesBottomBarWhenPushed = NO;
 }
+
+
 
 
 

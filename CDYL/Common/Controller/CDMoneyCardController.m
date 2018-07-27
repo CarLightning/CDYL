@@ -44,6 +44,10 @@
     
 }
 - (void)reloadCradInformation {
+    if (![CDXML isLogin]) {
+        [self showEmptyViewWith:@"待登录"];
+        return;
+    }
     NSString *userNo = [CDUserInfor shareUserInfor].phoneNum;
     NSString *pWord = [CDUserInfor shareUserInfor].userPword;
     __block typeof(self) weakself = self;

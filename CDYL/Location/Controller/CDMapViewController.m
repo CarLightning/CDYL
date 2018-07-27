@@ -26,21 +26,22 @@
 @interface CDMapViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,CallViewDelegate>{
     LocationAnnotationView *_locationAnnotationView;
 
-    BOOL is_request; // 是否请求
+   
 }
 
 @property (nonatomic, strong) MAMapView *mapview;
 @property (nonatomic, strong) AMapLocationManager *locationManager;
 @property (nonatomic, assign) CLLocationCoordinate2D nowCoordinate;
-@property (nonatomic, strong) NSArray *sourceArray;
+@property (nonatomic, strong) NSMutableArray *sourceArray;
 @property (nonatomic, strong) AliMapViewCustomCalloutView *selectView;
+@property (nonatomic) BOOL is_request; // 是否请求
 @end
 
 @implementation CDMapViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    is_request = YES;
+    self.is_request = YES;
     [self setAliMap];
     [self setRightItem];
     [self setBtn];
@@ -107,10 +108,10 @@
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
 }
--(NSArray *)sourceArray{
+-(NSMutableArray *)sourceArray{
     
     return _sourceArray?:(_sourceArray = ({
-        NSArray *sourceArray = [NSArray array];
+        NSMutableArray *sourceArray = [NSMutableArray array];
         sourceArray;
     }));
 }
@@ -153,11 +154,11 @@
     
 }
 -(void)getSource:(BOOL)is_request{
-    if (!is_request) {
+    if (!self.is_request) {
         return;
         
     }else{
-        is_request = NO;
+        self.is_request = NO;
     //CLLocationCoordinate2D amapcoord =CLLocationCoordinate2DMake(30.277, 120.33);
     
     typeof(self) __block weakSelf =  self;
@@ -189,8 +190,8 @@
    
 }
 -(void)clickTheBtn{
-    is_request = YES;
-    [self getSource:is_request];
+    self.is_request = YES;
+    [self getSource:self.is_request];
     [self location];
     [self.mapview setZoomLevel:16 animated:YES];
     [self.mapview setCenterCoordinate:self.nowCoordinate animated:YES];
@@ -206,7 +207,7 @@
     self.nowCoordinate = coor;
     [CDUserLocation share].userCoordinate = coor;
     
-     [self getSource:is_request];
+     [self getSource:self.is_request];
 }
 #pragma mark - MAMapViewDelegate
 #pragma mark 代理方法很多，根据需求选择
@@ -320,6 +321,8 @@
 }
 #pragma mark - method
 - (void)createAnnotation:(NSArray *)source{
+    [self.mapview removeAnnotations:self.sourceArray];
+    [self.sourceArray removeAllObjects];
     for (CDStation *model in source) {
         @autoreleasepool {
        CDPointAnnotation *pointAnnotation = [[CDPointAnnotation alloc] init];
@@ -330,6 +333,7 @@
             pointAnnotation.stationModel = model;
         
         [self.mapview addAnnotation:pointAnnotation];
+            [self.sourceArray addObject:pointAnnotation];
         }
     }
 }
@@ -380,6 +384,25 @@
      NSString *PwNub = [CDUserInfor shareUserInfor].userPword;
     NSString *facType = @"1";
     NSString *facId = model.pid;
+    
+    if (![CDXML isLogin]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"重新登陆" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+          CDBaseViewController*  basecth = [[NSClassFromString(@"CDViewController") alloc]init];
+            
+            CDNav *navi = [[CDNav alloc]initWithRootViewController:basecth];
+            navi.navigationBar.hidden = YES;
+            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navi animated:YES completion:nil];
+        }];
+        UIAlertAction *action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:action1];
+        [alert addAction:action2];
+        [self presentViewController:alert animated:YES completion:nil];
+
+    }else{
+    
+    
+    
     __weak typeof(self) weakself = self;
     [CDWebRequest requestgaddCollectWithidentity:@"1" cardNo:phoneNub Pass:PwNub facId:facId facType:facType AndBack:^(NSDictionary *backDic) {
  
@@ -393,7 +416,7 @@
     
     
     
-    
+    }
     
     
 }

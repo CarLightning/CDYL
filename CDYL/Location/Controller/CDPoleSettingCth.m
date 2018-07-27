@@ -10,6 +10,7 @@
 #import "CDBespeakTableViewCell.h"
 #import "CDRowCell.h"
 #import "HSDatePickerViewController.h"
+#import "CDNav.h"
 
 @interface CDPoleSettingCth ()<UITableViewDelegate,UITableViewDataSource,rowCellDelagate,HSDatePickerViewControllerDelegate>
 @property (nonatomic, strong) UITableView *tableV;
@@ -134,8 +135,36 @@ static CGFloat HeaderHeight = 10;
     [self.tableV reloadData];
     
 }
+
+-(void)showArlet:(NSString *)msg{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:msg preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+   
+    [alert addAction:action1];
+   
+    [self presentViewController:alert animated:YES completion:nil];
+
+}
 //开始预约
 - (void)clickTheBtn{
+   
+    if (![CDXML isLogin]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"重新登陆" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            CDBaseViewController*  basecth = [[NSClassFromString(@"CDViewController") alloc]init];
+            
+            CDNav *navi = [[CDNav alloc]initWithRootViewController:basecth];
+            navi.navigationBar.hidden = YES;
+            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navi animated:YES completion:nil];
+        }];
+        UIAlertAction *action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:action1];
+        [alert addAction:action2];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    }else{
+    
+    
     NSString * identify = @"1";
     NSString * uid = self.model.uid;
     NSString * type = @"2";
@@ -151,20 +180,31 @@ static CGFloat HeaderHeight = 10;
     
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeText ;
-    hud.offset = CGPointMake(0.f, 0);
-    hud.detailsLabel.font = [UIFont systemFontOfSize:12];
-    hud.detailsLabel.text = @"正在预约...";
-    
+
+    hud.label.text = @"正在预约...";
+    __weak typeof(self) weakself = self;
     [CDWebRequest requestbespeakPoleWithidentity:identify UID:uid Type:type cardNo:cardNum Pass:passNum CardId:cardId phoneNum:phoneNum startTime:statrdate lastTime:endDate AndBack:^(NSDictionary *backDic) {
-        hud.detailsLabel.text = @"预约成功";
+        hud.mode = MBProgressHUDModeCustomView;
+        UIImage *image = [[UIImage imageNamed:@"Checkmark"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        hud.customView = [[UIImageView alloc] initWithImage:image];
+        hud.label.text = @"预约成功";
         [hud hideAnimated:YES afterDelay:1.5];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [weakself.navigationController popToViewController:self.navigationController.childViewControllers[0] animated:YES];
+           CDNav *selectNavi = weakself.tabBarController.selectedViewController;
+            weakself.tabBarController.selectedIndex = 3;
+            weakself.tabBarController.selectedViewController = weakself.tabBarController.childViewControllers[2];
+            
+            if (selectNavi.childViewControllers.count>0) {
+                 [selectNavi popToViewController:selectNavi.childViewControllers[0] animated:YES];
+            }
+           
+        });
         
     } failure:^(NSString *err) {
-        
-        hud.detailsLabel.text = err;
-        [hud hideAnimated:YES afterDelay:1.5];
+        [hud hideAnimated:YES];
+        [weakself showArlet:err];
     }];
 }
-
+}
 @end

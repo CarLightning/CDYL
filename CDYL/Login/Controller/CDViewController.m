@@ -22,7 +22,7 @@
     [super viewDidLoad];
     [self setSubViews];
     [self add_masonrys];
-    
+    self.navigationController.navigationBarHidden = YES;
     UILongPressGestureRecognizer *longpress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
     
     longpress.minimumPressDuration = 2;

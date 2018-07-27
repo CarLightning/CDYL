@@ -19,7 +19,7 @@
     if (self) {
         UINavigationBar *navbar = [[UINavigationBar alloc]init];
         navbar.tintColor=[UIColor blackColor];
-//        navbar.barTintColor=[UIColor grayColor];
+        navbar.barTintColor=[UIColor whiteColor];
         NSDictionary *attri = @{
                                 NSForegroundColorAttributeName :[UIColor blackColor],
                                 NSFontAttributeName : [UIFont systemFontOfSize:18]

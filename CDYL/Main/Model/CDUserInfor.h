@@ -37,4 +37,6 @@
 +(instancetype)shareUserInfor;
 /*更新*/
 - (void)updateInforWithAll:(BOOL)all_update;
+/*退出登录*/
+- (void)logOut;
 @end

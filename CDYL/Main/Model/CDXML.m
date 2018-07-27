@@ -50,7 +50,7 @@
     
 }
 
-//md5加密
+#pragma mark - md5加密
 +(NSString *)md5:(NSString*)input
 {
     const char *cStr = [input UTF8String];
@@ -64,7 +64,7 @@
     }
     return mStr;
 }
-#pragma mark - 自定义判断
+#pragma mark - 自定义判断身份证
 //身份证号
 + (BOOL)CheckIsIdentityCard:(NSString *)identityCard
 {
@@ -119,7 +119,7 @@
     return NO;
 }
 
-//判断手机号
+#pragma mark - 判断手机号
 + (BOOL)phoneNumberIsTrue:(NSString *)phoneNumber{
     NSString *MOBILE = @"^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0678])\\d{8}$";
     NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
@@ -128,7 +128,7 @@
     
 }
 
-//利用正则表达式验证邮箱
+#pragma mark - 利用正则表达式验证邮箱
 
 + (BOOL)isValidateEmail:(NSString *)email {
     
@@ -139,4 +139,78 @@
     return [emailTest evaluateWithObject:email];
     
 }
++ (BOOL)isLogin{
+    NSUserDefaults *df = [NSUserDefaults standardUserDefaults];
+    BOOL is_login = [df boolForKey:@"isLogin"];
+    return is_login;
+}
+
+#pragma mark -  显示缓存大小
++ ( float )filePath{
+    
+    NSString * cachPath = [ NSSearchPathForDirectoriesInDomains ( NSCachesDirectory , NSUserDomainMask , YES ) firstObject ];
+    
+    return [ self folderSizeAtPath :cachPath];
+}
+//1:首先我们计算一下 单个文件的大小
++( long long ) fileSizeAtPath:( NSString *) filePath{
+    
+    NSFileManager * manager = [ NSFileManager defaultManager ];
+    
+    if ([manager fileExistsAtPath :filePath]){
+        return [[manager attributesOfItemAtPath :filePath error : nil ] fileSize ];
+    }
+    return 0 ;
+}
+//2:遍历文件夹获得文件夹大小，返回多少 M
++( float ) folderSizeAtPath:( NSString *) folderPath{
+    
+    NSFileManager * manager = [ NSFileManager defaultManager ];
+    
+    if (![manager fileExistsAtPath :folderPath]) return 0 ;
+    
+    NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath :folderPath] objectEnumerator ];
+    
+    NSString * fileName;
+    
+    long long folderSize = 0 ;
+    
+    while ((fileName = [childFilesEnumerator nextObject ]) != nil ){
+        NSString * fileAbsolutePath = [folderPath stringByAppendingPathComponent :fileName];
+        
+        folderSize += [ self fileSizeAtPath :fileAbsolutePath];
+        
+    }
+    
+    return folderSize/( 1024.0 * 1024.0 );
+    
+}
+#pragma mark - 判断推送是否打开
++ (BOOL)isUserNotificationEnable{
+    BOOL isEnable = NO;
+    if ([[UIDevice currentDevice].systemVersion floatValue] >=8.0f) {
+        // iOS版本 >=8.0 处理逻辑
+        UIUserNotificationSettings *setting = [UIApplication sharedApplication].currentUserNotificationSettings;
+        isEnable = (UIUserNotificationTypeNone == setting.types) ? NO : YES;
+    }else{
+        // iOS版本 <8.0 处理逻辑
+        UIRemoteNotificationType  type =  [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+        isEnable = (UIRemoteNotificationTypeNone == type) ? NO : YES;
+    }
+     return isEnable;
+}
+// 如果用户关闭了接收通知功能，该方法可以跳转到APP设置页面进行修改  iOS版本 >=8.0 处理逻辑
++ (void)goToAppSystemSetting{
+    UIApplication *application = [UIApplication sharedApplication];
+    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+    if ([application canOpenURL:url]) {
+        if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+            [application openURL:url options:@{} completionHandler:nil];
+        } else {
+            [application openURL:url];
+        }
+    }
+}
+
+
 @end

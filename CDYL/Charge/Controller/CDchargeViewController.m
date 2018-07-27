@@ -4,7 +4,7 @@
 //
 //  Created by admin on 2017/6/2.
 //  Copyright © 2017年 admin. All rights reserved.
-//
+//  预约
 
 #import "CDchargeViewController.h"
 #import "CDUserLocation.h"
@@ -15,12 +15,24 @@
 #import "CDRowCell.h"
 #import "HSDatePickerViewController.h"
 #import "CDLocationViewController.h"
+#import "CDBespeakView.h"
 
-@interface CDchargeViewController ()<UITableViewDelegate,UITableViewDataSource,AMapSearchDelegate,rowCellDelagate,HSDatePickerViewControllerDelegate>
+@interface CDchargeViewController ()<UITableViewDelegate,UITableViewDataSource,AMapSearchDelegate,rowCellDelagate,HSDatePickerViewControllerDelegate,BespeakViewDelagate>
+/**城市，位置，预约时间**/
 @property (nonatomic, strong) NSMutableArray *array;
 @property (nonatomic, strong) UITableView *tableV;
 @property (nonatomic, strong) AMapSearchAPI *search;
+/**半径**/
 @property (nonatomic, copy) NSString *rowStr;
+@property (nonatomic, strong) CDBespeakView *bespeakView;
+@property (nonatomic, strong) NSArray *bespeakArr; //预约数组
+
+//查询桩开启状态
+@property (nonatomic, weak) NSTimer *timer;
+@property (nonatomic, assign) NSInteger count;
+@property (nonatomic, copy) NSString  * bespeakPold;
+
+
 @end
 
 @implementation CDchargeViewController
@@ -49,12 +61,29 @@ static CGFloat HeaderHeight = 10;
     [btn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     btn.layer.cornerRadius=20;
     [self.tableV addSubview:btn];
-
-    
+    self.tableV.hidden = YES;
+   [self.view addSubview:self.bespeakView];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self arrAboutBespeak];
+    if (![CDXML isLogin]) {
+        [self showTableView];
+    }else{
+        [self getBesparkArrInfor];
+    }
+}
+#pragma mark - Get method
+-(CDBespeakView *)bespeakView{
+    if (_bespeakView == nil) {
+        CGFloat height = 64;
+        if (is_iphoneX) {
+            height=88;
+        }
+        _bespeakView = [[CDBespeakView alloc]initWithFrame:CGRectMake(0, height, DEAppWidth, 246)];
+        _bespeakView.delagate = self;
+        _bespeakView.hidden = YES;
+    }
+    return _bespeakView;
 }
 -(NSMutableArray *)array{
     if (_array == nil) {
@@ -62,6 +91,168 @@ static CGFloat HeaderHeight = 10;
     }
     return _array;
 }
+#pragma mark - 自定义 method
+- (void)getBesparkArrInfor{
+    __block typeof(self) weakself = self;
+    [CDWebRequest requestgetBespeakPoleIdByCardnoWithidentity:@"1" cardNo:[CDUserInfor shareUserInfor].phoneNum Pass:[CDUserInfor shareUserInfor].userPword AndBack:^(NSDictionary *backDic) {
+        weakself.bespeakArr = backDic[@"list"];
+        if (weakself.bespeakArr.count>0) {
+            [weakself showBeSpeakView:weakself.bespeakArr.firstObject];
+        }else{
+            [weakself showTableView];
+        }
+        
+    } failure:^(NSString *err) {
+        
+    }];
+}
+- (void)showBeSpeakView:(NSDictionary *)dic{
+    self.tableV.hidden = YES;
+    self.navigationItem.title = @"当前预约";
+    CDBespeakModel *model = [[CDBespeakModel alloc]init];
+    model.name = dic[@"addr"];
+    model.detailName = dic[@"name"];
+    model.poleid = [NSString stringWithFormat:@"%@",dic[@"poleID"]];
+    model.cardid = [NSString stringWithFormat:@"%@",dic[@"cardID"]];
+    model.bespeakid = [NSString stringWithFormat:@"%@",dic[@"bespeakServId"]];
+    model.startTime = [NSString stringWithFormat:@"%@",dic[@"startTime"]];
+    model.endTime = [NSString stringWithFormat:@"%@",dic[@"finishTime"]];
+    [model star:[NSString stringWithFormat:@"%@",dic[@"startTime"]] endTime:[NSString stringWithFormat:@"%@",dic[@"finishTime"]] is_all:YES];
+    model.lat = [NSString stringWithFormat:@"%@",dic[@"lat"]].floatValue;
+    model.lon = [NSString stringWithFormat:@"%@",dic[@"lon"]].floatValue;
+    
+    self.bespeakView.model = model;
+     self.bespeakView.hidden = NO;
+    
+}
+-(void)showTableView{
+    self.bespeakView.hidden = YES;
+    self.tableV.hidden = NO;
+    self.navigationItem.title = @"预约";
+    [self arrAboutBespeak];
+}
+- (void)showAlert:(NSString *)msg{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:msg message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if ([msg isEqualToString:@"取消成功"]) {
+            [self getBesparkArrInfor];
+        }
+        
+    }];
+    
+    [alert addAction:action1];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+- (void)didNowChargeBtnWithModel:(CDBespeakModel *)model{
+    NSLog(@"点击开始充电");
+    NSString *phoneNub = [CDUserInfor shareUserInfor].phoneNum;
+    NSString *PwNub = [CDUserInfor shareUserInfor].userPword;
+     NSString *cardId = model.cardid;
+    NSString *poleid = model.poleid;
+    self.bespeakPold = poleid;
+    NSString *bespeak_serv_id = model.bespeakid;
+    __weak typeof(self) weakself = self;
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.label.text = @"开启充电中";
+    [CDWebRequest requestOpenPoldWithIdentity:@"1" poleId:poleid cardNo:phoneNub pass:PwNub cardId:cardId type:@"0" value:@"0" pwm:@"100" bespeak_serv_id:bespeak_serv_id AndBack:^(NSDictionary *backDic) {
+         hud.label.text = @"正在进行绝缘检测，请稍等";
+        [weakself whetherOpenPoldOk];
+    } failure:^(NSString *err){
+         hud.label.text = err;
+        [hud hideAnimated:YES afterDelay:1.5f];
+    }];
+}
+- (void)didCollectionBtnWithModel:(CDBespeakModel *)model{
+    NSLog(@"点击收藏");
+    
+    NSString *phoneNub = [CDUserInfor shareUserInfor].phoneNum;
+    NSString *PwNub = [CDUserInfor shareUserInfor].userPword;
+    NSString *facType = @"1";
+    NSString *facId = model.poleid;
+    __weak typeof(self) weakself = self;
+    [CDWebRequest requestgaddCollectWithidentity:@"1" cardNo:phoneNub Pass:PwNub facId:facId facType:facType AndBack:^(NSDictionary *backDic) {
+        
+        [weakself showAlert:@"收藏成功"];
+        
+    } failure:^(NSString *err) {
+        [weakself showAlert:err];
+        
+    }];
+}
+- (void)didCandelBespeakBtnWithModel:(CDBespeakModel *)model{
+    NSLog(@"点击取消预约");
+    NSString *phoneNub = [CDUserInfor shareUserInfor].phoneNum;
+    NSString *PwNub = [CDUserInfor shareUserInfor].userPword;
+    NSString *cardId = model.cardid;
+    NSString *bespeakid = model.bespeakid;
+     __weak typeof(self) weakself = self;
+ 
+    [CDWebRequest requestdisBespeakPoleWithidentity:@"1" cardNo:phoneNub Pass:PwNub cardId:cardId bespeak_serv_id:bespeakid AndBack:^(NSDictionary *backDic) {
+         [weakself showAlert:@"取消成功"];
+        
+    } failure:^(NSString *err) {
+         [weakself showAlert:err];
+    }];
+}
+/***开启桩成功与否查询**/
+- (void)whetherOpenPoldOk{
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(checkPoldState) userInfo:nil repeats:YES];
+    [self.timer fire];
+}
+
+-(void)checkPoldState{
+    if (self.count>= 12) {
+        [self openNO];
+    }else{
+        __weak typeof(self) weakself = self;
+        [CDWebRequest requestgetRealByPoleIdid:self.bespeakPold AndBack:^(NSDictionary *backDic) {
+            NSString *status = [NSString stringWithFormat:@"%@",backDic[@"poleReal"][@"status"]];
+            if ([status isEqualToString:@"1"]) {
+                [weakself openOk];
+            }
+        } failure:^(NSString *err) {
+            
+        }];
+         self.count++;
+    }
+   
+}
+/***开启桩失败**/
+-(void)openNO{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeCustomView;
+    UIImage *image = [[UIImage imageNamed:@"ErrorMark"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    hud.customView = [[UIImageView alloc]initWithImage:image];
+    hud.label.text = @"开启失败";
+    [hud hideAnimated:YES afterDelay:1.5f];
+    self.count = 0;
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+/***开启桩成功**/
+-(void)openOk{
+    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeCustomView;
+    UIImage *image = [[UIImage imageNamed:@"Checkmark"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    hud.customView = [[UIImageView alloc] initWithImage:image];
+    hud.label.text = @"开启成功";
+    [hud hideAnimated:YES afterDelay:1.5f];
+    self.count = 0;
+    [self.timer invalidate];
+    self.timer = nil;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.tabBarController.selectedIndex = 1;
+        self.tabBarController.selectedViewController = self.tabBarController.childViewControllers[1];
+    });
+}
+
 #pragma mark -  tableViewDelagate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -171,5 +362,19 @@ static CGFloat HeaderHeight = 10;
     NSString *dateStr = [format stringFromDate:date];
     [self.array replaceObjectAtIndex:2 withObject:dateStr];
     [self.tableV reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:0]] withRowAnimation:YES];
+}
+#pragma mark - BespeakViewDelagate
+-(void)userDidClickTheBtn:(UIButton *)btn CDBespeakModel:(CDBespeakModel *)model{
+    switch (btn.tag) {
+        case 10:
+            [self didNowChargeBtnWithModel:model];
+            break;
+        case 15:
+            [self didCandelBespeakBtnWithModel:model];
+            break;
+        default:
+            [self didCollectionBtnWithModel:model];
+            break;
+    }
 }
 @end

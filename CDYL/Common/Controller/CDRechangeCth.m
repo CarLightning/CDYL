@@ -148,6 +148,7 @@ static NSString *const identifer = @"recharge";
         
         if (self.selectRow == 0) {
             // 支付宝支付
+            [self usedAlipay:string];
         }else{
             //微信支付
             NSString *payMoney = [self getWXpayMoney:string];
@@ -222,6 +223,19 @@ static NSString *const identifer = @"recharge";
     return [payMoney copy];
 }
 
-
+- (void)usedAlipay:(NSString *)string{
+//    http://183.129.254.28/webservice/services/IcCardWebService/genTransNo?cardId=3050120160821006&total_fee=0.01&accName=13136111092&accId=13136111092
+    NSString *cardId = self.model.cardno;
+    NSString *total_fee = string;
+    NSString *accName = [CDUserInfor shareUserInfor].phoneNum;
+    NSString *accId = [CDUserInfor shareUserInfor].phoneNum;
+    [CDWebRequest requestgenTransNocardId:cardId total_fee:total_fee accName:accName accId:accId AndBack:^(NSDictionary *backDic) {
+        NSString * orderNum =[NSString stringWithFormat:@"%@", backDic[@"message"]];
+         [CDPayHandle AliPayWithMoney:total_fee outTradeNO:orderNum];
+    } failure:^(NSString *err) {
+        
+    }];
+    
+}
 
 @end

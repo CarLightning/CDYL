@@ -12,6 +12,7 @@
 #import "CDTabbarCtl.h"
 #import <AFNetworking.h>
 #import <WXApi.h>
+#import <AlipaySDK/AlipaySDK.h>
 @interface CDAppDelegate()<WXApiDelegate>
 @property (nonatomic, copy) AFNetworkReachabilityManager  * networkMonitorManager;
 @end
@@ -35,8 +36,8 @@
     
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    CDTabbarCtl *tabbarCtl = [[CDTabbarCtl alloc]init];
-    self.window.rootViewController=tabbarCtl;
+    self.tabbarCtl = [[CDTabbarCtl alloc]init];
+    self.window.rootViewController=self.tabbarCtl;
    
     
 //    CDViewController *vc = [[CDViewController alloc]init];
@@ -49,7 +50,7 @@
 -(void)setWXpay{
     //向微信注册wx9ceed7678d79c5d4
     [WXApi registerApp:@"wx9ceed7678d79c5d4" enableMTA:YES];
-    [AMapServices sharedServices].apiKey = @"34d1eb538c5c29ebceb7f7e7c9f8d4dc";
+  
 }
 -(void)setAliMap{
 //  高德地图注册
@@ -83,6 +84,19 @@
 //9.0后的方法
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
     //这里判断是否发起的请求为微信支付，如果是的话，用WXApi的方法调起微信客户端的支付页面（://pay 之前的那串字符串就是你的APPID，）
+    //跳转支付宝钱包进行支付，处理支付结果
+    if ([url.host isEqualToString:@"safepay"]) {
+        
+        
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+             NSLog(@"支付宝处理结果：%@",resultDic);
+        }];
+    }else if ([url.host isEqualToString:@"platformapi"]){
+        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
+            
+            NSLog(@"result：%@",resultDic[@"success"]);
+        }];
+    }
     return  [WXApi handleOpenURL:url delegate:self];
 }
 

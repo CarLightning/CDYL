@@ -43,16 +43,16 @@ static NSString *const identifyCell = @"SHOWCELL";
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-     if (self.cthType != 0) {
-    NSArray *viewControllers = self.navigationController.viewControllers;//获取当前的视图控制其
-    if (viewControllers.count > 1 && [viewControllers objectAtIndex:viewControllers.count-2] == self) {
-        //当前视图控制器在栈中，故为push操作
-        NSLog(@"push");
-    } else if ([viewControllers indexOfObject:self] == NSNotFound) {
-        //当前视图控制器不在栈中，故为pop操作
-        self.navigationController.navigationBarHidden = YES;
+    if (self.cthType != 0) {
+        NSArray *viewControllers = self.navigationController.viewControllers;//获取当前的视图控制其
+        if (viewControllers.count > 1 && [viewControllers objectAtIndex:viewControllers.count-2] == self) {
+            //当前视图控制器在栈中，故为push操作
+            NSLog(@"push");
+        } else if ([viewControllers indexOfObject:self] == NSNotFound) {
+            //当前视图控制器不在栈中，故为pop操作
+            self.navigationController.navigationBarHidden = YES;
+        }
     }
-     }
 }
 #pragma mark -  tableViewDelagate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -61,7 +61,7 @@ static NSString *const identifyCell = @"SHOWCELL";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CDShowCell *cell = [tableView dequeueReusableCellWithIdentifier:identifyCell forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;
+    //    cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;
     cell.model = self.stationSource[indexPath.row];
     cell.btnName = @"取消收藏";
     if (self.cthType == 0) {
@@ -71,7 +71,7 @@ static NSString *const identifyCell = @"SHOWCELL";
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 135;
+    return 196;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     return [[UIView alloc]init];
@@ -119,29 +119,46 @@ static NSString *const identifyCell = @"SHOWCELL";
     NSString *facType = @"1";
     NSString *facId = model.pid;
     __weak typeof(self) weakself = self;
-    if (self.cthType ==0) {
-        
-        
-        [CDWebRequest requestgaddCollectWithidentity:@"1" cardNo:phoneNub Pass:PwNub facId:facId facType:facType AndBack:^(NSDictionary *backDic) {
+    if (![CDXML isLogin]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"重新登陆" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            CDBaseViewController*  basecth = [[NSClassFromString(@"CDViewController") alloc]init];
             
-            [weakself showAlert:@"收藏成功"];
-            
-        } failure:^(NSString *err) {
-            [weakself showAlert:err];
-            
+            CDNav *navi = [[CDNav alloc]initWithRootViewController:basecth];
+            navi.navigationBar.hidden = YES;
+            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navi animated:YES completion:nil];
         }];
+        UIAlertAction *action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:action1];
+        [alert addAction:action2];
+        [self presentViewController:alert animated:YES completion:nil];
         
     }else{
-        [CDWebRequest requestdeleteColleteWithidentity:@"1" cardNo:phoneNub Pass:PwNub facId:facId AndBack:^(NSDictionary *backDic) {
-            [weakself showAlert:@"取消成功"];
-            [weakself getSourceWithCollection];
-        } failure:^(NSString *err) {
-             [weakself showAlert:err];
-        }];
+        if (self.cthType ==0) {
+            
+            
+            [CDWebRequest requestgaddCollectWithidentity:@"1" cardNo:phoneNub Pass:PwNub facId:facId facType:facType AndBack:^(NSDictionary *backDic) {
+                
+                [weakself showAlert:@"收藏成功"];
+                
+            } failure:^(NSString *err) {
+                [weakself showAlert:err];
+                
+            }];
+            
+        }else{
+            [CDWebRequest requestdeleteColleteWithidentity:@"1" cardNo:phoneNub Pass:PwNub facId:facId AndBack:^(NSDictionary *backDic) {
+                [weakself showAlert:@"取消成功"];
+                [weakself getSourceWithCollection];
+            } failure:^(NSString *err) {
+                [weakself showAlert:err];
+            }];
+        }
     }
 }
 
 #pragma mark -  Method
+#pragma mark -附近
 -(void)getSourceFromWeb{
     NSString *lat = [NSString stringWithFormat:@"%.3f",self.nowCoordinate.latitude];
     NSString *lon = [NSString stringWithFormat:@"%.3f",self.nowCoordinate.longitude];
@@ -152,13 +169,13 @@ static NSString *const identifyCell = @"SHOWCELL";
     __block typeof(self) weakself = self;
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.contentColor = [UIColor blackColor];
+    
     [self hiddenAllBaseView];
     if (self.radius == nil) {
         self.radius =@"100";
     }
     [CDWebRequest requestsearchCanBespeakChargePoleWithlat:lat lon:lon radius:self.radius type:@"0" status:@"0" startTime:begin endTime:end regId:@"" AndBack:^(NSDictionary *backDic) {
-    
+        
         weakself.stationSource =[weakself changeArrFrom:backDic[@"stationlist"]];
         [hud hideAnimated:YES];
         [weakself.tabaleV reloadData];
@@ -171,20 +188,24 @@ static NSString *const identifyCell = @"SHOWCELL";
         
     }];
 }
+#pragma mark -收藏
 - (void)getSourceWithCollection{
-    __block typeof(self) weakself = self;
-    NSString *cardNo = [CDUserInfor shareUserInfor].phoneNum;
-    NSString *pass = [CDUserInfor shareUserInfor].userPword;
-     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CDWebRequest requestgetMyCollectWithidentity:@"1" cardNo:cardNo Pass:pass AndBack:^(NSDictionary *backDic) {
-        
-        weakself.stationSource =[weakself changeArrFrom:backDic[@"stationlist"]];
-        [hud hideAnimated:YES];
-        [weakself.tabaleV reloadData];
-    } failure:^(NSString *err) {
-        
-        
-    }];
+    [self hiddenAllBaseView];
+    if (![CDXML isLogin]) {
+        [self showEmptyViewWith:@"用户未登录"];
+    }else{
+        __block typeof(self) weakself = self;
+        NSString *cardNo = [CDUserInfor shareUserInfor].phoneNum;
+        NSString *pass = [CDUserInfor shareUserInfor].userPword;
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [CDWebRequest requestgetMyCollectWithidentity:@"1" cardNo:cardNo Pass:pass AndBack:^(NSDictionary *backDic) {
+            
+            weakself.stationSource =[weakself changeArrFrom:backDic[@"stationlist"]];
+            [hud hideAnimated:YES];
+            [weakself.tabaleV reloadData];
+        } failure:^(NSString *err) {
+        }];
+    }
 }
 
 - (void)initSubs {
@@ -192,11 +213,12 @@ static NSString *const identifyCell = @"SHOWCELL";
     tv.delegate=self;
     tv.dataSource=self;
     tv.backgroundColor = [UIColor clearColor];
+    tv.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tv registerClass:[CDShowCell class] forCellReuseIdentifier:identifyCell];
     [self.view addSubview:tv];
     self.tabaleV =tv;
 }
-//排序
+//距离排序
 -(NSArray *)changeArrFrom:(NSArray *)arr{
     NSString *keyStr = [[NSString alloc]init];
     if (self.cthType == 0) {
@@ -206,21 +228,38 @@ static NSString *const identifyCell = @"SHOWCELL";
     }
     NSArray *newArr=[arr sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         NSString * distance1=[NSString stringWithFormat:@"%@",obj1[keyStr]];
-        float dis1= distance1.floatValue;
+      
         NSString * distance2=[NSString stringWithFormat:@"%@",obj2[keyStr]];
-        
-        float dis2=distance2.floatValue;
-        
-        if (dis1<dis2) {
-            return  NSOrderedAscending;
-        }else{
-            return NSOrderedDescending;
+        if (self.cthType == 0) {
+            
+            
+            float dis1= distance1.floatValue;
+            float dis2=distance2.floatValue;
+            
+            if (dis1<dis2) {
+                return  NSOrderedAscending;
+            }else{
+                return NSOrderedDescending;
+            }
+         
+        } else {
+         distance1 =  [distance1 substringFromIndex:8];
+         distance2 =  [distance2 substringFromIndex:8];
+            long long dis1= distance1.longLongValue;
+            long long dis2=distance2.longLongValue;
+            long long d = dis1-dis2;
+            if (d<0) {
+                return  NSOrderedAscending;
+            }else{
+                return NSOrderedDescending;
+            }
         }
         
     }];
     NSArray *lastArr = [CDStation arrayOfModelsFromDictionaries:newArr error:nil];
     return lastArr;
 }
+
 - (void)showAlert:(NSString *)msg{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:msg message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];

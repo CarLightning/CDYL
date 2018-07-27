@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CDTabbarCtl.h"
 
 @interface CDAppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) CDTabbarCtl *tabbarCtl;
 @end

@@ -7,20 +7,21 @@
 //
 
 #import "CDoderViewController.h"
-#import "CDAppointmentOrderCth.h"
 #import "CDShowChangeCth.h"
 #import "CDWaitPayCth.h"
-#import "CDTopLabel.h"
+#import "UIView+PYExtension.h"
 
 @interface CDoderViewController ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *topSview;
 @property (nonatomic, strong) UIScrollView *contentSview;
+@property (nonatomic, strong) UILabel *scrollowLb;
 
 @end
 
 @implementation CDoderViewController
 
 - (void)viewDidLoad {
+   
     [super viewDidLoad];
     // 初始化
     [self _setup];
@@ -50,23 +51,19 @@
 #pragma mark - 设置导航栏
 - (void)_setupNavigationItem
 {
-    self.title = @"订单";
+    self.navigationItem.title = @"我的订单";
 }
 #pragma mark - 初始化子控制器
 - (void)_setupChildController
 {
-    CDAppointmentOrderCth *AppointmentOrder = [[CDAppointmentOrderCth alloc] init];
-    AppointmentOrder.title = @"当前预约";
-    [self addChildViewController:AppointmentOrder];
-    
     CDShowChangeCth *showCharge = [[CDShowChangeCth alloc] init];
-    showCharge.title = @"充电中";
+    showCharge.title = @"充电状态";
     [self addChildViewController:showCharge];
     
     CDWaitPayCth *waitPay = [[CDWaitPayCth alloc] init];
     waitPay.title = @"待支付";
     [self addChildViewController:waitPay];
-    
+  
 }
 #pragma mark - 设置子控件
 - (void)_setupSubViews
@@ -89,8 +86,8 @@
     }
     // 标签栏整体
     UIScrollView *titlesView = [[UIScrollView alloc] init];
-    titlesView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.7];
-    titlesView.frame = CGRectMake(0, blockX, DEAppWidth, 44);
+    titlesView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1];
+    titlesView.frame = CGRectMake(0, blockX, DEAppWidth, 95/2);
     titlesView.showsHorizontalScrollIndicator = NO;
     titlesView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:titlesView];
@@ -107,15 +104,14 @@
 {
     UIScrollView *contentView = [[UIScrollView alloc] init];
     contentView.showsHorizontalScrollIndicator = NO;
-    contentView.frame = self.view.bounds;
+    contentView.bounces = NO;
+    contentView.frame = CGRectMake(0, CGRectGetMaxY(self.topSview.frame), DEAppWidth, DEAppHeight);
     contentView.delegate = self;
     contentView.pagingEnabled = YES;
-    [self.view insertSubview:contentView atIndex:0];
-    contentView.contentSize = CGSizeMake(DEAppWidth * self.childViewControllers.count, 0);
-    self.contentSview = contentView;
-    
-  
    
+    contentView.contentSize = CGSizeMake(DEAppWidth * self.childViewControllers.count, 0);
+   [self.view addSubview:contentView];
+    self.contentSview = contentView;
     // 添加第一个控制器的view
     [self scrollViewDidEndScrollingAnimation:contentView];
 }
@@ -126,25 +122,46 @@
 - (void)_setupTopicTitle
 {
     // 定义临时变量
-    CGFloat labelW = (DEAppWidth-100)/3;
+    CGFloat labelW = DEAppWidth/2;
     CGFloat labelY = 0;
     CGFloat labelH = self.topSview.frame.size.height;
     
-    // 添加label
+    // 添加TitleLabel
     NSInteger count = self.childViewControllers.count;
     for (NSInteger i = 0; i < count; i++) {
-        CDTopLabel *label = [[CDTopLabel alloc] init];
+        UILabel *label = [[UILabel alloc] init];
         label.text = [self.childViewControllers[i] title];
-     
-        label.frame = CGRectMake((labelW+50)*i, labelY, labelW, labelH);
+        label.textAlignment = NSTextAlignmentCenter;
+        label.frame = CGRectMake(labelW*i, labelY, labelW, labelH);
+        label.font = [UIFont systemFontOfSize:17];
+        label.textColor = LHColor(34, 34, 34);
+        label.userInteractionEnabled = YES;
         [label addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick:)]];
         label.tag = i;
         [self.topSview addSubview:label];
         
-        if (i == 0) { // 最前面的label
-            label.scale = 1.0;
-        }
     }
+    //添加滚动条
+    CGFloat scrollLbW = 98;
+    CGFloat scrollLbY = self.topSview.frame.size.height-2.5;
+    CGFloat scrollLbH =2 ;
+    
+    UILabel *scrollLb = [[UILabel alloc]initWithFrame:CGRectMake(0, scrollLbY, scrollLbW, scrollLbH)];
+    scrollLb.center = CGPointMake(DEAppWidth/4, scrollLb.center.y);
+    scrollLb.backgroundColor = LHColor(255, 198, 0);
+    [self.topSview addSubview:scrollLb];
+    self.scrollowLb = scrollLb;
+    
+    
+    //添加底线
+    CGFloat downLbOr = 0;
+    CGFloat downLbW = DEAppWidth;
+    CGFloat downLbY = self.topSview.frame.size.height-0.5;
+    CGFloat downLbH =0.5 ;
+    UILabel *downLb = [[UILabel alloc]initWithFrame:CGRectMake(downLbOr, downLbY, downLbW, downLbH)];
+    downLb.backgroundColor = LHColor(216, 216, 216);
+    [self.topSview addSubview:downLb];
+
     
     // 设置contentSize
     self.topSview.contentSize = CGSizeMake(DEAppWidth, 0);
@@ -156,7 +173,11 @@
    
     NSInteger tag = tap.view.tag;
     CGPoint point = CGPointMake(DEAppWidth *tag, 0);
-    [self.contentSview setContentOffset:point animated:YES];
+    [UIView animateWithDuration:0.5 animations:^{
+         [self.contentSview setContentOffset:point];
+    } completion:^(BOOL finished) {
+        [self scrollViewDidEndScrollingAnimation:self.contentSview];
+    }];
 }
 #pragma mark - UIScrollViewDelegate
 /**
@@ -198,24 +219,9 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     //边界
-    CGFloat scale = scrollView.contentOffset.x / scrollView.frame.size.width;
-    if (scale < 0 || scale > self.topSview.subviews.count - 1) return;
+    CGFloat OffsetX = scrollView.contentOffset.x/2;
     
-    // 获得需要操作的左边label
-    NSInteger leftIndex = scale;
-    CDTopLabel *leftLabel = self.topSview.subviews[leftIndex];
-    
-    // 获得需要操作的右边label
-    NSInteger rightIndex = leftIndex + 1;
-    CDTopLabel *rightLabel = (rightIndex == self.topSview.subviews.count) ? nil : self.topSview.subviews[rightIndex];
-    
-    // 右边比例
-    CGFloat rightScale = scale - leftIndex;
-    // 左边比例
-    CGFloat leftScale = 1 - rightScale;
-    
-    // 设置label的比例
-    leftLabel.scale = leftScale;
-    rightLabel.scale = rightScale;
+     //设置scrollLabel的位置
+    self.scrollowLb.transform = CGAffineTransformMakeTranslation(OffsetX, 0);
 }
 @end
