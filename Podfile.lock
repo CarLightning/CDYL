@@ -27,6 +27,9 @@ PODS:
   - FMDB (2.7.2):
     - FMDB/standard (= 2.7.2)
   - FMDB/standard (2.7.2)
+  - JCore (1.1.9)
+  - JPush (3.0.9):
+    - JCore (~> 1.1.7)
   - JSONModel (1.7.0)
   - LBXScan/LBXNative (2.3):
     - LBXScan/Types (~> 2.2)
@@ -54,6 +57,7 @@ DEPENDENCIES:
   - AMapNavi
   - AMapSearch
   - FMDB
+  - JPush
   - JSONModel
   - LBXScan/LBXNative
   - LBXScan/LBXZBar
@@ -75,6 +79,8 @@ SPEC REPOS:
     - AMapNavi
     - AMapSearch
     - FMDB
+    - JCore
+    - JPush
     - JSONModel
     - LBXScan
     - Masonry
@@ -93,6 +99,8 @@ SPEC CHECKSUMS:
   AMapNavi: c02a60d4e0cd84cafd660bfd94c7378fac97170e
   AMapSearch: e3f96bd0681abe70abba303709a1a05625a8f76c
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
+  JCore: 27598485098d0db99d2812cba048003457d08cfb
+  JPush: 003d9eaef8ba2df76de32573d0c8aa62b92b3c82
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   LBXScan: e51449f0832d1fe17da632af0d22adeb3cfa3543
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -103,6 +111,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZBarSDK: 4c1b5daeb7d6cc67dc9355e690af0230a661f6ec
 
-PODFILE CHECKSUM: 29bcf5e2166e93a0461a6b02e3402803cd1ddbb4
+PODFILE CHECKSUM: d8802ddba74a58392881a9ae23875fd9bcac9ac0
 
 COCOAPODS: 1.5.0

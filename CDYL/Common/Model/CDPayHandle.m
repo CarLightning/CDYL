@@ -42,60 +42,39 @@
         NSDate *datenow = [NSDate date];
         NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]];
         UInt32 timeStamp =[timeSp intValue];
-        
         request.timeStamp= timeStamp;
-        
-        
-        
         request.sign= [dic objectForKey:@"paySign"];
-        
-        
         // 调用微信
         [WXApi sendReq:request];
-        
-        
-        
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
     }];
 }
 #pragma mark - 支付宝支付
 + (void)AliPayWithMoney:(NSString *)money outTradeNO:(NSString *)outTradeNO{
     NSString *string = @"https://www.evnetworks.cn/ali/pay/app/getsign";
-  
- 
     NSDictionary *paramater = @{@"subject":@"1",@"total_amount":money,@"product_code":@"QUICK_MSECURITY_PAY",@"outTradeNO":outTradeNO,@"notify_url":@"http://183.129.254.28/webservice/recharge!notifyURL.action"};
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer.timeoutInterval = 30.0f;
     // 设置允许接收返回数据类型： 加上@"application/xml"
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"application/xml",nil ];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
     [manager GET:string parameters:paramater progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSDictionary *data = [dic objectForKey:@"data"];
         NSString *orderStr = [data objectForKey:@"last"];
-        
 //        NSData *JSONData = [orderStr dataUsingEncoding:NSUTF8StringEncoding];
 //
 //        NSString *sth = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
-        
-        
         dispatch_async(dispatch_get_main_queue(), ^{
-            
             [self payOrder:orderStr fromScheme:@"alisdkdemo"];
         });
         NSLog(@"%@",orderStr);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
     }];
 }
 + (void)payOrder:(NSString *)orderString fromScheme:(NSString *)appScheme{
     // NOTE: 调用支付结果开始支付
     [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic){
-        
-        
         NSLog(@"reslut = %@",resultDic);
     }];
 }

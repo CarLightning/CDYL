@@ -234,6 +234,7 @@
 		8474B7622109B2C7004AD5BF /* CDAboutApp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDAboutApp.m; sourceTree = "<group>"; };
 		8474B7642109B42E004AD5BF /* LSXAboutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSXAboutTableViewCell.m; sourceTree = "<group>"; };
 		8474B7652109B42F004AD5BF /* LSXAboutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSXAboutTableViewCell.h; sourceTree = "<group>"; };
+		8474B767210EBFEA004AD5BF /* CDYL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CDYL.entitlements; sourceTree = "<group>"; };
 		847E46A820A92EC400675762 /* CDPoleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDPoleViewController.h; sourceTree = "<group>"; };
 		847E46A920A92EC400675762 /* CDPoleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDPoleViewController.m; sourceTree = "<group>"; };
 		847E46AB20A9353800675762 /* CDPoleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDPoleCell.h; sourceTree = "<group>"; };
@@ -394,6 +395,7 @@
 		843146ED1EE109FE00E41BBD /* CDYL */ = {
 			isa = PBXGroup;
 			children = (
+				8474B767210EBFEA004AD5BF /* CDYL.entitlements */,
 				84ADAF7920870AE300555B27 /* CDAppDelegate.h */,
 				84ADAF7A20870AE300555B27 /* CDAppDelegate.m */,
 				84233AE820736FE5007D1E09 /* PrefixHeader.pch */,
@@ -934,10 +936,13 @@
 				TargetAttributes = {
 					843146EA1EE109FD00E41BBD = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 7U4FFK4VVX;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 7NV459D738;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -1244,9 +1249,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = CDYL/CDYL.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7U4FFK4VVX;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 7NV459D738;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CDYL/3Th/ALiPay",
@@ -1271,10 +1277,10 @@
 				INFOPLIST_FILE = CDYL/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdyl.one;
+				PRODUCT_BUNDLE_IDENTIFIER = com.domainname.SWC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "96a7dc43-80fe-4cdc-bb03-e65b1563322f";
+				PROVISIONING_PROFILE_SPECIFIER = CDYL_develop;
 			};
 			name = Debug;
 		};
@@ -1284,9 +1290,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = CDYL/CDYL.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7U4FFK4VVX;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 7NV459D738;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CDYL/3Th/ALiPay",
@@ -1311,10 +1318,10 @@
 				INFOPLIST_FILE = CDYL/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdyl.one;
+				PRODUCT_BUNDLE_IDENTIFIER = com.domainname.SWC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "96a7dc43-80fe-4cdc-bb03-e65b1563322f";
+				PROVISIONING_PROFILE_SPECIFIER = CDYL_develop;
 			};
 			name = Release;
 		};

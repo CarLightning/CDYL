@@ -4,7 +4,7 @@
 //
 //  Created by admin on 2018/6/5.
 //  Copyright © 2018年 admin. All rights reserved.
-//
+//  明细界面
 
 #import "CDDetailViewController.h"
 #import "CDBarView.h"

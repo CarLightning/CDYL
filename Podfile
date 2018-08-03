@@ -17,6 +17,7 @@ pod 'SDWebImage', '~> 4.0'
 pod 'MJRefresh'
 pod 'YYText'
 pod 'WechatOpenSDK'
+pod 'JPush'
 end
 
 

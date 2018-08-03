@@ -34,9 +34,11 @@ static NSString *const identifyCell = @"SHOWCELL";
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     }
     if (self.cthType == 0) {
+        self.navigationItem.title = @"附近";
         //附近
         [self getSourceFromWeb];
     }else{
+         self.navigationItem.title = @"收藏";
         //收藏
         [self getSourceWithCollection];
     }

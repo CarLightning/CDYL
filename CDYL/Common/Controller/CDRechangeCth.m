@@ -4,7 +4,7 @@
 //
 //  Created by admin on 2018/6/25.
 //  Copyright © 2018年 admin. All rights reserved.
-//
+//  充值界面
 
 #import "CDRechangeCth.h"
 #import "CDPayCell.h"
@@ -224,14 +224,14 @@ static NSString *const identifer = @"recharge";
 }
 
 - (void)usedAlipay:(NSString *)string{
-//    http://183.129.254.28/webservice/services/IcCardWebService/genTransNo?cardId=3050120160821006&total_fee=0.01&accName=13136111092&accId=13136111092
+    //    http://183.129.254.28/webservice/services/IcCardWebService/genTransNo?cardId=3050120160821006&total_fee=0.01&accName=13136111092&accId=13136111092
     NSString *cardId = self.model.cardno;
     NSString *total_fee = string;
     NSString *accName = [CDUserInfor shareUserInfor].phoneNum;
     NSString *accId = [CDUserInfor shareUserInfor].phoneNum;
     [CDWebRequest requestgenTransNocardId:cardId total_fee:total_fee accName:accName accId:accId AndBack:^(NSDictionary *backDic) {
         NSString * orderNum =[NSString stringWithFormat:@"%@", backDic[@"message"]];
-         [CDPayHandle AliPayWithMoney:total_fee outTradeNO:orderNum];
+        [CDPayHandle AliPayWithMoney:total_fee outTradeNO:orderNum];
     } failure:^(NSString *err) {
         
     }];

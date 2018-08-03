@@ -4,7 +4,7 @@
 //
 //  Created by admin on 2018/5/28.
 //  Copyright © 2018年 admin. All rights reserved.
-//
+//  单张卡界面
 
 #import "CDOneCardCth.h"
 #import "CDMoneyCard.h"
@@ -58,6 +58,7 @@
     
     
 }
+// 点击明细
 - (void)clickThtDetail {
     CDDetailViewController *detail = [[CDDetailViewController alloc]init];
     detail.model = self.model;

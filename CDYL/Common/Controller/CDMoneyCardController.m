@@ -4,7 +4,7 @@
 //
 //  Created by admin on 2018/5/21.
 //  Copyright © 2018年 admin. All rights reserved.
-//
+//  钱包界面
 
 #import "CDMoneyCardController.h"
 #import "CDMoneyCardInfor.h"
@@ -41,7 +41,16 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    NSArray *viewControllers = self.navigationController.viewControllers;//获取当前的视图控制其
+    if (viewControllers.count > 1 && [viewControllers objectAtIndex:viewControllers.count-2] == self) {
+        //当前视图控制器在栈中，故为push操作
+        NSLog(@"push");
+    } else if ([viewControllers indexOfObject:self] == NSNotFound) {
+        //当前视图控制器不在栈中，故为pop操作
+        self.navigationController.navigationBarHidden = YES;
+    }
 }
 - (void)reloadCradInformation {
     if (![CDXML isLogin]) {
@@ -134,6 +143,7 @@
         }
     }
 }
+#pragma mark - MoneyCardDelegate
 - (void)clickTheMoneyCard:(CDMoneyCardInfor *)model{
     
     CDOneCardCth *cth = [[CDOneCardCth alloc]init];
@@ -155,14 +165,5 @@
         NSLog(@"%@",err);
     }];
 }
--(void)viewWillDisappear:(BOOL)animated{
-    NSArray *viewControllers = self.navigationController.viewControllers;//获取当前的视图控制其
-    if (viewControllers.count > 1 && [viewControllers objectAtIndex:viewControllers.count-2] == self) {
-        //当前视图控制器在栈中，故为push操作
-        NSLog(@"push");
-    } else if ([viewControllers indexOfObject:self] == NSNotFound) {
-        //当前视图控制器不在栈中，故为pop操作
-        self.navigationController.navigationBarHidden = YES;
-    }
-}
+
 @end

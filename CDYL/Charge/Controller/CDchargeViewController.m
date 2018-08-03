@@ -46,11 +46,13 @@ static CGFloat HeaderHeight = 10;
     UITableView *tv=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEAppWidth, DEAppHeight)];
     tv.delegate=self;
     tv.dataSource=self;
+    
     tv.backgroundColor = [UIColor clearColor];
     [tv registerClass:[CDBespeakTableViewCell class] forCellReuseIdentifier:@"bespeakupcell"];
     [tv registerClass:[CDRowCell class] forCellReuseIdentifier:@"rowcell"];
     [self.view addSubview:tv];
     self.tableV = tv;
+    self.tableV.hidden = YES;
     
     CGFloat heightY =HeaderHeight *2+SmallCellHeight*3+bigCellHeight;
     UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(30, heightY+50, DEAppWidth-60, 40)];
@@ -61,8 +63,10 @@ static CGFloat HeaderHeight = 10;
     [btn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     btn.layer.cornerRadius=20;
     [self.tableV addSubview:btn];
-    self.tableV.hidden = YES;
-   [self.view addSubview:self.bespeakView];
+   
+    [self.view addSubview:self.bespeakView];
+    
+    
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -71,6 +75,14 @@ static CGFloat HeaderHeight = 10;
     }else{
         [self getBesparkArrInfor];
     }
+}
+- (void)viewDidDisappear:(BOOL)animated{
+    [self.timer invalidate];
+    self.timer = nil;
+    
+}
+-(void)dealloc{
+    NSLog(@"退出预约界面");
 }
 #pragma mark - Get method
 -(CDBespeakView *)bespeakView{
@@ -107,6 +119,12 @@ static CGFloat HeaderHeight = 10;
     }];
 }
 - (void)showBeSpeakView:(NSDictionary *)dic{
+    
+    if (self.timer == nil) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(checkPoldState) userInfo:nil repeats:YES];
+        self.timer.fireDate = [NSDate distantFuture];
+        self.count = 0 ;
+    }
     self.tableV.hidden = YES;
     self.navigationItem.title = @"当前预约";
     CDBespeakModel *model = [[CDBespeakModel alloc]init];
@@ -122,7 +140,7 @@ static CGFloat HeaderHeight = 10;
     model.lon = [NSString stringWithFormat:@"%@",dic[@"lon"]].floatValue;
     
     self.bespeakView.model = model;
-     self.bespeakView.hidden = NO;
+    self.bespeakView.hidden = NO;
     
 }
 -(void)showTableView{
@@ -149,7 +167,7 @@ static CGFloat HeaderHeight = 10;
     NSLog(@"点击开始充电");
     NSString *phoneNub = [CDUserInfor shareUserInfor].phoneNum;
     NSString *PwNub = [CDUserInfor shareUserInfor].userPword;
-     NSString *cardId = model.cardid;
+    NSString *cardId = model.cardid;
     NSString *poleid = model.poleid;
     self.bespeakPold = poleid;
     NSString *bespeak_serv_id = model.bespeakid;
@@ -157,10 +175,10 @@ static CGFloat HeaderHeight = 10;
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"开启充电中";
     [CDWebRequest requestOpenPoldWithIdentity:@"1" poleId:poleid cardNo:phoneNub pass:PwNub cardId:cardId type:@"0" value:@"0" pwm:@"100" bespeak_serv_id:bespeak_serv_id AndBack:^(NSDictionary *backDic) {
-         hud.label.text = @"正在进行绝缘检测，请稍等";
+        hud.label.text = @"正在进行绝缘检测，请稍等";
         [weakself whetherOpenPoldOk];
     } failure:^(NSString *err){
-         hud.label.text = err;
+        hud.label.text = err;
         [hud hideAnimated:YES afterDelay:1.5f];
     }];
 }
@@ -187,19 +205,20 @@ static CGFloat HeaderHeight = 10;
     NSString *PwNub = [CDUserInfor shareUserInfor].userPword;
     NSString *cardId = model.cardid;
     NSString *bespeakid = model.bespeakid;
-     __weak typeof(self) weakself = self;
- 
+    __weak typeof(self) weakself = self;
+    
     [CDWebRequest requestdisBespeakPoleWithidentity:@"1" cardNo:phoneNub Pass:PwNub cardId:cardId bespeak_serv_id:bespeakid AndBack:^(NSDictionary *backDic) {
-         [weakself showAlert:@"取消成功"];
+        [weakself showAlert:@"取消成功"];
         
     } failure:^(NSString *err) {
-         [weakself showAlert:err];
+        [weakself showAlert:err];
     }];
 }
 /***开启桩成功与否查询**/
 - (void)whetherOpenPoldOk{
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(checkPoldState) userInfo:nil repeats:YES];
-    [self.timer fire];
+    
+    self.timer.fireDate = [NSDate distantPast];
+    
 }
 
 -(void)checkPoldState{
@@ -215,9 +234,9 @@ static CGFloat HeaderHeight = 10;
         } failure:^(NSString *err) {
             
         }];
-         self.count++;
+        self.count++;
     }
-   
+    
 }
 /***开启桩失败**/
 -(void)openNO{
@@ -229,8 +248,8 @@ static CGFloat HeaderHeight = 10;
     hud.label.text = @"开启失败";
     [hud hideAnimated:YES afterDelay:1.5f];
     self.count = 0;
-    [self.timer invalidate];
-    self.timer = nil;
+    self.timer.fireDate = [NSDate distantFuture];
+   
 }
 
 /***开启桩成功**/
@@ -244,8 +263,7 @@ static CGFloat HeaderHeight = 10;
     hud.label.text = @"开启成功";
     [hud hideAnimated:YES afterDelay:1.5f];
     self.count = 0;
-    [self.timer invalidate];
-    self.timer = nil;
+     self.timer.fireDate = [NSDate distantFuture];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.tabBarController.selectedIndex = 1;
@@ -271,7 +289,7 @@ static CGFloat HeaderHeight = 10;
         return cell;
     }else  {
         CDRowCell  *cell = [tableView dequeueReusableCellWithIdentifier:@"rowcell" forIndexPath:indexPath];
-         cell.status  = 100;
+        cell.status  = 100;
         cell.delagate = self;
         return cell;
     }
@@ -300,7 +318,7 @@ static CGFloat HeaderHeight = 10;
     if (indexPath.section == 0 && indexPath.row == 2) {
         HSDatePickerViewController *hsdpvc = [[HSDatePickerViewController alloc] init];
         hsdpvc.delegate = self;
-       [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:hsdpvc animated:YES completion:nil];
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:hsdpvc animated:YES completion:nil];
     }
 }
 #pragma mark - AMapSearchDelegate
@@ -308,7 +326,7 @@ static CGFloat HeaderHeight = 10;
     self.search = [[AMapSearchAPI alloc]init];
     self.search.delegate = self;
     AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
-   CLLocationCoordinate2D location = [CDUserLocation share].userCoordinate;
+    CLLocationCoordinate2D location = [CDUserLocation share].userCoordinate;
     regeo.location = [AMapGeoPoint locationWithLatitude:location.latitude longitude:location.longitude];
     regeo.requireExtension   = YES;
     [self.search AMapReGoecodeSearch:regeo];
@@ -322,21 +340,22 @@ static CGFloat HeaderHeight = 10;
         //解析response获取地址描述，具体解析见 Demo
         NSString *locationStr = response.regeocode.formattedAddress;
         NSString *cityStr = response.regeocode.addressComponent.city;
-       
-        NSString *dateStr = [self getDate];
-        [self.array addObject:cityStr];
-        [self.array addObject:locationStr];
-        [self.array addObject:dateStr];
-        
+        __weak typeof(self) weakself = self;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSString *dateStr = [self getDate];
+                    [weakself.array addObject:cityStr];
+                    [weakself.array addObject:locationStr];
+                    [weakself.array addObject:dateStr];
+                    [weakself.tableV reloadData];
+                });
     }
-    [self.tableV reloadData];
 }
 - (NSString *)getDate{
     NSDateFormatter *format = [[NSDateFormatter alloc]init];
     [format setDateFormat:@"YYYY-MM-dd HH:mm"];
     NSTimeInterval oldtime = [NSDate date].timeIntervalSince1970+1800;
     NSDate *showDate = [NSDate dateWithTimeIntervalSince1970:oldtime];
-   NSString *dateStr = [format stringFromDate:showDate];
+    NSString *dateStr = [format stringFromDate:showDate];
     return dateStr;
 }
 #pragma mark - rowCellDalagate

@@ -7,6 +7,7 @@
 //
 
 #import "ZJLabel.h"
+#import <objc/runtime.h>
 @interface ZJLabel ()
 
 @property (nonatomic) CADisplayLink * myTimer;

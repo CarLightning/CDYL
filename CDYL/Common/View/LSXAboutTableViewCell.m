@@ -47,7 +47,7 @@
     if ([name isEqualToString:@"微信公众号"]) {
         self.showLb.text = @"车电云联";
     }else if ([name isEqualToString:@"客服电话"]){
-         self.showLb.text = @"1571-86898502";
+         self.showLb.text = @"0571-86898502";
     }else if ([name isEqualToString:@"联系邮箱"]){
          self.showLb.text = @"540864802@qq.com";
     }else if ([name isEqualToString:@"商务合作"]){

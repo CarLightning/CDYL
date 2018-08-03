@@ -47,7 +47,7 @@ static NSString *const cellID = @"AboutCell";
         iview.image = [UIImage imageNamed:@"logo.png"];
         [_headerView addSubview:iview];
         
-        UILabel *lb=[[UILabel alloc]initWithFrame:CGRectMake((DEAppWidth-70)/2, CGRectGetMaxY(iview.frame)+10, 70, 20)];
+        UILabel *lb=[[UILabel alloc]initWithFrame:CGRectMake((DEAppWidth-150)/2, CGRectGetMaxY(iview.frame)+10, 150, 20)];
         NSString * app_version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         lb.text=[NSString stringWithFormat:@"版本：%@",app_version];
         lb.font=[UIFont systemFontOfSize:16];

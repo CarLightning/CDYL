@@ -68,6 +68,8 @@
             self.statusLb.text = @"就绪";
            self.bespeakBtn.userInteractionEnabled = YES;
             self.bespeakBtn.backgroundColor = LHColor(255, 198, 0);
+            [self.bespeakBtn setTitleColor:LHColor(255, 0, 0) forState:UIControlStateNormal];
+            [_bespeakBtn setTitleColor:LHColor(34, 34, 34) forState:UIControlStateNormal];
         }
             break;
         case 6:
@@ -143,7 +145,7 @@
     if (_statusLb == nil) {
         _statusLb =[[UILabel alloc]init];
         _statusLb.textAlignment=NSTextAlignmentCenter;
-        _statusLb.font=[UIFont systemFontOfSize:13];
+        _statusLb.font=[UIFont systemFontOfSize:12];
         _statusLb.textColor=LHColor(34, 34, 34);
     }
     return _statusLb;
@@ -155,7 +157,8 @@
         _bespeakBtn.backgroundColor = LHColor(111, 113, 121);
         _bespeakBtn.titleLabel.font = [UIFont systemFontOfSize:13];
         [_bespeakBtn setTitle:@"预约" forState:UIControlStateNormal];
-        [_bespeakBtn setTitleColor:LHColor(34, 34, 34) forState:UIControlStateNormal];
+        
+        [self.bespeakBtn setTitleColor:LHColor(255, 255, 255) forState:UIControlStateNormal];
         [_bespeakBtn addTarget:self action:@selector(clickThtBtn:) forControlEvents:UIControlEventTouchUpInside];
         _bespeakBtn.layer.cornerRadius =4;
         _bespeakBtn.layer.masksToBounds = YES;
