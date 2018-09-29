@@ -63,7 +63,7 @@ static CGFloat HeaderHeight = 10;
     [btn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     btn.layer.cornerRadius=20;
     [self.tableV addSubview:btn];
-   
+    
     [self.view addSubview:self.bespeakView];
     
     
@@ -249,7 +249,6 @@ static CGFloat HeaderHeight = 10;
     [hud hideAnimated:YES afterDelay:1.5f];
     self.count = 0;
     self.timer.fireDate = [NSDate distantFuture];
-   
 }
 
 /***开启桩成功**/
@@ -263,7 +262,7 @@ static CGFloat HeaderHeight = 10;
     hud.label.text = @"开启成功";
     [hud hideAnimated:YES afterDelay:1.5f];
     self.count = 0;
-     self.timer.fireDate = [NSDate distantFuture];
+    self.timer.fireDate = [NSDate distantFuture];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.tabBarController.selectedIndex = 1;
@@ -341,13 +340,13 @@ static CGFloat HeaderHeight = 10;
         NSString *locationStr = response.regeocode.formattedAddress;
         NSString *cityStr = response.regeocode.addressComponent.city;
         __weak typeof(self) weakself = self;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSString *dateStr = [self getDate];
-                    [weakself.array addObject:cityStr];
-                    [weakself.array addObject:locationStr];
-                    [weakself.array addObject:dateStr];
-                    [weakself.tableV reloadData];
-                });
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSString *dateStr = [self getDate];
+            [weakself.array addObject:cityStr];
+            [weakself.array addObject:locationStr];
+            [weakself.array addObject:dateStr];
+            [weakself.tableV reloadData];
+        });
     }
 }
 - (NSString *)getDate{

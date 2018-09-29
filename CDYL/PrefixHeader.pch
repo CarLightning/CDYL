@@ -13,6 +13,7 @@
 #import "NSFileManager+CDFilePath.h"
 #import "CDUserInfor.h"
 #import "CDXML.h"
+#import <YYCache.h>
 #import "CDWebRequest.h"
 #import "MBProgressHUD.h"
 #import "CDNav.h"

@@ -17,8 +17,10 @@
     static CDAFNetLine *helper;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        
         if (helper == nil) {
             helper = [[CDAFNetLine alloc]init];
+            
             manager = [AFHTTPSessionManager manager];
 
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];

@@ -14,6 +14,13 @@
     return [[JSONKeyMapper alloc]initWithModelToJSONDictionary:@{@"pid":@"id"}];
 }
 
++ (BOOL)propertyIsOptional:(NSString *)propertyName{
+    return true;
+}
+- (BOOL)isCollection{
+    return NO;
+}
+
 -(NSString<Ignore> *)canOrder{
     if (self.polelist && self.polelist.count > 0) {
         for (NSDictionary *model in self.polelist) {

@@ -21,8 +21,7 @@
 @end
 @implementation CDAppDelegate
 
-- (AFNetworkReachabilityManager *)networkMonitorManager {
-    
+- (AFNetworkReachabilityManager *)networkMonitorManager {    
     if (!_networkMonitorManager) {
         _networkMonitorManager = [AFNetworkReachabilityManager sharedManager];
         [_networkMonitorManager startMonitoring];  //开始监听

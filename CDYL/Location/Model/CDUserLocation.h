@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <AMapLocationKit/AMapLocationKit.h>
+#import "CDStation.h"
+
 @interface CDUserLocation : NSObject
 @property (nonatomic, assign) CLLocationCoordinate2D  userCoordinate;
+@property (nonatomic, strong) NSArray *stationArr;
 
 +(instancetype)share;
 

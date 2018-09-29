@@ -48,6 +48,7 @@ PODS:
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
   - WechatOpenSDK (1.8.2)
+  - YYCache (1.0.4)
   - YYText (1.0.7)
   - ZBarSDK (1.3.1)
 
@@ -68,6 +69,7 @@ DEPENDENCIES:
   - MJRefresh
   - SDWebImage (~> 4.0)
   - WechatOpenSDK
+  - YYCache
   - YYText
 
 SPEC REPOS:
@@ -88,6 +90,7 @@ SPEC REPOS:
     - MJRefresh
     - SDWebImage
     - WechatOpenSDK
+    - YYCache
     - YYText
     - ZBarSDK
 
@@ -108,9 +111,10 @@ SPEC CHECKSUMS:
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   WechatOpenSDK: 676feec516a11173eafd1fe64b10d27babf28701
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZBarSDK: 4c1b5daeb7d6cc67dc9355e690af0230a661f6ec
 
-PODFILE CHECKSUM: d8802ddba74a58392881a9ae23875fd9bcac9ac0
+PODFILE CHECKSUM: 8c0cbdd195f68d2f4fd46fe4d0b6669b0e5cb605
 
 COCOAPODS: 1.5.0

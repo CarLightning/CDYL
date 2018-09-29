@@ -27,8 +27,14 @@
 @property (nonatomic, assign) BOOL is_Collection;
 /**是否能预约**/
 @property (nonatomic, assign) BOOL is_Appointment;
+/**
+ *预约
+ */
 @property (nonatomic, strong) UIButton *appBtn;
-
+/**
+ *收藏
+ */
+@property (nonatomic, strong) UIButton *collectionBtn;
 
 @end
 
@@ -124,20 +130,21 @@
     }];
     
     UIButton *collectBtn=[[UIButton alloc]init];
-    collectBtn.backgroundColor = CanTouchColor;
+    
   
     collectBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [collectBtn setTitle:@"收藏" forState:UIControlStateNormal];
-    [collectBtn setTitleColor:LHColor(34, 34, 34) forState:UIControlStateNormal];
+    [collectBtn setBackgroundImage:[UIImage imageNamed:@"collection"] forState:UIControlStateNormal];
+    [collectBtn setBackgroundImage:[UIImage imageNamed:@"selectCollection"] forState:UIControlStateHighlighted];
     [collectBtn addTarget:self action:@selector(clickTheBtn:) forControlEvents:UIControlEventTouchUpInside];
     collectBtn.layer.cornerRadius = 3;
     [self addSubview:collectBtn];
+    self.collectionBtn = collectBtn;
     
     [collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self).offset(-20);
         make.top.mas_equalTo(self).offset(15);
-        make.width.mas_equalTo(50);
-        make.height.mas_equalTo(30);
+        make.width.mas_equalTo(20);
+        make.height.mas_equalTo(20);
     }];
     
     UIButton *navigaBtn = [[UIButton alloc]init];
@@ -185,7 +192,11 @@
         self.appBtn.userInteractionEnabled = NO;
     }
     
-    
+    if (stationModel.isCollection) {
+         [self.collectionBtn setBackgroundImage:[UIImage imageNamed:@"selectCollection"] forState:UIControlStateNormal];
+    }else{
+        [self.collectionBtn setBackgroundImage:[UIImage imageNamed:@"collection"] forState:UIControlStateNormal];
+    }
     
 }
 #pragma mark - method

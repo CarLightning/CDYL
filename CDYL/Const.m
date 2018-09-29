@@ -8,8 +8,6 @@
 
 #import "Const.h"
 
-
-
 BOOL whetherHaveNetwork = NO;
 
 CGFloat const CDPaoHight = 195.0f ;

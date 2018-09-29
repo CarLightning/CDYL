@@ -52,7 +52,7 @@
 #pragma mark - 支付宝支付
 + (void)AliPayWithMoney:(NSString *)money outTradeNO:(NSString *)outTradeNO{
     NSString *string = @"https://www.evnetworks.cn/ali/pay/app/getsign";
-    NSDictionary *paramater = @{@"subject":@"1",@"total_amount":money,@"product_code":@"QUICK_MSECURITY_PAY",@"outTradeNO":outTradeNO,@"notify_url":@"http://183.129.254.28/webservice/recharge!notifyURL.action"};
+    NSDictionary *paramater =  @{@"subject":@"1",@"total_amount":money,@"product_code":@"QUICK_MSECURITY_PAY",@"outTradeNO":outTradeNO,@"notify_url":@"http://183.129.254.28/webservice/recharge!notifyURL.action"};
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer.timeoutInterval = 30.0f;
     // 设置允许接收返回数据类型： 加上@"application/xml"

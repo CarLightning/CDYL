@@ -29,7 +29,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
-    
+ 
     // 首页
     [self addChildViewController:[[CDMapViewController alloc] init] image:@"tab_home_nor" seletedImage:@"tab_home_press" title:@"地图"];
     [self addChildViewController:[[CDoderViewController alloc] init] image:@"tab_classify_nor"  seletedImage:@"tab_classify_press"  title:@"订单"];
@@ -87,7 +87,7 @@
 }
 -(void)tabBarDidPlusClick:(UIButton *)btn{
     //添加一些扫码或相册结果处理
-   
+
     CDscanViewController *vc = [CDscanViewController new];
     vc.libraryType = [Global sharedManager].libraryType;
     vc.scanCodeType = [Global sharedManager].scanCodeType;

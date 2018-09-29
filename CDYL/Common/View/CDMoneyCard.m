@@ -56,9 +56,11 @@
     [self.moneyLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.bgiv.mas_bottom).offset(-20);
         make.right.equalTo(self.defaultBtn.mas_right);
-        make.width.mas_equalTo(120);
+//        make.width.mas_equalTo(100);
         make.height.mas_equalTo(40);
     }];
+    [self.moneyLb setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    [self.moneyLb setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [self.moneyiv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.moneyLb.mas_centerY);
         make.right.equalTo(self.moneyLb.mas_left).offset(-10);

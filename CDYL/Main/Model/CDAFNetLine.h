@@ -6,11 +6,13 @@
 //  Copyright © 2018年 admin. All rights reserved.
 //
 
+
 #import <Foundation/Foundation.h>
 
 @interface CDAFNetLine : NSObject
 
 typedef void(^SuccessedData)(id data);
+
 typedef void(^FailureMessage)(NSString * error);
 
 +(instancetype)shareManager;

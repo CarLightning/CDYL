@@ -22,7 +22,7 @@ static NSString *oneidenty = @"SETONECELL";
 static NSString *twoidenty = @"SETTWOCELL";
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.sourceArr = @[@"消息推送",@"清除缓存",@"关于APP"];
+    self.sourceArr = @[@"消息推送",@"清除缓存",@"关于APP"];
     self.navigationItem.title = @"设置";
     UITableView *tv=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEAppWidth, DEAppHeight)];
     tv.delegate=self;
@@ -32,7 +32,7 @@ static NSString *twoidenty = @"SETTWOCELL";
     tv.backgroundColor = [UIColor clearColor];
     [self.view addSubview:tv];
     self.tableV = tv;
-   
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkTheUserNotiOpenState:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -92,22 +92,34 @@ static NSString *twoidenty = @"SETTWOCELL";
         //清除缓存
         [self  clearFile];
     }else if(indexPath.section == 0 && indexPath.row == 2){
-       //关于APP
-      CDBaseViewController *  basecth = [[NSClassFromString(@"CDAboutApp") alloc]init];
-    self.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:basecth animated:YES];
-    self.hidesBottomBarWhenPushed = NO;
+        //关于APP
+        CDBaseViewController *basecth = [[NSClassFromString (@"CDAboutApp") alloc]init];
+        self.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:basecth animated:YES];
+        self.hidesBottomBarWhenPushed = YES;
     }else if (indexPath.section == 1){
         // 退出登录
+        if (![CDXML isLogin]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"当前未登录" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+           
+            [alert addAction:action1];
+          
+            [self presentViewController:alert animated:YES completion:nil];
+
+        }else{
+        
+        
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定要退出？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        __weak typeof(self) weakself = self;
         UIAlertAction *action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [[CDUserInfor shareUserInfor]logOut];
+            [weakself loginOut];
         }];
         UIAlertAction *action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         [alert addAction:action1];
         [alert addAction:action2];
         [self presentViewController:alert animated:YES completion:nil];
-
+    }
     }
 }
 #pragma mark - setOneCellDelagate
@@ -129,6 +141,11 @@ static NSString *twoidenty = @"SETTWOCELL";
     }
 }
 #pragma mark - 自定义method
+//退出登录
+-(void)loginOut{
+    [[CDUserInfor shareUserInfor]logOut];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 //清理缓存
 -(void)clearFile{
     NSString * cachPath = [ NSSearchPathForDirectoriesInDomains ( NSCachesDirectory , NSUserDomainMask , YES ) firstObject ];
@@ -141,6 +158,7 @@ static NSString *twoidenty = @"SETTWOCELL";
             [[ NSFileManager defaultManager ] removeItemAtPath :path error :&error];
         }
     }
+    
     [ self performSelectorOnMainThread : @selector (clearCachSuccess) withObject : nil waitUntilDone : YES ];
 }
 -(void)clearCachSuccess{
@@ -154,5 +172,7 @@ static NSString *twoidenty = @"SETTWOCELL";
     hud.label.text = @"清理成功";
     [hud hideAnimated:YES afterDelay:1.5];
 }
-
+- (void)checkTheUserNotiOpenState:(NSNotification *)noti{
+    [self.tableV reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+}
 @end

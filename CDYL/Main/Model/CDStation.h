@@ -37,4 +37,6 @@
 /**判断站点是否可以预约**/
 @property (nonatomic) NSString <Ignore>* canOrder;
 
+/**判断站点是否被收藏**/
+@property (nonatomic,assign) BOOL  isCollection;
 @end

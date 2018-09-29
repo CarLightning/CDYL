@@ -171,7 +171,7 @@
         NSDictionary *dic = backDic;
         
         NSArray *stationList = [CDStation arrayOfModelsFromDictionaries:dic[@"stationlist"] error:nil];
-        
+        [CDUserLocation share].stationArr = stationList;
         [weakSelf createAnnotation:stationList];
         
     } failure:^(NSString *err) {
@@ -407,6 +407,7 @@
     [CDWebRequest requestgaddCollectWithidentity:@"1" cardNo:phoneNub Pass:PwNub facId:facId facType:facType AndBack:^(NSDictionary *backDic) {
  
         [weakself showAlert:@"收藏成功"];
+        
         
     } failure:^(NSString *err) {
         [weakself showAlert:err];

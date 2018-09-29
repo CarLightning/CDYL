@@ -10,7 +10,6 @@
 #import "CDWebRequest.h"
 #import "CDAFNetLine.h"
 
-//http://183.129.254.28/webservice/services/IcCardWebService/wxOrderId?total_fee=1&accName=&accId=&cardId=3050120160821006
 @implementation CDWebRequest
 
 static NSString *const headStr = @"http://183.129.254.28/webservice/services";
@@ -21,7 +20,7 @@ static NSString *const headStr = @"http://183.129.254.28/webservice/services";
     [[CDAFNetLine shareManager] Post:urlString Parameter:parame XMLString:lastStr success:success failure:meg];
 }
 
-#pragma mark - 查询充电站
+#pragma mark - 查询ALL充电站
 + (void)requestsearchChargePoleWithlat:(NSString *)lat lon:(NSString *)lon radius:(NSString *)radius type:(NSString *)type status:(NSString *)status startTime:(NSString *)startTime endTime:(NSString *)endTime regId:(NSString *)regId AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * _Nonnull))failure{
 
    NSDictionary *parameter = @{@"lat":lat,@"lon":lon, @"radius":radius, @"type":type, @"status":status, @"startTime":startTime,@"endTime":endTime, @"regId":regId};
@@ -30,11 +29,20 @@ static NSString *const headStr = @"http://183.129.254.28/webservice/services";
    
 
     NSString * string =@"StationWebService/searchChargePoleAll";
-   
+    YYCache *cache = [YYCache cacheWithName:@"allPole"];
     
-    [self addLastString:string parameter:parameter AndBack:success failure:failure];
+    [self addLastString:string parameter:parameter AndBack:^(NSDictionary *backDic) {
+        if (backDic) {
+            [cache setObject:backDic forKey:string];
+            success (backDic);
+        }
+        
+        
+        
+    } failure:failure];
+     
 }
-#pragma mark - 查询充电站
+#pragma mark - 查询充充电的充电站
 + (void)requestsearchCanBespeakChargePoleWithlat:(NSString *)lat lon:(NSString *)lon radius:(NSString *)radius type:(NSString *)type status:(NSString *)status startTime:(NSString *)startTime endTime:(NSString *)endTime regId:(NSString *)regId AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * _Nonnull))failure{
     
     NSDictionary *parameter = @{@"lat":lat,@"lon":lon, @"radius":radius, @"type":type, @"status":status, @"startTime":startTime,@"endTime":endTime, @"regId":regId};
@@ -83,14 +91,11 @@ static NSString *const headStr = @"http://183.129.254.28/webservice/services";
   
     NSDictionary *parameter = @{@"tel":tel,@"verCode":cood,@"newPass":pass};
     NSString * string =@"IcCardWebService/resetPass";
-    
-    
     [self addLastString:string parameter:parameter AndBack:success failure:failure];
 }
 #pragma mark - 收藏桩
 + (void)requestgaddCollectWithidentity:(NSString *)identity cardNo:(NSString *)cardNo Pass:(NSString *)pass facId:(NSString *)facId facType:(NSString *)facType AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure{
     
-  
     NSDictionary *parameter = @{@"identity":identity,@"cardNo":cardNo,@"pass":pass,@"facId":facId,@"facType":facType};
     NSString * string =@"IcCardWebService/addCollect";
     
@@ -172,7 +177,7 @@ static NSString *const headStr = @"http://183.129.254.28/webservice/services";
     [self addLastString:string parameter:parameter AndBack:success failure:failure];
 }
 #pragma mark - 消费明细
-//@"http://183.129.254.28/webservice/services/IcCardWebService/getConsumRecord?identity=1&cardNo=13136111092&pass=E10ADC3949BA59ABBE56E057F20F883E&pageSize=1&index=50&cardId=3050120160821006
+//@"http://183.129.254.28/webservice/services/IcCardWebService/getConsumRecord?identity=1&cardNo=13516725015&pass=A492A00D6AB04CAE069EC741513AB9C2&pageSize=1&index=50&cardId=3050120150715001
 + (void)requestgetConsumRecordWithidentity:(NSString *)identity cardNo:(NSString *)cardNo Pass:(NSString *)pass  cardId:(NSString *)cardId pageSize:(NSString *)pageSize index:(NSString *)index AndBack:(void (^)(NSDictionary * backDic))success failure:(void (^)(NSString * err))failure{
     NSString * string =@"IcCardWebService/getConsumRecord";
     NSDictionary *parameter = @{@"identity":identity,@"cardNo":cardNo,@"pass":pass,@"pageSize":pageSize,@"index":index,@"cardId":cardId};
@@ -256,4 +261,25 @@ static NSString *const headStr = @"http://183.129.254.28/webservice/services";
     NSDictionary *parameter = @{@"identity":identity,@"poleId":poleId,@"cardNo":userNo,@"pass":pass,@"cardId":cardId,@"type":@"0",@"value":@"0",@"pwm":@"100"};
     [self addLastString:string parameter:parameter AndBack:success failure:failure];
 }
+//支付宝程序
+//   http://183.129.254.28/webservice/services/IcCardWebService/getPayAccInfoByCardId?cardId=3050120160821006&identity=1&accId=13136111092&pass=E10ADC3949BA59ABBE56E057F20F883E&accType=1
+//微信充值/支付
+/**
+ *
+ * 获取充值/支付预支付标识
+ *
+ * @Title wxOrderId
+ * @author zgy
+ * @create
+ * @param total_fee     金额
+ * @param noPayId    支付业务指账单号，充值不传
+ * @param accName        用户姓名
+ * @param accId    用户ID
+ * @param cardId   卡号
+ * @return
+ * @throws
+ */
+//public String wxOrderId ()
+//http://183.129.254.28/webservice/services/IcCardWebService/wxOrderId?total_fee=1&accName=13136111092&accId=3070120160906001&cardId=3050120160821006
+
 @end

@@ -46,9 +46,9 @@
     [self.scrollView addSubview:card];
     
 // 充值
-    CDcell *cell = [[CDcell alloc]initWithFrame:CGRectMake(0, 68+150+30, DEAppWidth, 50)];
-    cell.delegate = self;
-    [self.scrollView addSubview:cell];
+//    CDcell *cell = [[CDcell alloc]initWithFrame:CGRectMake(0, 68+150+30, DEAppWidth, 50)];
+//    cell.delegate = self;
+//    [self.scrollView addSubview:cell];
     
 }
 - (void)setItem {
